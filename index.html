@@ -4414,6 +4414,7 @@ main > .junto { margin-top: var(--ritmo-bloque); }
 .aparato__isla--lado { top: var(--space-64); left: var(--space-16); width: var(--space-24); height: var(--space-80); margin-left: 0; }
 .aparato__pliegue { position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background: var(--border-subtle); }
 .aparato__que { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: var(--space-16); width: 100%; max-width: 40rem; margin-inline: auto; text-align: center; }
+.aparato__que--solo { grid-template-columns: minmax(0, 1fr); }
 .aparato__txt { display: grid; gap: var(--space-4); min-height: calc(var(--space-64) + var(--space-16)); align-content: start; }
 .en { box-sizing: border-box; display: grid; gap: var(--space-24); align-content: start; width: 100%; height: 100%; padding: var(--space-40); }
 .en--uno { padding: calc(var(--space-64) + var(--space-8)) var(--space-24) var(--space-24); grid-template-rows: auto auto auto minmax(0, 1fr); }
@@ -4425,6 +4426,12 @@ main > .junto { margin-top: var(--ritmo-bloque); }
 .en__lado + .en__lado { padding-left: var(--space-32); }
 .en__pie { display: flex; flex-wrap: wrap; gap: var(--space-8); }
 .en--reloj { padding: var(--space-24) var(--space-16); gap: var(--space-8); justify-items: center; text-align: center; align-content: center; }
+
+/* A phone with little height (the browser's bars in view): the scenes keep to what fits. */
+@media (max-width: 55.99rem) and (max-height: 40rem) {
+  .escena__fija { padding-block: var(--space-16) var(--space-8); }
+  .escena__fija .pedido__si { gap: var(--space-8); padding: var(--space-16); }
+}
 
 </style>
 <a class="skip" href="#sistema">Saltar a qué es el sistema</a>
@@ -10978,7 +10985,7 @@ window.__ARCHIVOS = [{"ruta":"lenguajes/cordura.json","que":"La voz: cómo se es
   // and motion was not turned down; elsewhere the same things are there, still, with their own controls.
   var BARRA = 64;      // the bar at the top, which stays: the part that stays in place sits under it
   function useFija() {
-    var q = '(min-height: 40rem) and (prefers-reduced-motion: no-preference)', v = useState(!!window.matchMedia && matchMedia(q).matches);
+    var q = '(min-height: 30rem) and (prefers-reduced-motion: no-preference)', v = useState(!!window.matchMedia && matchMedia(q).matches);
     useEffect(function () { if (!window.matchMedia) return; var m = matchMedia(q), on = function () { v[1](m.matches); }; m.addEventListener('change', on); return function () { m.removeEventListener('change', on); }; }, []);
     return v[0];
   }
@@ -11140,10 +11147,11 @@ window.__ARCHIVOS = [{"ruta":"lenguajes/cordura.json","que":"La voz: cómo se es
             h(EnSoporte, { id: S.id }),
             S.id === 'telefono' ? h('span', { className: 'aparato__isla' }) : S.id === 'abierto' || S.id === 'cerrado' ? h('span', { className: 'aparato__isla aparato__isla--lado' }) : null,
             S.id === 'abierto' ? h('span', { className: 'aparato__pliegue' }) : null))),
-      h('div', { className: 'aparato__que' },
-        h(A.Button, { variant: 'plain', icon: 'arrow--left', 'aria-label': 'Soporte anterior', disabled: i === 0, onClick: function () { va(i - 1); } }),
+      // (where the scroll moves the scene it is all that is needed, as on every screen; the arrows are for where it does not)
+      h('div', { className: 'aparato__que' + (fija ? ' aparato__que--solo' : '') },
+        fija ? null : h(A.Button, { variant: 'plain', icon: 'arrow--left', 'aria-label': 'Soporte anterior', disabled: i === 0, onClick: function () { va(i - 1); } }),
         h('div', { className: 'aparato__txt', 'aria-live': fija ? 'off' : 'polite' }, h('p', { className: 'web-label-l sin' }, S.n + ' · ' + (i + 1) + ' de ' + total), h('p', { className: 'web-body-m note', key: S.id }, S.d)),
-        h(A.Button, { variant: 'plain', icon: 'arrow--right', 'aria-label': 'Soporte siguiente', disabled: i === total - 1, onClick: function () { va(i + 1); } })));
+        fija ? null : h(A.Button, { variant: 'plain', icon: 'arrow--right', 'aria-label': 'Soporte siguiente', disabled: i === total - 1, onClick: function () { va(i + 1); } })));
     return h('section', { className: 'sec', id: 'soportes', 'aria-labelledby': 'soportes-t' },
       h('div', { className: 'sec__head' },
         h(Efecto, { id: 'escalonar', como: 'h2', className: 'web-h2 sec__title', attrs: { id: 'soportes-t', tabIndex: -1 } }, 'En cada soporte'),
@@ -11227,11 +11235,10 @@ window.__ARCHIVOS = [{"ruta":"lenguajes/cordura.json","que":"La voz: cómo se es
     var total = ARCHIVOS.length, i = fija ? Math.min(total - 1, Math.floor(av.p * total)) : mano[0], a = ARCHIVOS[i];
     function va(n) { n = Math.max(0, Math.min(total - 1, n)); if (fija) irA(ref.current, (n + 0.5) / total); else mano[1](n); }
     var cuerpo = h('div', { className: 'archivos' + (fija ? ' archivos--fija' : '') },
-      // (where it is narrow there is no room for the list and the file: the one that is open, and two arrows)
-      chica ? h('div', { className: 'aparato__que' },
-          h(A.Button, { variant: 'plain', icon: 'arrow--left', 'aria-label': 'Archivo anterior', disabled: i === 0, onClick: function () { va(i - 1); } }),
+      // (where it is narrow there is no room for the list and the file: the one that is open, and how far along; the scroll does the rest)
+      chica ? h('div', { className: 'aparato__que aparato__que--solo' },
           h('div', { className: 'aparato__txt' }, h('p', { className: 'web-label-l sin' }, 'Sistema de Cordura · ' + (i + 1) + ' de ' + total), h('p', { className: 'web-body-m note', key: a.ruta }, a.que)),
-          h(A.Button, { variant: 'plain', icon: 'arrow--right', 'aria-label': 'Archivo siguiente', disabled: i === total - 1, onClick: function () { va(i + 1); } }))
+)
         : h(A.List, { header: 'Sistema de Cordura', headingLevel: 3, items: ARCHIVOS.map(function (x, n) { return { id: x.ruta, title: x.ruta, subtitle: x.que, icon: n === i ? 'checkmark' : 'document', onClick: function () { va(n); } }; }) }),
       h('div', { className: 'archivos__ver' },
         h('p', { className: 'web-label-m archivos__ruta', 'aria-live': fija ? 'off' : 'polite' }, a.ruta),
