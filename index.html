@@ -2184,6 +2184,8 @@
   --space-64: 64px;
   --space-72: 72px;
   --space-80: 80px;
+  --space-96: 96px;
+  --space-160: 160px;
   --z-hidden: -1;
   --z-footer: 5000;
   --z-floating: 6000;
@@ -4175,7 +4177,11 @@ body { margin: 0; background: var(--ui-02); color: var(--text-01); font-family: 
 }
 
 /* Cordura's site. Layout only: every color, space, radius and type value is an ALMA token with the Entidad Cordura's values. */
-html { background: var(--ui-02); scroll-padding-top: var(--space-80); }
+/* The rhythm (ALMA, Espaciado y grilla › Ritmo): three levels of vertical space, one step more from bp-md (672 px).
+   A jump to a section leaves the space of a section between the bar and its title. */
+:root { --ritmo-pieza: var(--space-16); --ritmo-bloque: var(--space-32); --ritmo-seccion: var(--space-64); }
+@media (min-width: 42rem) { /* bp-md */ :root { --ritmo-pieza: var(--space-24); --ritmo-bloque: var(--space-48); --ritmo-seccion: var(--space-96); } }
+html { background: var(--ui-02); scroll-padding-top: calc(var(--space-64) + var(--ritmo-seccion)); }
 body {
   margin: 0; background: var(--ui-02); color: var(--text-01);
   font-family: var(--font-flex); font-stretch: calc(var(--font-width, 100) * 1%); font-variation-settings: "wdth" var(--font-width, 100), "GRAD" var(--font-grade, 0);
@@ -4193,11 +4199,16 @@ body {
 
 /* After the cover (the scanned bust, site/escaneo.css): the map of what goes in and what comes out, on a grid ground. */
 .portada { margin-block: var(--space-40) 0; border-radius: var(--radius-panel); overflow: hidden; }
-.ancla { outline: none; scroll-margin-top: var(--space-80); }
+.ancla { outline: none; scroll-margin-top: calc(-1 * var(--ritmo-seccion)); }
+/* The page, one thing under another: sections apart by the space of a section; what belongs to the one before (a demonstration
+   after the text that asks for it, the figures after their paragraph) by the space of a block. The first one, under the bar. */
+main { display: grid; grid-template-columns: minmax(0, 1fr); }
+main > * + * { margin-top: var(--ritmo-seccion); }
+main > .junto { margin-top: var(--ritmo-bloque); }
 .portada__in { position: relative; display: grid; justify-items: center; padding: var(--space-64) var(--space-16); text-align: center; }
 .portada__pie { margin: 0; color: var(--text-01); }
 .escaneo__frase { font-family: inherit; }
-.mapa { display: block; width: 100%; max-width: 55rem; height: auto; margin-block: var(--space-16); }
+.mapa { display: block; width: 100%; max-width: 55rem; height: auto; margin: 0; }
 .mapa__txt { fill: var(--text-02); font-size: 13px; }
 .mapa__c { fill: var(--text-01); font-size: 14px; font-weight: var(--font-weight-emphasis); }
 .mapa__l { fill: none; stroke: var(--border-control); stroke-width: 1; }
@@ -4209,24 +4220,27 @@ body {
 .actions { display: flex; flex-wrap: wrap; gap: var(--space-16); }
 
 /* The essay: one narrow column. The demonstrations between its parts take the full width. */
-.texto { display: grid; gap: var(--space-24); max-width: 40rem; margin-inline: auto; padding-block: var(--space-40); }
+.texto { display: grid; gap: var(--ritmo-pieza); width: 100%; max-width: 40rem; margin-inline: auto; }
 .texto p { margin: 0; color: var(--text-02); text-wrap: pretty; }
 .texto .texto__f, .texto .texto__s { color: var(--text-01); line-height: 1.4; text-wrap: pretty; }
-.cap { padding-top: var(--space-80); }
+.cap { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ritmo-bloque); justify-items: center; }
+.cap > * { min-width: 0; }
 .sec__title.cap__t { max-width: 40rem; margin-inline: auto; }
-.demo { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-24); padding-block: var(--space-24) var(--space-40); }
+.demo { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ritmo-pieza); }
 .demo__pie { margin: 0; text-align: center; color: var(--text-02); }
 
 .pedido { display: grid; gap: var(--space-24); min-width: 0; }
 /* A scene that answers the scroll: a tall section, and in it a part that stays in place under the bar at the top. */
-.escena { position: relative; }
-.escena__fija { position: sticky; top: var(--space-64); box-sizing: border-box; height: calc(100svh - var(--space-64)); display: grid; grid-template-columns: minmax(0, 1fr); align-content: center; gap: var(--space-24); padding-block: var(--space-16); }
-.escena__quieta { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-40); }
+/* (its content sits a block's space under the bar, at the top, not centered: the gap does not change with the screen.
+   The scene takes back the space of the block before it, so that space is not counted twice before it stays in place) */
+.escena { position: relative; margin-top: calc(-1 * var(--ritmo-bloque)); }
+.escena__fija { position: sticky; top: var(--space-64); box-sizing: border-box; height: calc(100svh - var(--space-64)); display: grid; grid-template-columns: minmax(0, 1fr); align-content: start; gap: var(--ritmo-pieza); padding-block: var(--ritmo-bloque) var(--space-16); }
+.escena__quieta { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ritmo-bloque); }
 .escena .citas li { opacity: 0.16; transition: opacity var(--duration-slow-01) var(--easing-entrance-expressive); }
 .escena .citas li.is-on { opacity: 1; }
 .pedido__lados span { transition: color var(--duration-moderate-02) var(--easing-standard-productive); }
 .pedido__lados span.is-on { color: var(--text-01); }
-.tarima--fija { height: min(44rem, calc(100svh - 10.5rem)); overflow: hidden; padding: var(--space-24); grid-template-rows: auto minmax(0, 1fr); }
+.tarima--fija { height: min(44rem, calc(100svh - 10.5rem - var(--ritmo-bloque) + var(--space-16))); overflow: hidden; padding: var(--space-24); grid-template-rows: auto minmax(0, 1fr); }
 .tarima--fija .tarima__escena { min-height: 0; align-content: start; }
 .tarima--fija .entorno { height: 100%; }
 @media (prefers-reduced-motion: no-preference) {
@@ -4238,10 +4252,10 @@ body {
 .citas--una { min-height: var(--space-64); }
 .citas--una li { animation: llega var(--duration-slow-01) var(--easing-entrance-expressive) both; }
 @media (max-width: 55.99rem) {
-  .escena__fija { gap: var(--space-16); padding-block: var(--space-8); }
+  .escena__fija { gap: var(--space-16); padding-block: var(--ritmo-bloque) var(--space-8); }
   .escena__fija .pedido { gap: var(--space-16); }
   .escena__fija .mesa { gap: var(--space-8) var(--space-16); }
-  .tarima--fija { height: calc(100svh - 12rem); padding: var(--space-16); }
+  .tarima--fija { height: calc(100svh - 12rem - var(--ritmo-bloque) + var(--space-8)); padding: var(--space-16); }
 }
 .pedido__q { margin: 0; text-align: center; }
 .pedido__q span { display: inline-block; padding: var(--space-8) var(--space-16); border-radius: var(--radius-panel); background: var(--ui-03); color: var(--text-01); }
@@ -4274,12 +4288,12 @@ body {
 .archivos__ruta { margin: 0; color: var(--text-02); font-family: var(--font-mono, ui-monospace, monospace); }
 .archivos__txt { margin: 0; padding: var(--space-24); max-height: 26rem; overflow: auto; white-space: pre; font-family: var(--font-mono, ui-monospace, monospace); color: var(--text-01); }
 .archivos__txt:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
-.archivos--fija .archivos__txt { height: min(30rem, calc(100svh - 14rem)); max-height: none; }
+.archivos--fija .archivos__txt { height: min(30rem, calc(100svh - 14rem - var(--ritmo-bloque) + var(--space-16))); max-height: none; }
 @media (prefers-reduced-motion: no-preference) { .archivos--fija .archivos__txt { animation: asoma var(--duration-slow-01) var(--easing-entrance-expressive) both; } }
-@media (max-width: 55.99rem) { .archivos--fija { gap: var(--space-16); } .archivos--fija .archivos__txt { height: calc(100svh - 19rem); padding: var(--space-16); } }
+@media (max-width: 55.99rem) { .archivos--fija { gap: var(--space-16); } .archivos--fija .archivos__txt { height: calc(100svh - 19rem - var(--ritmo-bloque) + var(--space-8)); padding: var(--space-16); } }
 
-.sec { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-40); padding-block: var(--space-80); }
-.sec__head { box-sizing: border-box; display: grid; gap: var(--space-16); width: 100%; max-width: 40rem; margin-inline: auto; }
+.sec { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ritmo-bloque); }
+.sec__head { box-sizing: border-box; display: grid; gap: var(--ritmo-pieza); width: 100%; max-width: 40rem; margin-inline: auto; }
 .sec__title { margin: 0; line-height: 1.25; text-wrap: balance; outline: none; }
 .sec__lede { margin: 0; color: var(--text-02); }
 .note { margin: 0; color: var(--text-02); }
@@ -4321,16 +4335,16 @@ body {
 
 .piezas { display: grid; gap: var(--space-16); }
 .piezas > * { min-width: 0; }
-.piezas { gap: var(--space-48) var(--space-32); }
+.piezas { gap: var(--ritmo-bloque) var(--space-32); }
 .pieza { display: grid; gap: var(--space-8); align-content: start; }
 .pieza h3, .pieza p { margin: 0; text-wrap: pretty; }
 .pieza__marco { margin-bottom: var(--space-8); }
 .pieza__fig { border-radius: var(--radius-panel); overflow: hidden; }
-.cifras { display: grid; gap: var(--space-32); margin: 0; padding-block: var(--space-40) var(--space-64); text-align: center; }
+.cifras { display: grid; gap: var(--ritmo-bloque); margin: 0; text-align: center; }
 .cifras > div { display: grid; gap: var(--space-8); min-width: 0; }
 .cifras__n { margin: 0; line-height: 1; font-variant-numeric: tabular-nums; color: var(--text-01); }
 .cifras dt { color: var(--text-02); }
-.pasos { display: grid; gap: var(--space-32); margin: 0; padding: 0; list-style: none; width: 100%; max-width: 40rem; }
+.pasos { display: grid; gap: var(--ritmo-bloque); margin: 0; padding: 0; list-style: none; width: 100%; max-width: 40rem; }
 .pasos li { display: grid; grid-template-columns: var(--space-40) minmax(0, 1fr); gap: var(--space-4) var(--space-16); }
 .pasos__c { grid-row: span 2; padding-top: var(--space-4); }
 .pasos h3, .pasos p { margin: 0; }
@@ -4341,11 +4355,11 @@ body {
 .closing { margin-inline: calc(-1 * var(--space-16)); }
 .closing { position: relative; display: grid; }
 .closing__hilos { height: 12rem; }
-.closing__in { position: relative; display: grid; gap: var(--space-24); padding: var(--space-40) var(--space-16) var(--space-80); }
+.closing__in { position: relative; display: grid; gap: var(--ritmo-pieza); padding: var(--ritmo-seccion) var(--space-16); }
 .closing__t { margin: 0; line-height: 1.2; max-width: 22ch; text-wrap: balance; overflow-wrap: anywhere; }
 .closing__p { margin: 0; max-width: 40rem; color: var(--text-02); }
 .contacto { margin: 0; user-select: all; -webkit-user-select: all; }
-.foot { padding-block: var(--space-32) var(--space-56); border-top: 1px solid var(--border-subtle); color: var(--text-02); }
+.foot { padding-block: var(--ritmo-bloque) var(--ritmo-seccion); border-top: 1px solid var(--border-subtle); color: var(--text-02); }
 .foot p { margin: 0; max-width: 48rem; }
 
 @media (min-width: 56rem) {
@@ -4354,21 +4368,20 @@ body {
   .closing__in { padding-inline: var(--space-32); }
   .cifras { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .closing__hilos { position: absolute; inset: 0 0 0 48%; height: auto; }
-  .closing__in { max-width: 44%; padding-block: calc(2 * var(--space-64)); }
+  .closing__in { max-width: 44%; }
   .top__links { display: flex; }
   .tarima { padding: var(--space-32); }
   .citas { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .archivos { grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: var(--space-32); }
-  .texto { padding-block: var(--space-56); }
   .soportes { grid-template-columns: minmax(0, 4fr) minmax(0, 5fr) minmax(0, 6fr); }
   .piezas { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   }
 
 /* The block with everything: a wall of pieces in columns, under a bar that says which theme is on and lets it be chosen. */
-.muro { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-24); min-width: 0; }
+.muro { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; min-width: 0; }
 .muro__barra { position: sticky; top: var(--space-64); z-index: 2; display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-8) var(--space-24); padding-block: var(--space-16); background: var(--ui-02); }
 .muro__cual { margin: 0; margin-inline-start: auto; color: var(--text-02); }
-.muro__cols { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: var(--space-16); align-items: start; padding-block: var(--space-40); }
+.muro__cols { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: var(--space-16); align-items: start; padding-block: var(--ritmo-bloque) 0; }
 .muro__col { display: grid; gap: var(--space-16); min-width: 0; will-change: transform; }
 .losa { box-sizing: border-box; display: grid; gap: var(--space-16); min-width: 0; padding: var(--space-24); border-radius: var(--radius-panel); background: var(--ui-01); }
 .losa--suelta { padding: 0; background: none; }
@@ -11261,7 +11274,7 @@ window.__ARCHIVOS = [{"ruta":"lenguajes/cordura.json","que":"La voz: cómo se es
           { f: 'Cada pantalla, cada página y cada anuncio que publica tu equipo es una decisión sobre qué es tu marca. Hoy muchas de esas decisiones las toma un agente de IA.' },
           'Este es el mismo pedido, dos veces: primero sin nada a la vista, y después con nuestro sistema.'] }),
 
-        h('section', { className: 'demo', 'aria-label': 'El mismo pedido, sin el sistema y con el sistema' },
+        h('section', { className: 'demo junto', 'aria-label': 'El mismo pedido, sin el sistema y con el sistema' },
           h(Pedido),
           h('p', { className: 'web-body-s demo__pie' }, 'La pantalla «sin el sistema» es una maqueta de lo que sale por defecto; la otra usa nuestros componentes.')),
 
@@ -11277,7 +11290,7 @@ window.__ARCHIVOS = [{"ruta":"lenguajes/cordura.json","que":"La voz: cómo se es
             'Guías, piezas y código que una persona puede recorrer y un agente puede leer: la voz y los principios de tu marca, sus reglas de color, letra, forma y movimiento, y los componentes con que se construye lo nuevo.',
             'Cada regla dice dónde aplica y por qué. La del lima está escrita así: va solo en el botón principal; los enlaces son azules; los fondos y los textos, neutros. El código usa esa regla tal cual.'] })),
 
-        h('section', { className: 'demo', 'aria-label': 'Archivos del sistema de Cordura' },
+        h('section', { className: 'demo junto', 'aria-label': 'Archivos del sistema de Cordura' },
           h(Archivos),
           h('p', { className: 'web-body-s demo__pie' }, 'Archivos del sistema de Cordura, recortados. Ninguno se escribió para esta página.')),
 
@@ -11285,7 +11298,7 @@ window.__ARCHIVOS = [{"ruta":"lenguajes/cordura.json","que":"La voz: cómo se es
           'Las piezas siguen conectadas. El color de un botón no es un valor suelto: es un lugar en una tabla. Si la marca cambia de tono, cambia la tabla y todo lo demás la sigue.',
           'No todo se actualiza solo. Hay pruebas que avisan, y alguien tiene que mirar cómo queda. Ese alguien somos nosotros, contigo.'] }),
 
-        h('dl', { className: 'cifras' }, [[HECHOS.componentes, 'componentes'], [HECHOS.temas, 'temas'], [HECHOS.pares, 'combinaciones de texto y fondo, medidas']].map(function (c) { return h(Entra, { key: c[1] }, h(Efecto, { id: 'contar', como: 'dd', className: 'web-display-m cifras__n' }, String(c[0])), h('dt', { className: 'web-body-m' }, c[1])); })),
+        h('dl', { className: 'cifras junto' }, [[HECHOS.componentes, 'componentes'], [HECHOS.temas, 'temas'], [HECHOS.pares, 'combinaciones de texto y fondo, medidas']].map(function (c) { return h(Entra, { key: c[1] }, h(Efecto, { id: 'contar', como: 'dd', className: 'web-display-m cifras__n' }, String(c[0])), h('dt', { className: 'web-body-m' }, c[1])); })),
 
         h(Muro, { tema: tema[0], claro: claro, alto: alto, pon: pon }),
 
