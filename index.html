@@ -4233,7 +4233,6 @@ main > .junto { margin-top: var(--ritmo-bloque); }
 /* The text that asks for the comparison, and the comparison: a block apart, and together in the part that stays in place. */
 .pedido__junto { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ritmo-bloque); min-width: 0; }
 .pedido__junto--lado { grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: var(--space-32); align-items: start; }
-.pedido__junto--lado .citas { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 /* A scene that answers the scroll: a tall section, and in it a part that stays in place under the bar at the top. */
 /* (its content sits a block's space under the bar, at the top, not centered: the gap does not change with the screen.
    The scene takes back the space of the block before it, so that space is not counted twice before it stays in place) */
@@ -4242,8 +4241,6 @@ main > .junto { margin-top: var(--ritmo-bloque); }
 /* (when the text that asks for it is inside too, the whole is centered under the bar, a block's space at least above and below) */
 .escena__fija--centro { align-content: center; padding-block: var(--ritmo-bloque); }
 .escena__quieta { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ritmo-bloque); }
-.escena .citas li { opacity: 0.16; transition: opacity var(--duration-slow-01) var(--easing-entrance-expressive); }
-.escena .citas li.is-on { opacity: 1; }
 .pedido__lados span { transition: color var(--duration-moderate-02) var(--easing-standard-productive); }
 .pedido__lados span.is-on { color: var(--text-01); }
 .tarima--fija { height: min(44rem, calc(100svh - 10.5rem - var(--ritmo-bloque) + var(--space-16))); overflow: hidden; padding: var(--space-24); grid-template-rows: auto minmax(0, 1fr); }
@@ -4255,8 +4252,6 @@ main > .junto { margin-top: var(--ritmo-bloque); }
 }
 .tarima__escena { display: grid; gap: var(--space-24); min-width: 0; }
 .mesa__tema { margin: 0; color: var(--text-02); }
-.citas--una { min-height: var(--space-64); }
-.citas--una li { animation: llega var(--duration-slow-01) var(--easing-entrance-expressive) both; }
 @media (max-width: 55.99rem) {
   .escena__fija { gap: var(--space-16); padding-block: var(--ritmo-bloque) var(--space-8); }
   .escena__fija .pedido { gap: var(--space-16); }
@@ -4281,10 +4276,6 @@ main > .junto { margin-top: var(--ritmo-bloque); }
 .generico__a { padding: var(--space-16); border: 1px solid var(--green-500); border-radius: var(--space-4); color: var(--text-01); }
 .generico__f { display: flex; justify-content: space-between; gap: var(--space-16); padding-block: var(--space-8); border-bottom: 1px solid var(--border-subtle); color: var(--text-02); }
 .generico__b { padding: var(--space-8) var(--space-16); border-radius: var(--space-4); background: var(--green-700); color: var(--brand-white); text-align: center; font-weight: 700; }
-.citas { display: grid; gap: var(--space-16); margin: 0; padding: 0; list-style: none; }
-.citas li { display: grid; gap: var(--space-4); padding-top: var(--space-8); border-top: 1px solid var(--border-control); min-width: 0; }
-.citas code { font-family: var(--font-mono, ui-monospace, monospace); color: var(--text-02); overflow-wrap: anywhere; }
-.citas span { color: var(--text-01); }
 
 .archivos { display: grid; gap: var(--space-24); align-items: start; min-width: 0; }
 .archivos > * { min-width: 0; }
@@ -4376,7 +4367,6 @@ main > .junto { margin-top: var(--ritmo-bloque); }
   .closing__in { max-width: 44%; }
   .top__links { display: flex; }
   .tarima { padding: var(--space-32); }
-  .citas { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .archivos { grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: var(--space-32); }
   .soportes { grid-template-columns: minmax(0, 4fr) minmax(0, 5fr) minmax(0, 6fr); }
   .piezas { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -11044,7 +11034,7 @@ window.__ARCHIVOS = [{"ruta":"lenguajes/cordura.json","que":"La voz: cómo se es
   // The essay: a narrow column of our own words. A string is a paragraph; { f } opens it louder, { s } closes it.
   function Texto(p) {
     return h('div', { className: 'texto' }, p.parrafos.map(function (x, i) {
-      return typeof x === 'string' ? h(Entra, { como: 'p', className: 'web-body-l', key: i }, x) : x.f ? h(Entra, { como: 'p', className: 'web-h4 texto__f', key: i }, x.f) : h(Efecto, { id: 'desvelar', como: 'p', className: 'web-h3 texto__s', key: i }, x.s);
+      return typeof x === 'string' ? h(Entra, { como: 'p', className: 'web-body-l', key: i }, x) : x.f ? h(Entra, { como: 'p', className: 'web-h4 texto__f', key: i }, x.f) : x.n ? h(Entra, { como: 'p', className: 'web-body-s', key: i }, x.n) : h(Efecto, { id: 'desvelar', como: 'p', className: 'web-h3 texto__s', key: i }, x.s);
     }));
   }
 
@@ -11071,20 +11061,14 @@ window.__ARCHIVOS = [{"ruta":"lenguajes/cordura.json","que":"La voz: cómo se es
   function MapaVivo(p) { var ref = useRef(null), llega = useLlegada(ref); return h(Efecto, { id: 'reticula', className: 'portada' }, h('div', { className: 'portada__in', ref: ref }, h(Mapa, { wide: p.wide, llega: llega }))); }
 
   // The same request twice. On the left, what comes out with no system: a made-up, generic screen, drawn on purpose
-  // outside Cordura's values. On the right, the real components, and under them the rule each choice came from.
-  var CITAS = [
-    { ruta: 'lenguajes/cordura.json', regla: '«Botones con verbo y objeto.»' },
-    { ruta: 'lenguajes/cordura.json', regla: '«Nunca inventes urgencia.»' },
-    { ruta: 'tokens/matriz.json', regla: 'El color de marca, solo en el botón principal.' },
-    { ruta: 'tokens/core/radius.json', regla: 'Todas las esquinas salen de un solo radio.' }
-  ];
+  // outside Cordura's values. On the right, the real components.
   function Pedido(p) {
     // One frame, the two screens one over the other. It starts as the generic one, drawn as the web draws by default
     // (light, whatever the page's theme). The one made with the system is uncovered from the top down, and the two
     // are never cut by a line: around where they meet both fade and go out of focus, as in ALMA's «fundido», only
-    // that here the page's scroll is the clock. Where the scene stays in place the scroll does it and brings the rules
-    // in one by one; elsewhere a slider does. The real screen cannot be reached until it is whole.
-    var fija = useFija(), ancho = useAncho(), chica = fija && !ancho, ref = useRef(null), av = useAvance(ref, fija), mano = useState(0);
+    // that here the page's scroll is the clock. Where the scene stays in place the scroll does it;
+    // elsewhere a slider does. The real screen cannot be reached until it is whole.
+    var fija = useFija(), ancho = useAncho(), ref = useRef(null), av = useAvance(ref, fija), mano = useState(0);
     // (the text that asks for it stays in view with it, at its side, where the screen is wide and tall enough for both; elsewhere it goes first)
     var alto = useMedida('(min-height: 50rem)'), junto = fija && ancho && alto, intro = h(Texto, { parrafos: p.intro });
     var t = fija ? Math.min(1, Math.max(0, (av.p - 0.1) / 0.62)) : mano[0] / 100, B = 18, y = -B + t * (100 + 2 * B), entero = t >= 1, nada = t <= 0;
@@ -11106,12 +11090,7 @@ window.__ARCHIVOS = [{"ruta":"lenguajes/cordura.json","que":"La voz: cómo se es
         nada || entero ? null : h('span', { className: 'pedido__bruma', style: { top: (y - B) + '%', height: 2 * B + '%', maskImage: bruma, WebkitMaskImage: bruma }, 'aria-hidden': 'true' })),
       h('div', { className: 'pedido__control' },
         h('p', { className: 'web-label-m pedido__cual', key: t > 0.5 ? 'con' : 'sin' }, t > 0.5 ? 'Con el sistema de Cordura' : 'Sin el sistema'),
-        fija ? null : h(A.Slider, { label: 'Cuánto se ve la pantalla hecha con el sistema', min: 0, max: 100, step: 1, value: mano[0], onChange: mano[1], format: function (n) { return n + ' %'; } })),
-      // (where it is narrow there is room for one rule: the one that has just been reached)
-      h('ul', { className: 'citas' + (chica ? ' citas--una' : '') }, CITAS.map(function (c, i) {
-        var v = !fija || t >= (i + 1) / (CITAS.length + 0.5), esta = Math.min(CITAS.length - 1, Math.floor(t * (CITAS.length + 0.5)) - 1);
-        if (chica && i !== Math.max(0, esta)) return null;
-        return h('li', { key: i, className: v ? 'is-on' : null }, h('code', { className: 'web-body-s' }, c.ruta), h('span', { className: 'web-body-s' }, c.regla)); })));
+        fija ? null : h(A.Slider, { label: 'Cuánto se ve la pantalla hecha con el sistema', min: 0, max: 100, step: 1, value: mano[0], onChange: mano[1], format: function (n) { return n + ' %'; } })));
     if (junto) return h('div', { className: 'escena', ref: ref, style: { height: 'calc(100svh + 100vh)' } }, h('div', { className: 'escena__fija escena__fija--centro' }, h('div', { className: 'pedido__junto pedido__junto--lado' }, intro, cuerpo)));
     return h('div', { className: 'pedido__junto' }, intro, fija ? h('div', { className: 'escena', ref: ref, style: { height: 'calc(100svh + 100vh)' } }, h('div', { className: 'escena__fija' }, cuerpo)) : h(Entra, null, cuerpo));
   }
@@ -11281,8 +11260,8 @@ window.__ARCHIVOS = [{"ruta":"lenguajes/cordura.json","que":"La voz: cómo se es
         h('section', { className: 'demo', 'aria-label': 'El mismo pedido, sin el sistema y con el sistema' },
           h(Pedido, { intro: [
             { f: 'Cada pantalla, cada página y cada anuncio que publica tu equipo es una decisión sobre qué es tu marca. Hoy muchas de esas decisiones las toma un agente de IA.' },
-            'Le pedimos a un agente la misma pantalla de propuestas, dos veces: primero sin nada a la vista, y después con nuestro sistema.'] }),
-          h('p', { className: 'web-body-s demo__pie' }, 'La pantalla «sin el sistema» es una maqueta de lo que sale por defecto; la otra usa nuestros componentes.')),
+            'Le pedimos a un agente la misma pantalla de propuestas, dos veces: primero sin nada a la vista, y después con nuestro sistema.',
+            { n: 'La pantalla «sin el sistema» es una maqueta de lo que sale por defecto; la otra usa nuestros componentes.' }] })),
 
         h(Texto, { parrafos: [
           'La de la izquierda no está mal. Está genérica: nadie le dijo cómo decide esta marca.',
