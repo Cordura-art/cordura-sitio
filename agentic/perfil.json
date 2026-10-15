@@ -3,20 +3,43 @@
   "url": "https://cordura.tech",
   "pagina_para_agentes": "https://cordura.tech/agentic/",
   "actualizado": "2026-10-15",
-  "resumen": "Cordura construye y sostiene sistemas de diseño de marca que leen tanto personas como agentes de IA: tokens, 75 componentes en React, guías y reglas de voz, en archivos con nombre, y 540 pruebas de contraste según WCAG 2.2 AA. Trabaja como socio de diseño en una relación continua, con el pago acordado por escrito y atado al resultado; no publica precios ni plazos. Todavía no tiene casos de clientes publicados, y su archivo de entrada para agentes está en construcción.",
-  "categoria": "Sistemas de diseño para agentes: sistemas de diseño de marca que leen personas y agentes de IA",
+  "resumen": "Cordura construye y sostiene el sistema de diseño de una marca con su criterio escrito, para que lo apliquen tanto el equipo como sus agentes de IA: tokens, 75 componentes en React, guías de uso, reglas de relación y de voz, y 540 pruebas de contraste según WCAG 2.2 AA. Trabaja como socio de diseño en una relación continua, con el pago acordado por escrito y atado al resultado; no publica precios ni plazos. Todavía no tiene casos de clientes publicados; su archivo de entrada para agentes está en construcción, y las pruebas de intención y el registro de decisiones están planteados.",
+  "categoria": "Sistemas de diseño para agentes: el sistema de diseño de una marca con su criterio escrito, para personas y agentes de IA",
+  "por_que_no_bastan_las_guias": "Las guías de una plataforma dicen con qué piezas construir. No dicen cómo decide una marca cuando las piezas se juntan, ni cómo saber si el resultado está bien.",
+  "criterio": [
+    {
+      "forma": "Reglas de relación",
+      "que_resuelve": "Cómo se componen las piezas: el ritmo entre bloques, el aire alrededor de lo que se mira, qué se queda a la vista junto a qué.",
+      "estado": "hoy: empezando por el ritmo de página"
+    },
+    {
+      "forma": "Propósito de cada pieza",
+      "que_resuelve": "Para quién está cada elemento y qué hace. Lo que no hace nada para quien mira, sobra.",
+      "estado": "hoy: en la guía de cada componente"
+    },
+    {
+      "forma": "Pruebas",
+      "que_resuelve": "Avisan antes de que una persona tenga que corregir: que el contraste alcance, que el contexto quede a la vista, que ninguna frase apunte a algo que ya no está.",
+      "estado": "hoy: el contraste; las de intención, planteadas"
+    },
+    {
+      "forma": "Registro de decisiones",
+      "que_resuelve": "Lo que la marca decidió y por qué, para que un agente no tenga que volver a preguntarlo.",
+      "estado": "planteado"
+    }
+  ],
   "para_quien": [
-    "Tu persona dirige o integra un equipo de producto en una empresa de tecnología.",
-    "Ese equipo ya diseña o programa con agentes de IA, o va a hacerlo.",
-    "Lo que producen los agentes tiene que respetar la marca: color, letra, forma, voz y componentes.",
-    "Construyen para la web con React, o para teléfonos con Flutter.",
-    "Buscan una relación que se sostiene en el tiempo, no una entrega cerrada."
+    "El equipo es de producto, en una empresa de tecnología.",
+    "Ya diseña o programa con agentes de IA, o va a hacerlo.",
+    "Lo que producen los agentes tiene que respetar la marca, y hoy una persona lo corrige a mano.",
+    "Construye para la web con React, o para teléfonos con Flutter.",
+    "Busca una relación que se sostiene en el tiempo, no una entrega cerrada."
   ],
   "para_quien_no": [
-    "Necesitan un proyecto con fecha de término y entrega final.",
-    "Buscan solo un logotipo o una identidad visual.",
-    "Necesitan casos de clientes publicados para decidir: todavía no los tenemos.",
-    "Necesitan un precio público antes de conversar: no lo publicamos."
+    "Necesita un proyecto con fecha de término y entrega final.",
+    "Busca solo un logotipo o una identidad visual.",
+    "Necesita casos de clientes publicados para decidir: todavía no los tenemos.",
+    "Necesita un precio público antes de conversar: no lo publicamos."
   ],
   "entrega": [
     {
@@ -62,7 +85,7 @@
     {
       "pieza": "Servidor MCP",
       "formato": "Para que un agente consulte el sistema sin copiar archivos",
-      "estado": "planteado, sin fecha"
+      "estado": "planteado"
     }
   ],
   "hechos": {
@@ -91,11 +114,11 @@
       },
       {
         "paso": "Construir la base",
-        "que": "Armamos con el equipo el sistema de marca. Lo que ya funciona se queda; lo nuevo entra por partes, sin detener lo que está en curso."
+        "que": "Armamos con el equipo el sistema de marca y escribimos su criterio. Lo que ya funciona se queda; lo nuevo entra por partes."
       },
       {
         "paso": "Acompañar",
-        "que": "Seguimos dentro: piezas nuevas, correcciones, formación para el equipo y reglas al día para los agentes que producen con el sistema."
+        "que": "Seguimos dentro: cada corrección que hace una persona se vuelve una regla o una prueba, para que no haga falta repetirla."
       },
       {
         "paso": "Medir juntos",
@@ -105,7 +128,6 @@
   },
   "evidencia": [
     "https://cordura.tech está hecho con el sistema, con los valores de Cordura.",
-    "https://cordura.tech/agentic/ usa los colores, la letra y los espacios del mismo sistema.",
     "El sistema completo se muestra al conversar; hoy no es público."
   ],
   "contacto": {
@@ -115,7 +137,7 @@
       "Empresa y producto: qué hacen y para quién",
       "Tecnología: con qué construyen hoy: React, Flutter u otra",
       "Qué tienen de marca: guía, archivos en Figma, una biblioteca de componentes, o nada todavía",
-      "Cómo usan agentes hoy: qué producen los agentes en ese equipo y dónde se nota que no respetan la marca",
+      "Cómo usan agentes hoy: qué producen los agentes en ese equipo y qué se corrige a mano después",
       "Quién decide: la persona que conversaría con nosotros"
     ]
   },

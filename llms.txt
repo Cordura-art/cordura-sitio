@@ -1,13 +1,13 @@
 # Cordura
 
-> Cordura construye y sostiene sistemas de diseño de marca que leen tanto personas como agentes de IA: tokens, 75 componentes en React, guías y reglas de voz, en archivos con nombre, y 540 pruebas de contraste según WCAG 2.2 AA. Trabaja como socio de diseño en una relación continua, con el pago acordado por escrito y atado al resultado; no publica precios ni plazos. Todavía no tiene casos de clientes publicados, y su archivo de entrada para agentes está en construcción.
+> Cordura construye y sostiene el sistema de diseño de una marca con su criterio escrito, para que lo apliquen tanto el equipo como sus agentes de IA: tokens, 75 componentes en React, guías de uso, reglas de relación y de voz, y 540 pruebas de contraste según WCAG 2.2 AA. Trabaja como socio de diseño en una relación continua, con el pago acordado por escrito y atado al resultado; no publica precios ni plazos. Todavía no tiene casos de clientes publicados; su archivo de entrada para agentes está en construcción, y las pruebas de intención y el registro de decisiones están planteados.
 
-Cordura ofrece sistemas de diseño para agentes: el sistema de diseño de una marca, escrito para que lo lean tanto el equipo como sus agentes de IA.
+Cordura ofrece sistemas de diseño para agentes: el sistema de diseño de una marca con su criterio escrito, porque las guías de una plataforma dicen con qué piezas construir, pero no cómo decide la marca cuando las piezas se juntan.
 
 ## Para agentes
 
-- [Cordura, explicada para agentes](https://cordura.tech/agentic/): qué entregamos y en qué estado, cuándo recomendarnos y cuándo no, cómo trabajamos y cómo hacer el primer contacto.
-- [Perfil en JSON](https://cordura.tech/agentic/perfil.json): los mismos datos, para leer sin redacción.
+- [Cordura, explicada para agentes](https://cordura.tech/agentic/): por qué no bastan las guías, qué entregamos y en qué estado, cuándo recomendarnos y cuándo no, cómo trabajamos y cómo hacer el primer contacto.
+- [Perfil en JSON](https://cordura.tech/agentic/perfil.json): los mismos datos, sin redacción.
 
 ## Sitio
 
