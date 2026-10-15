@@ -11091,7 +11091,7 @@ window.__ARCHIVOS = [{"ruta":"lenguajes/cordura.json","que":"La voz: cómo se es
         var v = !fija || t >= (i + 1) / (CITAS.length + 0.5), esta = Math.min(CITAS.length - 1, Math.floor(t * (CITAS.length + 0.5)) - 1);
         if (chica && i !== Math.max(0, esta)) return null;
         return h('li', { key: i, className: v ? 'is-on' : null }, h('code', { className: 'web-body-s' }, c.ruta), h('span', { className: 'web-body-s' }, c.regla)); })));
-    return fija ? h('div', { className: 'escena', ref: ref, style: { height: 'calc(100svh + 170vh)' } }, h('div', { className: 'escena__fija' }, cuerpo)) : h(Entra, null, cuerpo);
+    return fija ? h('div', { className: 'escena', ref: ref, style: { height: 'calc(100svh + 100vh)' } }, h('div', { className: 'escena__fija' }, cuerpo)) : h(Entra, null, cuerpo);
   }
 
   // The same proposal on every support, from a desktop to a watch. One frame that changes its shape as
@@ -11141,7 +11141,7 @@ window.__ARCHIVOS = [{"ruta":"lenguajes/cordura.json","que":"La voz: cómo se es
       h('div', { className: 'sec__head' },
         h(Efecto, { id: 'escalonar', como: 'h2', className: 'web-h2 sec__title', attrs: { id: 'soportes-t', tabIndex: -1 } }, 'En cada soporte'),
         h(Entra, { como: 'p', className: 'web-body-l sec__lede' }, 'La misma propuesta, de un escritorio a un reloj. Cambia cuánto se muestra; la voz, la letra y la forma no.')),
-      fija ? h('div', { className: 'escena', ref: ref, style: { height: 'calc(100svh + ' + total * 60 + 'vh)' } }, h('div', { className: 'escena__fija escena__fija--soportes' }, cuerpo)) : h('div', { className: 'escena__quieta escena__quieta--soportes' }, cuerpo));
+      fija ? h('div', { className: 'escena', ref: ref, style: { height: 'calc(100svh + ' + total * 35 + 'vh)' } }, h('div', { className: 'escena__fija escena__fija--soportes' }, cuerpo)) : h('div', { className: 'escena__quieta escena__quieta--soportes' }, cuerpo));
   }
 
   // One block with everything: letter, color, tokens, controls, cards, charts, a conversation, a desktop. Nothing is
@@ -11159,16 +11159,16 @@ window.__ARCHIVOS = [{"ruta":"lenguajes/cordura.json","que":"La voz: cómo se es
   }
   function Muro(p) {
     var ref = useRef(null), cols = useColumnas(), quieto = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches), libre = useState(false);
-    var a = useState({ p: 0, dentro: false });
+    var a = useState({ p: 0, dentro: false, s: 0 });
     useEffect(function () {
       var raf = 0;
-      function mide() { raf = 0; var el = ref.current; if (!el) return; var r = el.getBoundingClientRect(), q = Math.min(1, Math.max(0, (innerHeight * 0.55 - r.top) / r.height)), dentro = r.top < innerHeight * 0.55 && r.bottom > innerHeight * 0.45; a[1](function (x) { return Math.abs(x.p - q) < 0.003 && x.dentro === dentro ? x : { p: q, dentro: dentro }; }); }
+      function mide() { raf = 0; var el = ref.current; if (!el) return; var r = el.getBoundingClientRect(), q = Math.min(1, Math.max(0, (innerHeight * 0.55 - r.top) / r.height)), dentro = r.top < innerHeight * 0.55 && r.bottom > innerHeight * 0.45, s = Math.max(0, Math.floor((innerHeight * 0.55 - r.top) / (innerHeight * 0.4))); a[1](function (x) { return Math.abs(x.p - q) < 0.003 && x.dentro === dentro && x.s === s ? x : { p: q, dentro: dentro, s: s }; }); }
       function pide() { if (!raf) raf = requestAnimationFrame(mide); }
       addEventListener('scroll', pide, { passive: true }); addEventListener('resize', pide); mide();
       return function () { removeEventListener('scroll', pide); removeEventListener('resize', pide); cancelAnimationFrame(raf); };
     }, []);
-    // (the four themes, from the viewer's own; a choice made by hand inside the block holds until it is left)
-    var base = propio(), k = TEMAS_EN_ORDEN.indexOf(base), i = Math.min(3, Math.floor(a[0].p * 4)), toca = TEMAS_EN_ORDEN[(k + i) % 4];
+    // (the four themes, from the viewer's own, one more every 0.4 of a screen, round and round; a choice made by hand inside the block holds until it is left)
+    var base = propio(), k = TEMAS_EN_ORDEN.indexOf(base), i = a[0].s % 4, toca = TEMAS_EN_ORDEN[(k + i) % 4];
     useEffect(function () { if (!a[0].dentro && libre[0]) libre[1](false); }, [a[0].dentro]);
     useEffect(function () { fuerza(!quieto && a[0].dentro && !libre[0] && i > 0 ? toca : null); }, [quieto, a[0].dentro, libre[0], toca, i]);
     useEffect(function () { return function () { fuerza(null); }; }, []);
@@ -11229,7 +11229,7 @@ window.__ARCHIVOS = [{"ruta":"lenguajes/cordura.json","que":"La voz: cómo se es
       h('div', { className: 'archivos__ver' },
         h('p', { className: 'web-label-m archivos__ruta', 'aria-live': fija ? 'off' : 'polite' }, a.ruta),
         h('pre', { className: 'marco archivos__txt web-body-s', key: a.ruta, tabIndex: 0, 'aria-label': 'Contenido de ' + a.ruta }, a.texto)));
-    return fija ? h('div', { className: 'escena', ref: ref, style: { height: 'calc(100svh + ' + total * 55 + 'vh)' } }, h('div', { className: 'escena__fija' }, cuerpo)) : h(Entra, null, cuerpo);
+    return fija ? h('div', { className: 'escena', ref: ref, style: { height: 'calc(100svh + ' + total * 35 + 'vh)' } }, h('div', { className: 'escena__fija' }, cuerpo)) : h(Entra, null, cuerpo);
   }
 
   var Campo = window.__GENERADOR_VISTAS(G).Campo;
