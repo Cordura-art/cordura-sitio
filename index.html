@@ -4198,7 +4198,7 @@ body {
 .top__links { display: none; gap: var(--space-8); }
 
 /* After the cover (the scanned bust, site/escaneo.css): the map of what goes in and what comes out, on a grid ground. */
-.portada { margin-block: var(--space-40) 0; border-radius: var(--radius-panel); overflow: hidden; }
+.portada { margin: 0; border-radius: var(--radius-panel); overflow: hidden; }
 .ancla { outline: none; scroll-margin-top: calc(-1 * var(--ritmo-seccion)); }
 /* The page, one thing under another: sections apart by the space of a section; what belongs to the one before (a demonstration
    after the text that asks for it, the figures after their paragraph) by the space of a block. The first one, under the bar. */
@@ -4223,7 +4223,7 @@ main > .junto { margin-top: var(--ritmo-bloque); }
 .texto { display: grid; gap: var(--ritmo-pieza); width: 100%; max-width: 40rem; margin-inline: auto; }
 .texto p { margin: 0; color: var(--text-02); text-wrap: pretty; }
 .texto .texto__f, .texto .texto__s { color: var(--text-01); line-height: 1.4; text-wrap: pretty; }
-.cap { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ritmo-bloque); justify-items: center; }
+.cap { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ritmo-bloque); }
 .cap > * { min-width: 0; }
 .sec__title.cap__t { max-width: 40rem; margin-inline: auto; }
 .demo { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ritmo-pieza); }
