@@ -10984,15 +10984,23 @@ window.__ARCHIVOS = [{"ruta":"lenguajes/cordura.json","que":"La voz: cómo se es
   // under it: how far the page has gone through it (0 to 1) is what the scene shows. Only where there is room for it
   // and motion was not turned down; elsewhere the same things are there, still, with their own controls.
   var BARRA = 64;      // the bar at the top, which stays: the part that stays in place sits under it
+  // (the height is read in pixels, not asked in rem of a media query, which Safari on the iPhone answered otherwise; and
+  // motion counts as turned down only when it is asked for, so a browser that does not say keeps the scenes)
+  function fijaAhora() { var calma = !!window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches; return !calma && window.innerHeight >= 480; }
+  function escucha(m, on) { if (m.addEventListener) m.addEventListener('change', on); else if (m.addListener) m.addListener(on); return function () { if (m.removeEventListener) m.removeEventListener('change', on); else if (m.removeListener) m.removeListener(on); }; }
   function useFija() {
-    var q = '(min-height: 30rem) and (prefers-reduced-motion: no-preference)', v = useState(!!window.matchMedia && matchMedia(q).matches);
-    useEffect(function () { if (!window.matchMedia) return; var m = matchMedia(q), on = function () { v[1](m.matches); }; m.addEventListener('change', on); return function () { m.removeEventListener('change', on); }; }, []);
+    var v = useState(fijaAhora);
+    useEffect(function () {
+      var on = function () { v[1](fijaAhora()); }, deja = window.matchMedia ? escucha(matchMedia('(prefers-reduced-motion: reduce)'), on) : function () {};
+      addEventListener('resize', on); on();
+      return function () { removeEventListener('resize', on); deja(); };
+    }, []);
     return v[0];
   }
   function useAncho() { return useMedida('(min-width: 56rem)'); }
   function useMedida(q) {
     var v = useState(!window.matchMedia || matchMedia(q).matches);
-    useEffect(function () { if (!window.matchMedia) return; var m = matchMedia(q), on = function () { v[1](m.matches); }; m.addEventListener('change', on); return function () { m.removeEventListener('change', on); }; }, []);
+    useEffect(function () { if (!window.matchMedia) return; var m = matchMedia(q), on = function () { v[1](m.matches); }; on(); return escucha(m, on); }, []);
     return v[0];
   }
   function useAvance(ref, activo) {
