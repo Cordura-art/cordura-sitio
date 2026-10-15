@@ -4353,6 +4353,7 @@ main > .junto { margin-top: var(--ritmo-bloque); }
 .closing__p { margin: 0; max-width: 40rem; color: var(--text-02); }
 .contacto { margin: 0; user-select: all; -webkit-user-select: all; }
 .foot { padding-block: var(--ritmo-bloque) var(--ritmo-seccion); border-top: 1px solid var(--border-subtle); color: var(--text-02); }
+.foot__in { display: grid; gap: var(--space-16); justify-items: start; }
 .foot p { margin: 0; max-width: 48rem; }
 
 @media (min-width: 56rem) {
@@ -11283,8 +11284,10 @@ window.__ARCHIVOS = [{"ruta":"lenguajes/cordura.json","que":"La voz: cómo se es
           h('p', { className: 'web-body-l closing__p' }, 'Escríbenos un correo. Te mostramos el sistema con tu caso a la vista. Si no es el momento, esta página sigue aquí.'),
           CONTACTO ? h('p', { className: 'web-h4 contacto' }, CONTACTO) : h('p', { className: 'web-body-m note' }, 'Borrador: falta la dirección de correo.')))),
 
-      h('footer', { className: 'foot' }, h('div', { className: 'wrap' },
-        h('p', { className: 'web-body-s' }, 'Cordura · Santiago de Chile. Todo lo que ves en esta página usa los componentes de ALMA, nuestro sistema de diseño, con los valores de Cordura.'))));
+      h('footer', { className: 'foot' }, h('div', { className: 'wrap foot__in' },
+        h('p', { className: 'web-body-s' }, 'Cordura · Santiago de Chile. Todo lo que ves en esta página usa los componentes de ALMA, nuestro sistema de diseño, con los valores de Cordura.'),
+        // (the page written for agents that look for a provider: static, with the same facts as data)
+        h(A.Link, { href: '/agentic/', standalone: true }, 'Para agentes'))));
   }
 
   ReactDOM.createRoot(document.getElementById('app')).render(h(Page));
