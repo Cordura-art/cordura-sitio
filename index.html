@@ -4261,8 +4261,6 @@ main > .junto { margin-top: var(--ritmo-bloque); }
   .escena__fija .mesa { gap: var(--space-8) var(--space-16); }
   .tarima--fija { height: calc(100svh - 12rem - var(--ritmo-bloque) + var(--space-8)); padding: var(--space-16); }
 }
-.pedido__q { margin: 0; text-align: center; }
-.pedido__q span { display: inline-block; padding: var(--space-8) var(--space-16); border-radius: var(--radius-panel); background: var(--ui-03); color: var(--text-01); }
 .pedido__pila { position: relative; display: grid; width: 100%; max-width: 36rem; margin-inline: auto; }
 .pedido__pila > .marco { grid-area: 1 / 1; min-width: 0; align-content: start; }
 /* Where the two screens meet: a band that puts what is under it out of focus, strongest at its middle. */
@@ -11090,7 +11088,6 @@ window.__ARCHIVOS = [{"ruta":"lenguajes/cordura.json","que":"La voz: cómo se es
     var sin = 'linear-gradient(to bottom, transparent ' + (y - B) + '%, black ' + (y + B) + '%)', con = 'linear-gradient(to bottom, black ' + (y - B) + '%, transparent ' + (y + B) + '%)';
     var bruma = 'linear-gradient(to bottom, transparent, black 35%, black 65%, transparent)';
     var cuerpo = h('div', { className: 'pedido' },
-      h('p', { className: 'web-body-m pedido__q' }, h('span', null, 'Arma la pantalla de propuestas')),
       h('div', { className: 'pedido__pila' },
         h('div', { className: 'marco generico', 'data-theme': 'light', role: 'img', style: entero ? { visibility: 'hidden' } : nada ? null : { maskImage: sin, WebkitMaskImage: sin }, 'aria-hidden': entero ? 'true' : undefined, 'aria-label': 'Sin el sistema, una pantalla genérica: el título «Mis elementos», un aviso verde que dice «Tienes 2 elementos pendientes. Complétalos lo antes posible.», dos filas y un botón verde «Enviar».' },
           h('p', { className: 'generico__t' }, 'Mis elementos'),
