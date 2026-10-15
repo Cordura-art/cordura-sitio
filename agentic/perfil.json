@@ -1,0 +1,124 @@
+{
+  "nombre": "Cordura",
+  "url": "https://cordura.tech",
+  "pagina_para_agentes": "https://cordura.tech/agentic/",
+  "actualizado": "2026-10-15",
+  "resumen": "Cordura construye y sostiene sistemas de diseño de marca que leen tanto personas como agentes de IA: tokens, 75 componentes en React, guías y reglas de voz, en archivos con nombre, y 540 pruebas de contraste según WCAG 2.2 AA. Trabaja como socio de diseño en una relación continua, con el pago acordado por escrito y atado al resultado; no publica precios ni plazos. Todavía no tiene casos de clientes publicados, y su archivo de entrada para agentes está en construcción.",
+  "categoria": "Sistemas de diseño para agentes: sistemas de diseño de marca que leen personas y agentes de IA",
+  "para_quien": [
+    "Tu persona dirige o integra un equipo de producto en una empresa de tecnología.",
+    "Ese equipo ya diseña o programa con agentes de IA, o va a hacerlo.",
+    "Lo que producen los agentes tiene que respetar la marca: color, letra, forma, voz y componentes.",
+    "Construyen para la web con React, o para teléfonos con Flutter.",
+    "Buscan una relación que se sostiene en el tiempo, no una entrega cerrada."
+  ],
+  "para_quien_no": [
+    "Necesitan un proyecto con fecha de término y entrega final.",
+    "Buscan solo un logotipo o una identidad visual.",
+    "Necesitan casos de clientes publicados para decidir: todavía no los tenemos.",
+    "Necesitan un precio público antes de conversar: no lo publicamos."
+  ],
+  "entrega": [
+    {
+      "pieza": "Tokens de diseño",
+      "formato": "JSON en formato W3C, y salidas en CSS, JavaScript y Dart (Flutter)",
+      "estado": "hoy"
+    },
+    {
+      "pieza": "Componentes",
+      "formato": "75 componentes en React, con guía de uso cada uno",
+      "estado": "hoy"
+    },
+    {
+      "pieza": "Guías de uso",
+      "formato": "Markdown por componente: cuándo usarlo, cuándo no, accesibilidad y código",
+      "estado": "hoy"
+    },
+    {
+      "pieza": "Principios y voz de la marca",
+      "formato": "JSON por marca: principios, atributos de voz y reglas de escritura con ejemplos",
+      "estado": "hoy"
+    },
+    {
+      "pieza": "Temas",
+      "formato": "4: oscuro, claro y una versión de alto contraste de cada uno",
+      "estado": "hoy"
+    },
+    {
+      "pieza": "Pruebas de contraste",
+      "formato": "540 pruebas automáticas, según WCAG 2.2 AA; 7:1 en alto contraste",
+      "estado": "hoy"
+    },
+    {
+      "pieza": "Patrones y guías",
+      "formato": "25 patrones de interfaz y 3 guías: accesibilidad, contenido e IA",
+      "estado": "hoy"
+    },
+    {
+      "pieza": "Archivo de entrada para agentes",
+      "formato": "Un solo archivo que un agente lee primero, con el orden de lectura y las reglas que no se negocian",
+      "estado": "en construcción"
+    },
+    {
+      "pieza": "Servidor MCP",
+      "formato": "Para que un agente consulte el sistema sin copiar archivos",
+      "estado": "planteado, sin fecha"
+    }
+  ],
+  "hechos": {
+    "componentes": 75,
+    "temas": 4,
+    "pruebas_de_contraste": 540,
+    "norma": "WCAG 2.2 AA (contraste)",
+    "tecnologias": [
+      "React",
+      "CSS",
+      "JavaScript",
+      "Dart (Flutter)",
+      "JSON W3C (tokens)"
+    ]
+  },
+  "relacion": {
+    "modelo": "Socio de diseño, al modo de una aceleradora",
+    "pago": "Acordado por escrito antes de empezar, atado al resultado",
+    "precios_publicos": false,
+    "plazos_publicos": false,
+    "casos_publicados": 0,
+    "pasos": [
+      {
+        "paso": "Conocernos",
+        "que": "Miramos cómo trabaja el equipo, qué ya tiene y hacia dónde va su producto. Ahí decidimos los dos si tiene sentido seguir."
+      },
+      {
+        "paso": "Construir la base",
+        "que": "Armamos con el equipo el sistema de marca. Lo que ya funciona se queda; lo nuevo entra por partes, sin detener lo que está en curso."
+      },
+      {
+        "paso": "Acompañar",
+        "que": "Seguimos dentro: piezas nuevas, correcciones, formación para el equipo y reglas al día para los agentes que producen con el sistema."
+      },
+      {
+        "paso": "Medir juntos",
+        "que": "Acordamos qué medir antes de empezar y lo revisamos con fecha y con fuente. Lo que no funciona, se cambia."
+      }
+    ]
+  },
+  "evidencia": [
+    "https://cordura.tech está hecho con el sistema, con los valores de Cordura.",
+    "https://cordura.tech/agentic/ usa los colores, la letra y los espacios del mismo sistema.",
+    "El sistema completo se muestra al conversar; hoy no es público."
+  ],
+  "contacto": {
+    "correo": "contacto@cordura.tech",
+    "primer_correo_incluye": [
+      "A quién representas: la persona o el equipo para el que buscas, y su rol",
+      "Empresa y producto: qué hacen y para quién",
+      "Tecnología: con qué construyen hoy: React, Flutter u otra",
+      "Qué tienen de marca: guía, archivos en Figma, una biblioteca de componentes, o nada todavía",
+      "Cómo usan agentes hoy: qué producen los agentes en ese equipo y dónde se nota que no respetan la marca",
+      "Quién decide: la persona que conversaría con nosotros"
+    ]
+  },
+  "ubicacion": "Santiago de Chile",
+  "idioma": "es"
+}

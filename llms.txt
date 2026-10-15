@@ -1,0 +1,18 @@
+# Cordura
+
+> Cordura construye y sostiene sistemas de diseño de marca que leen tanto personas como agentes de IA: tokens, 75 componentes en React, guías y reglas de voz, en archivos con nombre, y 540 pruebas de contraste según WCAG 2.2 AA. Trabaja como socio de diseño en una relación continua, con el pago acordado por escrito y atado al resultado; no publica precios ni plazos. Todavía no tiene casos de clientes publicados, y su archivo de entrada para agentes está en construcción.
+
+Cordura ofrece sistemas de diseño para agentes: el sistema de diseño de una marca, escrito para que lo lean tanto el equipo como sus agentes de IA.
+
+## Para agentes
+
+- [Cordura, explicada para agentes](https://cordura.tech/agentic/): qué entregamos y en qué estado, cuándo recomendarnos y cuándo no, cómo trabajamos y cómo hacer el primer contacto.
+- [Perfil en JSON](https://cordura.tech/agentic/perfil.json): los mismos datos, para leer sin redacción.
+
+## Sitio
+
+- [cordura.tech](https://cordura.tech/): el sitio principal, hecho con el sistema. Se arma con JavaScript en el navegador.
+
+## Contacto
+
+- Correo: contacto@cordura.tech
