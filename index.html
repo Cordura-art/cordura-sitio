@@ -4239,6 +4239,8 @@ main > .junto { margin-top: var(--ritmo-bloque); }
    The scene takes back the space of the block before it, so that space is not counted twice before it stays in place) */
 .escena { position: relative; margin-top: calc(-1 * var(--ritmo-bloque)); }
 .escena__fija { position: sticky; top: var(--space-64); box-sizing: border-box; height: calc(100svh - var(--space-64)); display: grid; grid-template-columns: minmax(0, 1fr); align-content: start; gap: var(--ritmo-pieza); padding-block: var(--ritmo-bloque) var(--space-16); }
+/* (when the text that asks for it is inside too, the whole is centered under the bar, a block's space at least above and below) */
+.escena__fija--centro { align-content: center; padding-block: var(--ritmo-bloque); }
 .escena__quieta { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ritmo-bloque); }
 .escena .citas li { opacity: 0.16; transition: opacity var(--duration-slow-01) var(--easing-entrance-expressive); }
 .escena .citas li.is-on { opacity: 1; }
@@ -11109,7 +11111,7 @@ window.__ARCHIVOS = [{"ruta":"lenguajes/cordura.json","que":"La voz: cómo se es
         var v = !fija || t >= (i + 1) / (CITAS.length + 0.5), esta = Math.min(CITAS.length - 1, Math.floor(t * (CITAS.length + 0.5)) - 1);
         if (chica && i !== Math.max(0, esta)) return null;
         return h('li', { key: i, className: v ? 'is-on' : null }, h('code', { className: 'web-body-s' }, c.ruta), h('span', { className: 'web-body-s' }, c.regla)); })));
-    if (junto) return h('div', { className: 'escena', ref: ref, style: { height: 'calc(100svh + 100vh)' } }, h('div', { className: 'escena__fija' }, h('div', { className: 'pedido__junto pedido__junto--lado' }, intro, cuerpo)));
+    if (junto) return h('div', { className: 'escena', ref: ref, style: { height: 'calc(100svh + 100vh)' } }, h('div', { className: 'escena__fija escena__fija--centro' }, h('div', { className: 'pedido__junto pedido__junto--lado' }, intro, cuerpo)));
     return h('div', { className: 'pedido__junto' }, intro, fija ? h('div', { className: 'escena', ref: ref, style: { height: 'calc(100svh + 100vh)' } }, h('div', { className: 'escena__fija' }, cuerpo)) : h(Entra, null, cuerpo));
   }
 
