@@ -10829,17 +10829,16 @@ window.__ARCHIVOS = [{"ruta":"lenguajes/cordura.json","que":"La voz: cómo se es
   var CONTACTO = 'contacto@cordura.tech';
 
   // The theme: the viewer's choice on this page (remembered on this device), else the host's (data-theme on the root),
-  // else the system's. Four themes: dark or light, each with its high-contrast version.
-  var KEY = 'cordura-sitio-tema', TEMAS = ['dark', 'light', 'dark-hc', 'light-hc'], ok = function (v) { return TEMAS.indexOf(v) >= 0; };
+  // else light: the site opens in light whatever the system says. Four themes: dark or light, each with its high-contrast version.
+  var KEY = 'cordura-sitio-tema-2', TEMAS = ['dark', 'light', 'dark-hc', 'light-hc'], ok = function (v) { return TEMAS.indexOf(v) >= 0; };
   var store = { get: function () { try { return localStorage.getItem(KEY); } catch (e) { return null; } }, set: function (v) { try { localStorage.setItem(KEY, v); } catch (e) { /* storage blocked */ } } };
-  var mq = window.matchMedia ? matchMedia('(prefers-color-scheme: light)') : null, host = root.getAttribute('data-theme'), choice = store.get(), listen = function () {};
+  var host = root.getAttribute('data-theme'), choice = store.get(), listen = function () {};
   // (a scene may hold the page in another theme while it is on screen: `forzado`. The viewer's own choice is untouched)
   var forzado = null;
-  function propio() { return ok(choice) ? choice : ok(host) ? host : (mq && mq.matches ? 'light' : 'dark'); }
+  function propio() { return ok(choice) ? choice : ok(host) ? host : 'light'; }
   function paint() { var t = ok(forzado) ? forzado : propio(); root.style.colorScheme = t.indexOf('light') === 0 ? 'light' : 'dark'; if (root.getAttribute('data-theme') !== t) root.setAttribute('data-theme', t); listen(t); return t; }
   var painted = paint();
   new MutationObserver(function () { var v = root.getAttribute('data-theme'); if (v !== painted) { host = v; choice = null; painted = paint(); } }).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
-  if (mq && mq.addEventListener) mq.addEventListener('change', function () { painted = paint(); });
   function choose(t) { choice = t; store.set(t); painted = paint(); }
   function fuerza(t) { if (forzado === t) return; forzado = t; painted = paint(); }
 
