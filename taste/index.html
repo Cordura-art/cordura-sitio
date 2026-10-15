@@ -4225,8 +4225,12 @@ main { display: grid; }
 .piezas__lista dt, .piezas__lista dd { margin: 0; }
 .piezas__lista dd { max-width: 36rem; }
 
-.campo { padding: 0 var(--margen); }
 .campo img { aspect-ratio: 7 / 4; object-fit: cover; }
+/* Edge to edge: the underpass and the planet run past the margins. */
+.recorrido { display: grid; gap: var(--dentro); padding-bottom: var(--entre); }
+.recorrido > .tipo { padding-inline: var(--margen); }
+.sangrado video, .sangrado img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; }
+.sangrado--planeta img { max-height: 90svh; }
 
 .relacion { display: grid; gap: var(--dentro); padding: var(--entre) var(--margen); }
 .relacion > p.web-body-l { max-width: 40rem; }
@@ -4265,7 +4269,7 @@ main { display: grid; }
   .relacion { grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); align-items: end; }
   .relacion .pasos { grid-column: 1 / -1; }
   .principios__lista div { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); align-items: baseline; gap: var(--space-32); }
-  .campo img { max-height: 70svh; }
+  .relacion .campo { grid-column: 1 / -1; }
 }
 
 /* Motion: each part rises once, a beat after the one before; the bust drifts slowly. Transform and opacity only. */
@@ -4302,7 +4306,7 @@ main { display: grid; }
 
   <section class="portada" aria-labelledby="titulo">
     <div class="portada__texto">
-      <h1 class="tipo " data-tipo="h1 display-m display-l" id="titulo" data-entra>Tu marca,<br>por escrito.</h1>
+      <h1 class="tipo " data-tipo="display-m display-l display-l" id="titulo" data-entra>Tu marca,<br>por escrito.</h1>
       <p class="web-body-l" data-entra>Cordura escribe el sistema de diseño de tu marca para que tu equipo y sus agentes de IA decidan igual en cada pantalla.</p>
       <div id="accion" class="accion" data-entra><a class="web-label-l" href="#contacto">Conversemos</a></div>
     </div>
@@ -4319,14 +4323,19 @@ main { display: grid; }
     <p class="web-body-l palabra-banda__frase" data-entra>Las guías de una plataforma dicen con qué piezas construir. Nosotros escribimos cómo decide tu marca cuando las piezas se juntan.</p>
   </section>
 
+  <section class="recorrido" aria-labelledby="recorrido-t">
+    <figure class="sangrado" data-entra><video src="img/tunel.webm" poster="img/tunel-poster.jpg" width="1440" height="900" autoplay muted loop playsinline preload="metadata" aria-label="Un paso bajo nivel escaneado, dibujado con miles de puntos en los colores de Cordura, que se recorre hacia adentro."></video></figure>
+    <h2 class="tipo " data-tipo="display-s display-m display-m" id="recorrido-t" data-entra>No se mira.<br>Se recorre.</h2>
+  </section>
+
   <section class="principios" aria-labelledby="principios-t">
-    <h2 class="tipo " data-tipo="h2 display-s display-m" id="principios-t" data-entra>Cómo decide<br>Cordura.</h2>
-    <dl class="principios__lista"><div data-entra><dt><span class="tipo " data-tipo="h3 display-s display-s" >El control es tuyo</span></dt><dd class="web-body-l">Nuestros productos ofrecen; las personas deciden.</dd></div><div data-entra><dt><span class="tipo " data-tipo="h3 display-s display-s" >Emoción con sentido</span></dt><dd class="web-body-l">No le tememos a la emoción: es nuestro motor.</dd></div><div data-entra><dt><span class="tipo " data-tipo="h3 display-s display-s" >Memoria que convence</span></dt><dd class="web-body-l">Convencemos con lo que ya pasó, no con promesas.</dd></div><div data-entra><dt><span class="tipo " data-tipo="h3 display-s display-s" >Hasta la raíz</span></dt><dd class="web-body-l">No nos quedamos en la superficie.</dd></div></dl>
+    <h2 class="tipo " data-tipo="display-s display-m display-m" id="principios-t" data-entra>Cómo decide<br>Cordura.</h2>
+    <dl class="principios__lista"><div data-entra><dt><span class="tipo " data-tipo="h3 display-s display-s" >El control es tuyo</span></dt><dd class="web-h5">Nuestros productos ofrecen; las personas deciden.</dd></div><div data-entra><dt><span class="tipo " data-tipo="h3 display-s display-s" >Emoción con sentido</span></dt><dd class="web-h5">No le tememos a la emoción: es nuestro motor.</dd></div><div data-entra><dt><span class="tipo " data-tipo="h3 display-s display-s" >Memoria que convence</span></dt><dd class="web-h5">Convencemos con lo que ya pasó, no con promesas.</dd></div><div data-entra><dt><span class="tipo " data-tipo="h3 display-s display-s" >Hasta la raíz</span></dt><dd class="web-h5">No nos quedamos en la superficie.</dd></div></dl>
   </section>
 
   <section class="soportes" id="sistema" aria-labelledby="soportes-t">
     <div class="soportes__texto">
-      <h2 class="tipo " data-tipo="h2 display-s display-m" id="soportes-t" data-entra>Lo mismo,<br>en cada soporte.</h2>
+      <h2 class="tipo " data-tipo="display-s display-m display-m" id="soportes-t" data-entra>Lo mismo,<br>en cada soporte.</h2>
       <p class="web-body-l" data-entra>Un escritorio, un teléfono, un reloj. Cambia cuánto se muestra; la voz, la letra y la forma no.</p>
     </div>
     <div class="soportes__fotos">
@@ -4337,23 +4346,24 @@ main { display: grid; }
   </section>
 
   <section class="temas" data-theme="light" aria-labelledby="temas-t">
-    <h2 class="tipo " data-tipo="h2 display-s display-m" id="temas-t" data-entra>Cuatro temas.<br>Ningún color suelto.</h2>
+    <h2 class="tipo " data-tipo="display-s display-m display-m" id="temas-t" data-entra>Cuatro temas,<br>una regla.</h2>
     <figure class="temas__video" data-entra><video src="img/temas.webm" poster="img/temas-poster.jpg" width="1280" height="800" autoplay muted loop playsinline preload="metadata" aria-label="La misma página de Cordura pasando por sus cuatro temas: claro, oscuro y sus versiones de alto contraste. Cada pieza se redibuja con el tema."></video></figure>
     <p class="web-body-l temas__nota" data-entra>Cada color sale de una tabla, no de un valor suelto. 540 pruebas revisan que cada texto se lea en los cuatro temas.</p>
   </section>
 
   <section class="piezas" aria-labelledby="piezas-t">
-    <h2 class="tipo " data-tipo="h2 display-s display-m" id="piezas-t" data-entra>Lo que<br>construimos contigo.</h2>
+    <h2 class="tipo " data-tipo="display-s display-m display-m" id="piezas-t" data-entra>Lo que hacemos<br>contigo.</h2>
     <dl class="piezas__lista"><div data-entra><div class="pieza__fig" data-figura="sello" aria-hidden="true"></div><dt><span class="tipo " data-tipo="h4 h3 h3" >Centro de marca</span></dt><dd class="web-body-l">Principios, voz, color, letra, forma y movimiento, con el porqué de cada regla.</dd></div><div data-entra><div class="pieza__fig" data-figura="matriz" aria-hidden="true"></div><dt><span class="tipo " data-tipo="h4 h3 h3" >Sistema de diseño</span></dt><dd class="web-body-l">75 componentes en React y tokens en CSS, JavaScript y Dart, en cuatro temas.</dd></div><div data-entra><div class="pieza__fig" data-figura="lupa" aria-hidden="true"></div><dt><span class="tipo " data-tipo="h4 h3 h3" >Guía de uso</span></dt><dd class="web-body-l">Cuándo usar cada pieza y cuándo no: patrones, accesibilidad y escritura.</dd></div><div data-entra><div class="pieza__fig" data-figura="portatil" aria-hidden="true"></div><dt><span class="tipo " data-tipo="h4 h3 h3" >Soluciones construidas</span></dt><dd class="web-body-l">Pantallas y flujos armados con el sistema, listos para adaptar.</dd></div><div data-entra><div class="pieza__fig" data-figura="cinta" aria-hidden="true"></div><dt><span class="tipo " data-tipo="h4 h3 h3" >Plantillas y movimiento</span></dt><dd class="web-body-l">Portadas, piezas de comunicación y transiciones del mismo lenguaje.</dd></div><div data-entra><div class="pieza__fig" data-figura="terminal" aria-hidden="true"></div><dt><span class="tipo " data-tipo="h4 h3 h3" >La puerta para tus agentes</span></dt><dd class="web-body-l">Las mismas reglas, escritas para que un agente de IA las lea antes de producir.</dd></div></dl>
   </section>
 
   <section class="relacion" id="relacion" aria-labelledby="relacion-t">
-    <h2 class="tipo " data-tipo="h2 display-s display-m" id="relacion-t" data-entra>Una relación,<br>no una entrega.</h2>
+    <h2 class="tipo " data-tipo="display-s display-m display-m" id="relacion-t" data-entra>Una relación,<br>no una entrega.</h2>
     <p class="web-body-l" data-entra>Un sistema así no se entrega y se deja: se sostiene. Entramos como tu socio de diseño, al modo de una aceleradora, con el pago acordado por escrito y atado al resultado.</p>
+    <figure class="campo" data-entra><img src="img/campo.jpg" alt="El campo generativo de Cordura: emblemas lima, verdes y ocres sobre negro, dibujados por el sistema." width="700" height="400" loading="lazy"></figure>
     <ol class="pasos"><li data-entra><span class="criatura" data-criatura="Conocernos" aria-hidden="true"></span><div><h3 class="tipo " data-tipo="h3 h2 h2" >Conocernos</h3><p class="web-body-l">Miramos cómo trabaja tu equipo y hacia dónde va tu producto. Ahí decidimos los dos si tiene sentido seguir.</p></div></li><li data-entra><span class="criatura" data-criatura="Construir la base" aria-hidden="true"></span><div><h3 class="tipo " data-tipo="h3 h2 h2" >Construir la base</h3><p class="web-body-l">Armamos contigo el sistema y escribimos su criterio. Lo que ya funciona se queda.</p></div></li><li data-entra><span class="criatura" data-criatura="Acompañar" aria-hidden="true"></span><div><h3 class="tipo " data-tipo="h3 h2 h2" >Acompañar</h3><p class="web-body-l">Seguimos dentro: cada corrección se vuelve una regla, para no repetirla.</p></div></li><li data-entra><span class="criatura" data-criatura="Medir juntos" aria-hidden="true"></span><div><h3 class="tipo " data-tipo="h3 h2 h2" >Medir juntos</h3><p class="web-body-l">Acordamos qué medir antes de empezar, y lo revisamos con fecha y con fuente.</p></div></li></ol>
   </section>
 
-  <figure class="campo" data-entra><img src="img/campo.jpg" alt="El campo generativo de Cordura: emblemas lima, verdes y ocres sobre negro, dibujados por el sistema." width="700" height="400" loading="lazy"></figure>
+  <figure class="sangrado sangrado--planeta" data-entra><img src="img/planeta.jpg" alt="El planeta de Cordura: colinas de puntos verdes y ocres bajo un cielo negro, calculadas por el sistema a partir de sus genes." width="2880" height="1800" loading="lazy"></figure>
 
   <section class="cierre" id="contacto" aria-labelledby="cierre-t">
     <h2 class="tipo " data-tipo="display-s display-m display-l" id="cierre-t" tabindex="-1" data-entra>Conversemos.</h2>
@@ -4363,7 +4373,7 @@ main { display: grid; }
 </main>
 <footer class="pie">
   <p class="web-h6 pie__marca">Cordura</p>
-  <p class="web-body-m">Santiago de Chile. Las imágenes son el sistema de Cordura funcionando, tomadas de cordura.tech.</p>
+  <p class="web-body-m">Santiago de Chile. Las imágenes son el sistema de Cordura funcionando: su sitio, su busto, su túnel y su planeta.</p>
   <nav class="pie__nav" aria-label="Más de Cordura"><a class="web-label-l" href="/">El sitio</a><a class="web-label-l" href="/agentic/">Para agentes</a></nav>
 </footer>
 
