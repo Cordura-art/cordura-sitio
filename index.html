@@ -4292,7 +4292,8 @@ main > .junto { margin-top: var(--ritmo-bloque); }
 .archivos__ruta { margin: 0; color: var(--text-02); font-family: var(--font-mono, ui-monospace, monospace); }
 .archivos__txt { margin: 0; padding: var(--space-24); max-height: 26rem; overflow: auto; white-space: pre; font-family: var(--font-mono, ui-monospace, monospace); color: var(--text-01); }
 .archivos__txt:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
-.archivos--fija .archivos__txt { height: min(30rem, calc(100svh - 14rem - var(--ritmo-bloque) + var(--space-16))); max-height: none; }
+/* (the viewer grows to fill the height under the bar, a block's space above and below; past its cap, the whole is centered) */
+.archivos--fija .archivos__txt { height: min(44rem, calc(100svh - var(--space-64) - 2 * var(--ritmo-bloque) - var(--space-32))); max-height: none; }
 @media (prefers-reduced-motion: no-preference) { .archivos--fija .archivos__txt { animation: asoma var(--duration-slow-01) var(--easing-entrance-expressive) both; } }
 @media (max-width: 55.99rem) { .archivos--fija { gap: var(--space-16); } .archivos--fija .archivos__txt { height: calc(100svh - 19rem - var(--ritmo-bloque) + var(--space-8)); padding: var(--space-16); } }
 
@@ -11250,7 +11251,7 @@ window.__ARCHIVOS = [{"ruta":"lenguajes/cordura.json","que":"La voz: cómo se es
       h('div', { className: 'archivos__ver' },
         h('p', { className: 'web-label-m archivos__ruta', 'aria-live': fija ? 'off' : 'polite' }, a.ruta),
         h('pre', { className: 'marco archivos__txt web-body-s', key: a.ruta, tabIndex: 0, 'aria-label': 'Contenido de ' + a.ruta }, a.texto)));
-    return fija ? h('div', { className: 'escena', ref: ref, style: { height: 'calc(100svh + ' + total * 35 + 'vh)' } }, h('div', { className: 'escena__fija' }, cuerpo)) : h(Entra, null, cuerpo);
+    return fija ? h('div', { className: 'escena', ref: ref, style: { height: 'calc(100svh + ' + total * 35 + 'vh)' } }, h('div', { className: 'escena__fija' + (ancho ? ' escena__fija--centro' : '') }, cuerpo)) : h(Entra, null, cuerpo);
   }
 
   var Campo = window.__GENERADOR_VISTAS(G).Campo;
