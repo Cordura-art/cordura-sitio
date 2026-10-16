@@ -11345,15 +11345,15 @@ window.__TEMA_ANTES = document.documentElement.getAttribute('data-theme');
 
     // The diagram: what goes in, then what comes out, traced as it comes into view.
     var mapa = document.querySelector('.mapa'), sistema = document.querySelector('.sistema');
-    // (its middle is named once what goes in has reached it: the letters come one after another, then a light runs along them)
+    // (its middle comes first: its words one after another, then a light runs along them; only then are the lines traced)
     var nombre = mapa && mapa.querySelector('.mapa__nombre'), nombrado = false;
     function nombra() {
       if (nombrado || !nombre || !window.AlmaEfectos) return; nombrado = true; nombre.classList.add('mapa__nombre--dicho');
-      var letras = nombre.querySelector('.mapa__letras'), E = window.AlmaEfectos, uno = E.monta('escalonar', letras, { letras: 1, pulsos: 1 }), piezas = letras.textContent.replace(/ /g, '').length;
+      var letras = nombre.querySelector('.mapa__letras'), E = window.AlmaEfectos, uno = E.monta('escalonar', letras, {}), piezas = letras.textContent.trim().split(' ').length;
       var dura = (E.segundos('duration-stagger', nombre) * uno.valores.pulsos * (piezas - 1) + E.segundos('duration-slow-01', nombre)) * 1000;
       setTimeout(function () { uno.quita(); E.monta('brillo', nombre, {}); }, E.quieto() ? 0 : dura);
     }
-    if (mapa) { var trazaHasta = function (llega) { if (llega >= 0.45) nombra();
+    if (mapa) { var trazaHasta = function (llega) { if (llega > 0) nombra();
         mapa.querySelectorAll('[data-traza]').forEach(function (l) { var t = Math.min(1, Math.max(0, (llega * 2 - +l.getAttribute('data-traza')) / 0.4)); l.style.strokeDasharray = 1; l.style.strokeDashoffset = 1 - t; });
         mapa.querySelectorAll('[data-sale]').forEach(function (x) { x.style.opacity = Math.min(1, Math.max(0, (llega * 2 - +x.getAttribute('data-sale')) / 0.25)); }); };
       // Held where there is room for the drawing: first it is traced, alone; then it goes and what it means is said,
@@ -11363,7 +11363,7 @@ window.__TEMA_ANTES = document.documentElement.getAttribute('data-theme');
         var caja = sistema.querySelector('.mapa-caja'), dichos = [].slice.call(sistema.querySelectorAll('.sistema__texto > *'));
         [caja].concat(dichos).forEach(function (e) { e.removeAttribute('data-entra'); });
         var cuenta = function () { var k = avance(sistema), va = tramo(k, 0.45, 0.55);
-          trazaHasta(tramo(k, 0, 0.4)); caja.style.opacity = (1 - va).toFixed(3); caja.style.visibility = va > 0.99 ? 'hidden' : '';
+          if (sistema.getBoundingClientRect().top < innerHeight * 0.5) nombra(); trazaHasta(tramo(k, 0.08, 0.45)); caja.style.opacity = (1 - va).toFixed(3); caja.style.visibility = va > 0.99 ? 'hidden' : '';
           dichos.forEach(function (e, i) { var v = tramo(k, 0.55 + i * 0.08, 0.63 + i * 0.08); e.style.opacity = v.toFixed(3); e.style.transform = 'translateY(' + ((1 - v) * 16).toFixed(1) + 'px)'; }); };
         cuenta(); alPasar.push(cuenta);
       } else alPasar.push(function () { var r = mapa.getBoundingClientRect(); trazaHasta(calma ? 1 : Math.min(1, Math.max(0, (innerHeight * 0.92 - r.top) / (innerHeight * 0.5)))); }); }
