@@ -4214,7 +4214,7 @@ p { margin: 0; }
 main { display: grid; }
 
 /* The first screen: the answer in large type, the one action beside it; under it, the field, edge to edge and quiet. */
-.portada { display: grid; gap: var(--dentro); padding: var(--space-32) var(--margen) var(--space-48); }
+.portada { display: grid; gap: var(--dentro); padding: var(--entre) var(--margen) var(--space-48); }
 .portada__cabeza { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-16); }
 /* (on a phone the action has its own row, at the right, so the title keeps the whole width) */
 .portada__cabeza .accion { order: -1; justify-self: end; }
@@ -4315,11 +4315,16 @@ main { display: grid; }
 
 /* At the end of everything, the planet, edge to edge, to be walked. */
 .recorrido { position: relative; display: grid; background: var(--ui-02); }
+/* (high above at first: the page going down brings it near; it stays in place the while) */
+.criatura-marco { display: inline-block; }
 /* (its line sits above it, never over the moving dots) */
 .recorrido__dice { max-width: 40rem; margin: 0; padding: var(--space-24) var(--margen); color: var(--text-02); }
 .recorrido .mundo { height: auto; }
 .recorrido .mundo .escaneo__fija { position: relative; height: 88svh; min-height: 28rem; }
 .recorrido .mundo:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
+.recorrido--fija { height: 320svh; align-content: start; }
+.recorrido--fija .mundo { position: sticky; top: 0; height: 100svh; overflow: hidden; }
+.recorrido--fija .mundo .escaneo__fija { height: 100svh; min-height: 0; }
 
 .pie { display: grid; gap: var(--space-16); padding: var(--space-48) var(--margen) var(--space-64); background: var(--ui-01); color: var(--text-01); }
 .pie__marca { margin: 0; }
@@ -4377,10 +4382,10 @@ main { display: grid; }
 
   <section class="portada" aria-labelledby="titulo">
     <div class="portada__cabeza">
-      <h1 class="tipo " data-tipo="display-m display-l display-l" id="titulo" data-entra>Tu marca,<br>por escrito.</h1>
-      <div id="accion" class="accion" data-entra><a class="web-label-l" href="#contacto">Conversemos</a></div>
+      <h1 class="tipo " data-tipo="display-m display-l display-l" id="titulo" data-efecto="escalonar">Tu marca,<br>por escrito.</h1>
+      <div class="accion" data-efecto="iman"><div id="accion"><a class="web-label-l" href="#contacto">Conversemos</a></div></div>
     </div>
-    <p class="web-body-l portada__dice" data-entra>Cordura escribe el sistema de diseño de tu marca para que tu equipo y sus agentes de IA decidan igual en cada pantalla.</p>
+    <p class="web-body-l portada__dice" data-efecto="desvelar">Cordura escribe el sistema de diseño de tu marca para que tu equipo y sus agentes de IA decidan igual en cada pantalla.</p>
   </section>
   <div class="campo" data-campo role="img" aria-label="El campo generativo de Cordura: emblemas de sus colores, dibujados por el sistema."></div>
 
@@ -4391,7 +4396,7 @@ main { display: grid; }
         <div class="escaneo__fija"><figure class="escaneo__figura" role="img" aria-label="Un busto romano dibujado con miles de puntos lima, blancos y verdes. Gira con el puntero."><canvas class="escaneo__lienzo" aria-hidden="true"></canvas></figure></div>
       </section>
     </div>
-    <p class="web-body-l palabra-banda__frase" data-entra>Las guías de una plataforma dicen con qué piezas construir. Nosotros escribimos cómo decide tu marca cuando las piezas se juntan.</p>
+    <p class="web-body-l palabra-banda__frase" data-efecto="desvelar">Las guías de una plataforma dicen con qué piezas construir. Nosotros escribimos cómo decide tu marca cuando las piezas se juntan.</p>
   </section>
 
   <section class="sistema" id="sistema" aria-labelledby="sistema-t">
@@ -4399,8 +4404,8 @@ main { display: grid; }
       <div class="mapa-pila" role="img" aria-label="Lo que entra al sistema de marca: principios, voz, color, letra, forma, movimiento, componentes, guías, pruebas. Lo que sale de él: producto, sitio, documento, anuncio, presentación, entorno."><p class="web-body-m">Principios · Voz · Color · Letra · Forma · Movimiento · Componentes · Guías · Pruebas</p><svg viewBox="0 0 32 32" width="24" height="24" fill="currentColor" aria-hidden="true" focusable="false"><polygon points="24.59 16.59 17 24.17 17 4 15 4 15 24.17 7.41 16.59 6 18 16 28 26 18 24.59 16.59"/></svg><p class="web-label-l mapa-pila__c">Sistema de marca</p><svg viewBox="0 0 32 32" width="24" height="24" fill="currentColor" aria-hidden="true" focusable="false"><polygon points="24.59 16.59 17 24.17 17 4 15 4 15 24.17 7.41 16.59 6 18 16 28 26 18 24.59 16.59"/></svg><p class="web-body-m">Producto · Sitio · Documento · Anuncio · Presentación · Entorno</p></div>
     </div>
     <div class="sistema__texto">
-      <h2 id="sistema-t" class="web-h4" data-entra>El sistema</h2>
-      <p class="web-h5" data-entra>La marca se escribe para que cualquiera pueda decidir bien una pantalla que nadie dibujó todavía.</p>
+      <h2 id="sistema-t" class="web-h4" data-efecto="brillo">El sistema</h2>
+      <p class="web-h5" data-efecto="desvelar">La marca se escribe para que cualquiera pueda decidir bien una pantalla que nadie dibujó todavía.</p>
       <p class="web-body-m" data-entra>Guías, piezas y código que una persona puede recorrer y un agente puede leer: la voz y los principios de tu marca, sus reglas de color, letra, forma y movimiento, y los componentes con que se construye lo nuevo.</p>
       <p class="web-body-m" data-entra>Cada regla dice dónde aplica y por qué. La del lima está escrita así: va solo en el botón principal; los enlaces son azules; los fondos y los textos, neutros. El código usa esa regla tal cual.</p>
     </div>
@@ -4408,9 +4413,9 @@ main { display: grid; }
 
   <section class="desliza" aria-labelledby="piezas-t">
     <div class="desliza__fija">
-      <h2 class="tipo desliza__t" data-tipo="display-s display-m display-m" id="piezas-t">Lo que hacemos<br>contigo.</h2>
+      <h2 class="tipo desliza__t" data-tipo="display-s display-m display-m" id="piezas-t" data-efecto="escalonar">Lo que hacemos<br>contigo.</h2>
       <div class="desliza__ventana" tabindex="0" role="region" aria-label="Las seis piezas que hacemos contigo">
-        <dl class="desliza__pista"><div class="pieza"><div class="pieza__fig" data-figura="sello" aria-hidden="true"></div><dt><span class="tipo " data-tipo="h4 h3 h3" >Centro de marca</span></dt><dd class="web-body-l">Principios, voz, color, letra, forma y movimiento, con el porqué de cada regla.</dd></div><div class="pieza"><div class="pieza__fig" data-figura="matriz" aria-hidden="true"></div><dt><span class="tipo " data-tipo="h4 h3 h3" >Sistema de diseño</span></dt><dd class="web-body-l">75 componentes en React y tokens en CSS, JavaScript y Dart, en cuatro temas.</dd></div><div class="pieza"><div class="pieza__fig" data-figura="lupa" aria-hidden="true"></div><dt><span class="tipo " data-tipo="h4 h3 h3" >Guía de uso</span></dt><dd class="web-body-l">Cuándo usar cada pieza y cuándo no: patrones, accesibilidad y escritura.</dd></div><div class="pieza"><div class="pieza__fig" data-figura="portatil" aria-hidden="true"></div><dt><span class="tipo " data-tipo="h4 h3 h3" >Soluciones construidas</span></dt><dd class="web-body-l">Pantallas y flujos armados con el sistema, listos para adaptar.</dd></div><div class="pieza"><div class="pieza__fig" data-figura="cinta" aria-hidden="true"></div><dt><span class="tipo " data-tipo="h4 h3 h3" >Plantillas y movimiento</span></dt><dd class="web-body-l">Portadas, piezas de comunicación y transiciones del mismo lenguaje.</dd></div><div class="pieza"><div class="pieza__fig" data-figura="terminal" aria-hidden="true"></div><dt><span class="tipo " data-tipo="h4 h3 h3" >La puerta para tus agentes</span></dt><dd class="web-body-l">Las mismas reglas, escritas para que un agente de IA las lea antes de producir.</dd></div></dl>
+        <dl class="desliza__pista"><div class="pieza"><div class="pieza__marco" data-efecto="inclinar"><div class="pieza__fig" data-figura="sello" aria-hidden="true"></div></div><dt><span class="tipo " data-tipo="h4 h3 h3" >Centro de marca</span></dt><dd class="web-body-l">Principios, voz, color, letra, forma y movimiento, con el porqué de cada regla.</dd></div><div class="pieza"><div class="pieza__marco" data-efecto="inclinar"><div class="pieza__fig" data-figura="matriz" aria-hidden="true"></div></div><dt><span class="tipo " data-tipo="h4 h3 h3" >Sistema de diseño</span></dt><dd class="web-body-l">75 componentes en React y tokens en CSS, JavaScript y Dart, en cuatro temas.</dd></div><div class="pieza"><div class="pieza__marco" data-efecto="inclinar"><div class="pieza__fig" data-figura="lupa" aria-hidden="true"></div></div><dt><span class="tipo " data-tipo="h4 h3 h3" >Guía de uso</span></dt><dd class="web-body-l">Cuándo usar cada pieza y cuándo no: patrones, accesibilidad y escritura.</dd></div><div class="pieza"><div class="pieza__marco" data-efecto="inclinar"><div class="pieza__fig" data-figura="portatil" aria-hidden="true"></div></div><dt><span class="tipo " data-tipo="h4 h3 h3" >Soluciones construidas</span></dt><dd class="web-body-l">Pantallas y flujos armados con el sistema, listos para adaptar.</dd></div><div class="pieza"><div class="pieza__marco" data-efecto="inclinar"><div class="pieza__fig" data-figura="cinta" aria-hidden="true"></div></div><dt><span class="tipo " data-tipo="h4 h3 h3" >Plantillas y movimiento</span></dt><dd class="web-body-l">Portadas, piezas de comunicación y transiciones del mismo lenguaje.</dd></div><div class="pieza"><div class="pieza__marco" data-efecto="inclinar"><div class="pieza__fig" data-figura="terminal" aria-hidden="true"></div></div><dt><span class="tipo " data-tipo="h4 h3 h3" >La puerta para tus agentes</span></dt><dd class="web-body-l">Las mismas reglas, escritas para que un agente de IA las lea antes de producir.</dd></div></dl>
       </div>
     </div>
   </section>
@@ -4435,13 +4440,13 @@ main { display: grid; }
 
   <section class="relacion" id="relacion" aria-labelledby="relacion-t">
     <h2 id="relacion-t" class="visualmente-oculto">Cómo trabajamos</h2>
-    <ol class="pasos"><li data-entra><span class="criatura" data-criatura="Conocernos" aria-hidden="true"></span><div><h3 class="tipo " data-tipo="h3 h2 h2" >Conocernos</h3><p class="web-body-l">Miramos cómo trabaja tu equipo y hacia dónde va tu producto. Ahí decidimos los dos si tiene sentido seguir.</p></div></li><li data-entra><span class="criatura" data-criatura="Construir la base" aria-hidden="true"></span><div><h3 class="tipo " data-tipo="h3 h2 h2" >Construir la base</h3><p class="web-body-l">Armamos contigo el sistema y escribimos su criterio. Lo que ya funciona se queda.</p></div></li><li data-entra><span class="criatura" data-criatura="Acompañar" aria-hidden="true"></span><div><h3 class="tipo " data-tipo="h3 h2 h2" >Acompañar</h3><p class="web-body-l">Seguimos dentro: cada corrección se vuelve una regla, para no repetirla.</p></div></li><li data-entra><span class="criatura" data-criatura="Medir juntos" aria-hidden="true"></span><div><h3 class="tipo " data-tipo="h3 h2 h2" >Medir juntos</h3><p class="web-body-l">Acordamos qué medir antes de empezar, y lo revisamos con fecha y con fuente.</p></div></li></ol>
+    <ol class="pasos"><li data-entra><span class="criatura-marco" data-efecto="iman" aria-hidden="true"><span class="criatura" data-criatura="Conocernos"></span></span><div><h3 class="tipo " data-tipo="h3 h2 h2" data-efecto="escalonar">Conocernos</h3><p class="web-body-l">Miramos cómo trabaja tu equipo y hacia dónde va tu producto. Ahí decidimos los dos si tiene sentido seguir.</p></div></li><li data-entra><span class="criatura-marco" data-efecto="iman" aria-hidden="true"><span class="criatura" data-criatura="Construir la base"></span></span><div><h3 class="tipo " data-tipo="h3 h2 h2" data-efecto="escalonar">Construir la base</h3><p class="web-body-l">Armamos contigo el sistema y escribimos su criterio. Lo que ya funciona se queda.</p></div></li><li data-entra><span class="criatura-marco" data-efecto="iman" aria-hidden="true"><span class="criatura" data-criatura="Acompañar"></span></span><div><h3 class="tipo " data-tipo="h3 h2 h2" data-efecto="escalonar">Acompañar</h3><p class="web-body-l">Seguimos dentro: cada corrección se vuelve una regla, para no repetirla.</p></div></li><li data-entra><span class="criatura-marco" data-efecto="iman" aria-hidden="true"><span class="criatura" data-criatura="Medir juntos"></span></span><div><h3 class="tipo " data-tipo="h3 h2 h2" data-efecto="escalonar">Medir juntos</h3><p class="web-body-l">Acordamos qué medir antes de empezar, y lo revisamos con fecha y con fuente.</p></div></li></ol>
   </section>
 
   <section class="cierre" id="contacto" aria-labelledby="cierre-t">
-    <h2 class="tipo " data-tipo="display-s display-m display-l" id="cierre-t" tabindex="-1" data-entra>Conversemos.</h2>
+    <h2 class="tipo " data-tipo="display-s display-m display-l" id="cierre-t" tabindex="-1" data-efecto="escalonar">Conversemos.</h2>
     <p class="web-body-l" data-entra>Te mostramos el sistema con tu caso a la vista. Escríbenos a</p>
-    <p class="tipo correo" data-tipo="h3 display-s display-m" data-entra>contacto@cordura.tech</p>
+    <p class="tipo correo" data-tipo="h3 display-s display-m" data-efecto="descifrar">contacto@cordura.tech</p>
   </section>
 
 </main>
@@ -4452,7 +4457,7 @@ main { display: grid; }
 </footer>
 <aside class="cierre-mundo" aria-labelledby="recorrido-t">
   <div class="recorrido">
-    <h2 id="recorrido-t" class="web-label-l recorrido__dice">El planeta de Cordura se calcula alrededor de quien camina. Recórrelo con los botones o, después de hacerle clic, con las flechas o W A S D; con F despegas.</h2>
+    <h2 id="recorrido-t" class="web-label-l recorrido__dice">El planeta de Cordura se calcula alrededor de quien llega. Baja para acercarte; en el suelo, camina con las flechas o con los botones.</h2>
     <section class="escaneo mundo" aria-label="El planeta de Cordura, dibujado con puntos en sus colores. No está guardado en ningún archivo: se calcula alrededor de quien lo recorre y cada trozo llega como polvo que se asienta. Se camina con las flechas o los botones, y se puede despegar para verlo entero.">
       <div class="escaneo__fija">
         <figure class="escaneo__figura" role="img" aria-label="El planeta de Cordura, dibujado con puntos en sus colores. No está guardado en ningún archivo: se calcula alrededor de quien lo recorre y cada trozo llega como polvo que se asienta. Se camina con las flechas o los botones, y se puede despegar para verlo entero."><canvas class="escaneo__lienzo" aria-hidden="true"></canvas></figure>
@@ -9580,6 +9585,331 @@ window.__GENERADOR_VISTAS = function (G) {
   raiz.AlmaPalabra = { monta: monta };
 })(typeof window !== 'undefined' ? window : this);
 
+// ALMA's effects: the collection of what moves behind, between and under things. Four families: a background
+// (fondo), a change from one thing to another (transicion), an answer to whoever touches (reaccion) and a text that
+// moves as it arrives (texto).
+// Every effect is written here, ours, and keeps the same promises: its colours are tokens, read from where it is
+// mounted (so an entity's effect is the entity's); it asks ALMA's clock (site/reloj.js) for its frames; it draws only
+// while it is seen and the page is shown; with less motion asked for it is one still picture; and it is decoration,
+// hidden from whoever does not see the page.
+//   AlmaEfectos.pon({ id, familia, nombre, colores: { nombre: token }, ajustes: [{ id, nombre, min, max, paso, valor }], crea(lienzo, V) })
+//     crea → { medida(ancho, alto), cuadro(dt, t, puntero), color(nombre, [r, g, b]), quita() }
+//   A reaction lives on an element instead of on a canvas of its own: it gives pone(el, V) → { ajusta(id, valor), quita() }.
+//   A transition is a reaction with one more thing to give: pasa(), which plays it when whoever uses it says so.
+//   AlmaEfectos.monta(id, el, valores) → { ajusta(id, valor), valores, quieto(), quita() }
+(function () {
+  if (window.AlmaEfectos) return;
+  var LISTA = {}, sonda = null;
+  // A colour token as an element has it, as three numbers from 0 to 1, however CSS writes it.
+  function color(token, el) {
+    var v = getComputedStyle(el || document.documentElement).getPropertyValue('--' + token).trim();
+    if (!sonda) { var c = document.createElement('canvas'); c.width = c.height = 1; sonda = c.getContext('2d', { willReadFrequently: true }); }
+    sonda.clearRect(0, 0, 1, 1); if (v) { sonda.fillStyle = v; sonda.fillRect(0, 0, 1, 1); }
+    var d = sonda.getImageData(0, 0, 1, 1).data; return [d[0] / 255, d[1] / 255, d[2] / 255];
+  }
+  function quieto() { var R = window.AlmaReloj; return R ? R.quieto : !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches); }
+  // A motion token as an element has it: a duration in seconds, a curve as the function it is.
+  function segundos(token, el) { var P = window.AlmaPartitura; if (P) return P.segundos(token, el); var t = getComputedStyle(el || document.documentElement).getPropertyValue('--' + token).trim(), x = parseFloat(t); return isFinite(x) ? (/ms$/.test(t) ? x / 1000 : x) : 0.24; }
+  function curva(token, el) { var P = window.AlmaPartitura; return P ? P.curva(token, el) : function (k) { return 1 - (1 - k) * (1 - k); }; }
+  // A background that is one picture worked out point by point: a canvas, the program that colours each point, and
+  // its values by name. escala: how many of the screen's points it is drawn with (a soft picture needs fewer).
+  function sombra(lienzo, fs, escala) {
+    var gl = lienzo.getContext('webgl', { alpha: false, antialias: false, depth: false, stencil: false, preserveDrawingBuffer: true }); if (!gl) return null;
+    var p = gl.createProgram();
+    [[gl.VERTEX_SHADER, 'attribute vec2 p; varying vec2 vUv; void main() { vUv = p * 0.5 + 0.5; gl_Position = vec4(p, 0.0, 1.0); }'], [gl.FRAGMENT_SHADER, fs]].forEach(function (x) { var s = gl.createShader(x[0]); gl.shaderSource(s, x[1]); gl.compileShader(s); if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s)); gl.attachShader(p, s); });
+    gl.bindAttribLocation(p, 0, 'p'); gl.linkProgram(p); gl.useProgram(p);
+    var u = {}, n = gl.getProgramParameter(p, gl.ACTIVE_UNIFORMS); for (var i = 0; i < n; i++) { var nombre = gl.getActiveUniform(p, i).name; u[nombre] = gl.getUniformLocation(p, nombre); }
+    gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer()); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW); gl.enableVertexAttribArray(0); gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+    return {
+      gl: gl, u: u,
+      medida: function (ancho, alto) { var d = Math.min(window.devicePixelRatio || 1, 2) * (escala || 1); lienzo.width = Math.max(2, Math.round(ancho * d)); lienzo.height = Math.max(2, Math.round(alto * d)); gl.viewport(0, 0, lienzo.width, lienzo.height); gl.uniform2f(u.uTam, lienzo.width, lienzo.height); },
+      dibuja: function () { gl.drawArrays(gl.TRIANGLES, 0, 3); },
+      quita: function () { var x = gl.getExtension('WEBGL_lose_context'); if (x) x.loseContext(); }
+    };
+  }
+  // (a noise of our own for those programs: a value at each corner of a grid, eased between them; from 0 to 1)
+  var RUIDO = 'float azar(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }\n' +
+    'float ruido(vec2 p) { vec2 i = floor(p), f = fract(p); f = f * f * (3.0 - 2.0 * f); return mix(mix(azar(i), azar(i + vec2(1.0, 0.0)), f.x), mix(azar(i + vec2(0.0, 1.0)), azar(i + vec2(1.0, 1.0)), f.x), f.y); }\n';
+  // Every frame while fn answers true, on ALMA's clock where there is one. → quita()
+  function cada(fn) { var R = window.AlmaReloj; if (R) return R.cada(function () { return fn(R.dt); }); var id = 0, paso = function () { if (fn(1 / 60) === true) id = requestAnimationFrame(paso); }; id = requestAnimationFrame(paso); return function () { cancelAnimationFrame(id); }; }
+  // Once, the first time a tenth of an element is seen. → deja()
+  function alVer(el, fn) { var ojo = new IntersectionObserver(function (v) { if (v[v.length - 1].isIntersecting) { ojo.disconnect(); fn(); } }, { threshold: 0.1 }); ojo.observe(el); return function () { ojo.disconnect(); }; }
+  // A text that moves has two faces: the true one, out of sight, for whoever has the page read to them, and the one
+  // that is seen and changes, which they are not told about.
+  function dosCaras(el) {
+    var texto = el.textContent, antes = el.innerHTML, real = document.createElement('span'), vista = document.createElement('span');
+    real.style.cssText = 'position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap'; real.textContent = texto;
+    vista.setAttribute('aria-hidden', 'true'); vista.textContent = texto; el.textContent = ''; el.appendChild(real); el.appendChild(vista);
+    return { texto: texto, vista: vista, suelta: function () { el.innerHTML = antes; } };
+  }
+  function monta(id, el, valores) {
+    var def = LISTA[id]; if (!def) throw new Error('No hay un efecto «' + id + '»');
+    if (def.pone) {
+      var W = {}; def.ajustes.forEach(function (a) { W[a.id] = valores && valores[a.id] != null ? valores[a.id] : a.valor; });
+      var o = def.pone(el, W);
+      return { valores: W, quieto: quieto, ajusta: function (k, v) { W[k] = v; if (o.ajusta) o.ajusta(k, v); }, pasa: o.pasa || function () {}, quita: o.quita };
+    }
+    var R = window.AlmaReloj, V = {}, lienzo = document.createElement('canvas'), vivo = true, aLaVista = false, quita = null, t = 0, cuenta = 0, puntero = { x: 0, y: 0, dentro: false };
+    def.ajustes.forEach(function (a) { V[a.id] = valores && valores[a.id] != null ? valores[a.id] : a.valor; });
+    lienzo.setAttribute('aria-hidden', 'true'); lienzo.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none';
+    if (getComputedStyle(el).position === 'static') el.style.position = 'relative';
+    el.insertBefore(lienzo, el.firstChild);
+    var obra = def.crea(lienzo, V);
+    if (!obra) { lienzo.remove(); return null; }
+    function colores() { for (var k in def.colores) obra.color(k, color(def.colores[k], el)); }
+    function mide() { var r = el.getBoundingClientRect(); if (r.width && r.height) { obra.medida(r.width, r.height); if (quieto()) fija(); } }
+    // One still picture: the effect as it is after a while, worked out at once.
+    function fija() { colores(); for (var i = 0; i < 200; i++) obra.cuadro(1 / 60, 20 + i / 60, puntero, i < 199); }
+    function cuadro() {
+      if (!vivo || !aLaVista || document.hidden || quieto()) { quita = null; return false; }
+      var dt = R ? R.dt : 1 / 60; t += dt;
+      // (a theme or an entity may change under it: its colours are read again twice a second)
+      if (cuenta++ % 30 === 0) colores();
+      obra.cuadro(dt, t, puntero, false); return true;
+    }
+    function anda() {
+      if (!vivo) return; if (quieto()) { fija(); return; }
+      if (quita || !aLaVista || document.hidden) return;
+      if (R) quita = R.cada(cuadro); else { var id = 0, paso = function () { if (cuadro()) id = requestAnimationFrame(paso); }; id = requestAnimationFrame(paso); quita = function () { cancelAnimationFrame(id); }; }
+    }
+    function mueve(e) { var r = el.getBoundingClientRect(); puntero.x = (e.clientX - r.left) / r.width - 0.5; puntero.y = 0.5 - (e.clientY - r.top) / r.height; puntero.dentro = Math.abs(puntero.x) <= 0.5 && Math.abs(puntero.y) <= 0.5; }
+    var ojo = new IntersectionObserver(function (v) { aLaVista = v[v.length - 1].isIntersecting; anda(); }), regla = new ResizeObserver(mide);
+    var dejaReloj = R ? R.alCambiar(anda) : null;
+    // (a still picture is not drawn again by itself: when the page changes theme, it is worked out anew)
+    var tema = window.MutationObserver ? new MutationObserver(function () { if (quieto()) fija(); }) : null; if (tema) tema.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    ojo.observe(el); regla.observe(el); window.addEventListener('pointermove', mueve, { passive: true }); document.addEventListener('visibilitychange', anda);
+    colores(); mide();
+    return {
+      valores: V,
+      ajusta: function (k, v) { V[k] = v; if (quieto()) fija(); },
+      quieto: quieto,
+      quita: function () { vivo = false; if (quita) quita(); if (dejaReloj) dejaReloj(); ojo.disconnect(); regla.disconnect(); if (tema) tema.disconnect(); window.removeEventListener('pointermove', mueve); document.removeEventListener('visibilitychange', anda); obra.quita(); lienzo.remove(); }
+    };
+  }
+  // The presence of an AI (guide «Interfaces de IA»): the Velo behind, the Halo in front, and the Halo saying the state.
+  // presencia(el, estado) → { estado(nombre), quita() }, or null where there is no WebGL: the state is always written too.
+  var PRESENCIA = {
+    velo: { alto: 0.45, amplitud: 1, suave: 0.35, fuerza: 0.7, velocidad: 1 },
+    reposo: { tamano: 1.2, pulso: 2, petalos: 3, estela: 0.8, giro: 1, velocidad: 1, latido: 0.6 },
+    escuchando: { tamano: 1.5, pulso: 0.6, petalos: 3, estela: 0.6, giro: 0.4, velocidad: 0.5, latido: 0 },
+    pensando: { tamano: 0.9, pulso: 3, petalos: 5, estela: 0.9, giro: 2.2, velocidad: 1.8, latido: 0 },
+    respondiendo: { tamano: 1.2, pulso: 1.2, petalos: 3, estela: 0.8, giro: 1, velocidad: 1.2, latido: 0.3 }
+  };
+  // «fondo»: the AI is there, in the background — the Velo alone, and no Halo is even made (it is the costly one).
+  // Any other state brings the Halo in front of it: the AI is what the screen is about.
+  function presencia(el, estado) {
+    if (!LISTA.halo || !LISTA.velo) return null;
+    var bajo = el.getBoundingClientRect().height < 240, velo = monta('velo', el, bajo ? Object.assign({}, PRESENCIA.velo, { alto: 0.35 }) : PRESENCIA.velo); if (!velo) return null;
+    var halo = null, para = null;
+    // lugar: where the Halo goes and how big, { x, y, escala } — to move it to the clear zone of a stage
+    function pon(nombre, lugar) {
+      var a = PRESENCIA[nombre]; if (nombre === 'velo') return;
+      if (a && lugar) { a = Object.assign({}, a, { x: lugar.x || 0, y: lugar.y || 0 }); a.tamano = a.tamano * (lugar.escala || 1); }
+      if (para) { para(); para = null; }
+      velo.ajusta('fuerza', nombre === 'apagada' ? 0.3 : PRESENCIA.velo.fuerza);
+      // in the background, or with no service, there is no Halo: it is taken away, not hidden
+      if (!a) { if (halo) { halo.quita(); halo = null; } return; }
+      // (an effect goes to the back of its zone when it is made: bring the Halo in front of the Velo)
+      if (!halo) { halo = monta('halo', el, a); if (!halo) return; var c = el.querySelectorAll('canvas'); if (c.length > 1) el.insertBefore(c[0], c[1].nextSibling); return; }
+      var de = Object.assign({}, halo.valores), t = 0, dura = segundos('duration-slow-02', el), sube = curva('easing-standard-expressive', el);
+      if (quieto()) { for (var q in a) halo.ajusta(q, a[q]); return; }
+      para = cada(function (dt) { t = Math.min(1, t + dt / dura); for (var k in a) halo.ajusta(k, k === 'petalos' ? a[k] : de[k] + (a[k] - de[k]) * sube(t)); return t < 1; });
+    }
+    pon(estado || 'fondo');
+    return { estado: pon, estados: ['fondo'].concat(Object.keys(PRESENCIA).filter(function (k) { return k !== 'velo'; }), ['apagada']), quita: function () { if (para) para(); if (halo) halo.quita(); velo.quita(); } };
+  }
+  window.AlmaEfectos = { presencia: presencia, lista: LISTA, color: color, quieto: quieto, segundos: segundos, curva: curva, sombra: sombra, RUIDO: RUIDO, cada: cada, alVer: alVer, dosCaras: dosCaras, monta: monta, pon: function (def) { LISTA[def.id] = def; return def; } };
+})();
+
+// Escalonar: the words of a line come in one after another, each rising a little into its place. A text.
+// Each word is its own piece, so each can start a beat after the one before; the spaces between them stay spaces,
+// so the line still breaks where it would. It plays the first time it is seen; pasa() plays it again.
+(function () {
+  var E = window.AlmaEfectos;
+  E.pon({
+    id: 'escalonar', familia: 'texto', nombre: 'Escalonar', muestra: 'texto', ejemplo: 'Cada palabra a su tiempo',
+    colores: {},
+    ajustes: [
+      { id: 'pulsos', nombre: 'Pulsos entre palabras', min: 1, max: 8, paso: 1, valor: 3 },
+      { id: 'subida', nombre: 'Subida', min: 0, max: 1, paso: 0.1, valor: 0.4 }
+    ],
+    pone: function (el, V) {
+      var C = E.dosCaras(el), piezas = [], andan = [], deja = null;
+      C.vista.textContent = '';
+      C.texto.split(/(\s+)/).forEach(function (t) {
+        if (!t) return; if (/^\s+$/.test(t)) { C.vista.appendChild(document.createTextNode(t)); return; }
+        var s = document.createElement('span'); s.style.display = 'inline-block'; s.textContent = t; C.vista.appendChild(s); piezas.push(s);
+      });
+      function para() { andan.forEach(function (a) { a.cancel(); }); andan = []; }
+      function pasa() {
+        para(); if (E.quieto() || !piezas.length || !piezas[0].animate) return;
+        var cs = getComputedStyle(el), paso = E.segundos('duration-stagger', el) * V.pulsos * 1000, o = { duration: E.segundos('duration-slow-01', el) * 1000, easing: cs.getPropertyValue('--easing-entrance-expressive').trim() || 'ease-out', fill: 'backwards' };
+        andan = piezas.map(function (s, i) { return s.animate([{ opacity: 0, transform: 'translateY(' + V.subida + 'em)' }, { opacity: 1, transform: 'translateY(0)' }], Object.assign({ delay: i * paso }, o)); });
+      }
+      if (!E.quieto()) { piezas.forEach(function (s) { s.style.opacity = '0'; }); deja = E.alVer(el, function () { piezas.forEach(function (s) { s.style.opacity = ''; }); pasa(); }); }
+      return { pasa: pasa, quita: function () { para(); if (deja) deja(); C.suelta(); } };
+    }
+  });
+})();
+
+// Desvelar: the words of a passage go from faint to full, one after another, as whoever reads scrolls past it. A text.
+// Nothing here runs on time: how many words are full is how far the passage has travelled up the window, from
+// entering near the bottom to reaching the middle. Scrolling back dims them again.
+// pasa() goes through it by itself once, to try it where there is nothing to scroll.
+(function () {
+  var E = window.AlmaEfectos;
+  E.pon({
+    id: 'desvelar', familia: 'texto', nombre: 'Desvelar', muestra: 'texto', ejemplo: 'Lo que se lee al paso de quien avanza, palabra por palabra.',
+    colores: {},
+    ajustes: [
+      { id: 'tenue', nombre: 'Tenue', min: 0.1, max: 0.6, paso: 0.05, valor: 0.25 },
+      { id: 'a_la_vez', nombre: 'Palabras a la vez', min: 1, max: 8, paso: 1, valor: 3 }
+    ],
+    pone: function (el, V) {
+      var C = E.dosCaras(el), piezas = [], pedido = 0, quita = null, R = window.AlmaReloj, solo = -1;
+      C.vista.textContent = '';
+      C.texto.split(/(\s+)/).forEach(function (t) {
+        if (!t) return; if (/^\s+$/.test(t)) { C.vista.appendChild(document.createTextNode(t)); return; }
+        var s = document.createElement('span'); s.textContent = t; C.vista.appendChild(s); piezas.push(s);
+      });
+      function pinta(k) { var n = piezas.length, ancho = V.a_la_vez; for (var i = 0; i < n; i++) piezas[i].style.opacity = String(V.tenue + (1 - V.tenue) * Math.min(1, Math.max(0, (k * (n + ancho) - i) / ancho))); }
+      // (how far along: 0 when its top comes to 85% of the window's height, 1 when its bottom reaches 45%)
+      function mide() {
+        pedido = 0; if (solo >= 0) return;
+        if (E.quieto()) { pinta(1); return; }
+        var r = el.getBoundingClientRect(), alto = window.innerHeight; pinta(Math.min(1, Math.max(0, (alto * 0.85 - r.top) / (alto * 0.4 + r.height))));
+      }
+      function pide() { if (!pedido) pedido = R ? R.pide(mide) : requestAnimationFrame(mide); }
+      function pasa() {
+        if (quita || E.quieto()) return; solo = 0; var dura = E.segundos('duration-slow-02', el) * 3;
+        quita = E.cada(function (dt) { solo += dt / dura; if (solo >= 1) { solo = -1; quita = null; mide(); return false; } pinta(solo); return true; });
+      }
+      window.addEventListener('scroll', pide, { capture: true, passive: true }); window.addEventListener('resize', pide);
+      mide();
+      return { pasa: pasa, ajusta: mide, quita: function () { window.removeEventListener('scroll', pide, { capture: true }); window.removeEventListener('resize', pide); if (quita) quita(); if (pedido) (R ? R.deja(pedido) : cancelAnimationFrame(pedido)); C.suelta(); } };
+    }
+  });
+})();
+
+// Brillo: a band of light runs once along a line of text. A text.
+// The line is painted with a gradient instead of a flat colour: the secondary text colour all along, and a band of
+// the primary one, wider than the line and kept out of sight to one side. Seeing the line, pointing at it or
+// reaching it with the keyboard slides the band across, once. It does not go on by itself.
+(function () {
+  var E = window.AlmaEfectos;
+  E.pon({
+    id: 'brillo', familia: 'texto', nombre: 'Brillo', muestra: 'texto', ejemplo: 'Algo nuevo llegó',
+    colores: { base: 'text-02', luz: 'text-01' },
+    ajustes: [
+      { id: 'ancho', nombre: 'Ancho', min: 4, max: 20, paso: 2, valor: 10 },
+      { id: 'veces', nombre: 'Duración', min: 1, max: 4, paso: 0.5, valor: 2 }
+    ],
+    pone: function (el, V) {
+      var puede = window.CSS && (CSS.supports('background-clip', 'text') || CSS.supports('-webkit-background-clip', 'text')), anda = null, deja = null, antes = el.getAttribute('style');
+      if (!puede || E.quieto() || !el.animate) return { pasa: function () {}, quita: function () {} };
+      function pinta() { el.style.backgroundImage = 'linear-gradient(100deg, var(--text-02) ' + (50 - V.ancho) + '%, var(--text-01) 50%, var(--text-02) ' + (50 + V.ancho) + '%)'; }
+      pinta(); el.style.backgroundSize = '250% 100%'; el.style.backgroundPosition = '100% 0'; el.style.webkitBackgroundClip = 'text'; el.style.backgroundClip = 'text'; el.style.color = 'transparent';
+      function pasa() {
+        if (anda || E.quieto()) return;
+        anda = el.animate([{ backgroundPosition: '100% 0' }, { backgroundPosition: '0% 0' }], { duration: E.segundos('duration-slow-02', el) * V.veces * 1000, easing: getComputedStyle(el).getPropertyValue('--easing-standard-expressive').trim() || 'ease-in-out' });
+        anda.onfinish = anda.oncancel = function () { anda = null; };
+      }
+      deja = E.alVer(el, pasa); el.addEventListener('pointerenter', pasa); el.addEventListener('focusin', pasa);
+      return { pasa: pasa, ajusta: pinta, quita: function () { if (anda) anda.cancel(); deja(); el.removeEventListener('pointerenter', pasa); el.removeEventListener('focusin', pasa); if (antes == null) el.removeAttribute('style'); else el.setAttribute('style', antes); } };
+    }
+  });
+})();
+
+// Inclinar: a surface tips toward the pointer as if it were held by its middle, and lies flat again when the
+// pointer leaves. A reaction.
+// It is put on a wrapper, which stays flat, and tips what the wrapper holds: so the place the pointer is measured
+// against does not tip with it. The side the pointer is on goes down, as a card pressed with a finger would.
+(function () {
+  var E = window.AlmaEfectos;
+  E.pon({
+    id: 'inclinar', familia: 'reaccion', nombre: 'Inclinar', muestra: 'envuelta',
+    colores: {},
+    ajustes: [
+      { id: 'grados', nombre: 'Grados', min: 2, max: 20, paso: 1, valor: 8 },
+      { id: 'crece', nombre: 'Crece', min: 1, max: 1.1, paso: 0.01, valor: 1.02 }
+    ],
+    pone: function (el, V) {
+      var pieza = el.firstElementChild; if (!pieza) return { quita: function () {} };
+      var antes = { transform: pieza.style.transform, transition: pieza.style.transition };
+      function mueve(ev) {
+        if (ev.pointerType === 'touch' || E.quieto()) return;
+        var r = el.getBoundingClientRect(), px = (ev.clientX - r.left) / r.width - 0.5, py = (ev.clientY - r.top) / r.height - 0.5;
+        pieza.style.transition = 'transform var(--duration-moderate-01) var(--easing-entrance-productive)';
+        pieza.style.transform = 'perspective(800px) rotateX(' + (-py * 2 * V.grados).toFixed(2) + 'deg) rotateY(' + (px * 2 * V.grados).toFixed(2) + 'deg) scale(' + V.crece + ')';
+      }
+      function sale() { pieza.style.transition = 'transform var(--duration-slow-01) var(--easing-standard-productive)'; pieza.style.transform = antes.transform; }
+      el.addEventListener('pointermove', mueve); el.addEventListener('pointerleave', sale);
+      return { quita: function () { el.removeEventListener('pointermove', mueve); el.removeEventListener('pointerleave', sale); pieza.style.transform = antes.transform; pieza.style.transition = antes.transition; } };
+    }
+  });
+})();
+
+// Imán: a thing leans toward the pointer when it comes near, and goes back when it leaves. A reaction.
+// It is put on a wrapper, which stays where it is, and moves what the wrapper holds: so where "near" is does not
+// move with the thing. Near is the wrapper's box and a margin round it; the lean is a part of the way to the pointer.
+(function () {
+  var E = window.AlmaEfectos;
+  E.pon({
+    id: 'iman', familia: 'reaccion', nombre: 'Imán', muestra: 'boton',
+    colores: {},
+    ajustes: [
+      { id: 'alcance', nombre: 'Alcance', min: 0, max: 160, paso: 8, valor: 80 },
+      { id: 'fuerza', nombre: 'Fuerza', min: 0.1, max: 0.8, paso: 0.05, valor: 0.4 }
+    ],
+    pone: function (el, V) {
+      var pieza = el.firstElementChild, antes = pieza ? { transform: pieza.style.transform, transition: pieza.style.transition } : null, cerca = false;
+      function suelta() { if (!cerca) return; cerca = false; pieza.style.transition = 'transform var(--duration-slow-01) var(--easing-standard-productive)'; pieza.style.transform = antes.transform; }
+      function mueve(ev) {
+        if (!pieza || ev.pointerType === 'touch' || E.quieto()) { suelta(); return; }
+        var r = el.getBoundingClientRect(), dx = ev.clientX - (r.left + r.width / 2), dy = ev.clientY - (r.top + r.height / 2);
+        if (Math.abs(dx) > r.width / 2 + V.alcance || Math.abs(dy) > r.height / 2 + V.alcance) { suelta(); return; }
+        cerca = true; pieza.style.transition = 'transform var(--duration-moderate-02) var(--easing-entrance-productive)';
+        pieza.style.transform = 'translate(' + (dx * V.fuerza).toFixed(1) + 'px,' + (dy * V.fuerza).toFixed(1) + 'px)';
+      }
+      window.addEventListener('pointermove', mueve, { passive: true }); document.addEventListener('pointerleave', suelta);
+      return { quita: function () { window.removeEventListener('pointermove', mueve); document.removeEventListener('pointerleave', suelta); if (pieza) { pieza.style.transform = antes.transform; pieza.style.transition = antes.transition; } } };
+    }
+  });
+})();
+
+// Descifrar: a line of text arrives scrambled and settles letter by letter, from its beginning. A text.
+// The scrambled letters are the line's own, shuffled, so it keeps its look and nearly its width while it settles.
+// It plays the first time it is seen; pasa() plays it again.
+(function () {
+  var E = window.AlmaEfectos;
+  E.pon({
+    id: 'descifrar', familia: 'texto', nombre: 'Descifrar', muestra: 'texto', ejemplo: 'Todo lo que se mueve',
+    colores: {},
+    ajustes: [
+      { id: 'pulsos', nombre: 'Pulsos por letra', min: 1, max: 8, paso: 1, valor: 3 },
+      { id: 'cambio', nombre: 'Calma del revuelo', min: 1, max: 8, paso: 1, valor: 3 }
+    ],
+    pone: function (el, V) {
+      var C = E.dosCaras(el), texto = C.texto, letras = texto.replace(/\s/g, '').split(''), revuelto = [], quita = null, deja = null;
+      function baraja() { for (var i = 0; i < texto.length; i++) revuelto[i] = letras[Math.floor(Math.random() * letras.length)]; }
+      function pinta(k) { var n = Math.floor(k * texto.length), s = ''; for (var i = 0; i < texto.length; i++) s += i < n || /\s/.test(texto[i]) ? texto[i] : revuelto[i]; C.vista.textContent = s; }
+      function pasa() {
+        if (quita) { quita(); quita = null; }
+        if (E.quieto() || !letras.length) { C.vista.textContent = texto; return; }
+        // (a letter settles every so many pulses: the pulse is the one a word is written with)
+        var t = 0, cuenta = 0, dura = texto.length * E.segundos('duration-stagger', el) * V.pulsos;
+        quita = E.cada(function (dt) {
+          t += dt; if (cuenta++ % V.cambio === 0) baraja();
+          if (t >= dura) { C.vista.textContent = texto; quita = null; return false; }
+          pinta(t / dura); return true;
+        });
+      }
+      if (!E.quieto() && letras.length) { baraja(); pinta(0); deja = E.alVer(el, pasa); }
+      return { pasa: pasa, quita: function () { if (quita) quita(); if (deja) deja(); C.suelta(); } };
+    }
+  });
+})();
+
 // ALMA's line figures: the engine. A figure is one object drawn in thin line, seen from above and to one side, that
 // answers the pointer. Everything a figure needs is here: a camera, springs, one shared clock, the pointer (and the
 // keyboard in its place), and the five tones of line, which are ALMA tokens by name (`figura-*`).
@@ -10838,7 +11168,7 @@ window.__TEMA_ANTES = document.documentElement.getAttribute('data-theme');
   // the tab key, so the arrows still scroll the page and no letter does anything elsewhere)
   if (M.enPagina) { escena.tabIndex = 0; escena.addEventListener('pointerdown', function () { escena.focus({ preventScroll: true }); }); }
   window.addEventListener('keydown', function (ev) {
-    if (M.enPagina && !escena.contains(document.activeElement)) return;
+    if (M.enPagina && !escena.contains(document.activeElement) && escena.getAttribute('data-camina') !== 'si') return;
     if (ev.metaKey || ev.ctrlKey || ev.altKey || enUnCampo(ev)) return; if (ev.code === 'KeyF') { if (!ev.repeat) vuela(!enVuelo); ev.preventDefault(); return; }
     var m = TECLAS[ev.code]; if (!m) return; teclas[m] = true; if (/^Arrow/.test(ev.code)) ev.preventDefault(); pide();
   });
@@ -10854,6 +11184,7 @@ window.__TEMA_ANTES = document.documentElement.getAttribute('data-theme');
     boton.addEventListener('click', function (ev) { if (ev.detail !== 0) return; teclas[m] = true; clearTimeout(espera); espera = setTimeout(deja, 450); pide(); });
   });
   lienzo.addEventListener('wheel', function (ev) {
+    if (M.enPagina) return;      // (on a page, the wheel scrolls the page: the page brings the planet closer)
     ev.preventDefault(); var d = -ev.deltaY * (ev.deltaMode ? 16 : 1);
     if (enVuelo && ev.shiftKey) quiereAltura = Math.min(RADIO * 4, Math.max(3, quiereAltura * Math.exp(-d * 0.0015))); else pasa(d * 0.02 * (enVuelo ? Math.max(1, (radioDelOjo - piso0) * 0.08) : 1) / radioDelOjo);
     pide();
@@ -10916,6 +11247,8 @@ window.__TEMA_ANTES = document.documentElement.getAttribute('data-theme');
     get manos() { return manos.length; }, get maquina() { var x = gl.getExtension('WEBGL_debug_renderer_info'); return x ? gl.getParameter(x.UNMASKED_RENDERER_WEBGL) : ''; },
     ajusta: function (que, v) { ajusta(que, v, document.querySelector('[data-ajuste="' + que + '"]')); }, remueve: function (x, y, c) { remueve(x * escala, H - y * escala, c == null ? 1 : c); pide(); },
     regla: { sube: function (x, y, z) { return sube(x, y, z); }, semilla: SEMILLA, relieve: RELIEVE, mar: MAR, llegada: LLEGADA },
+    // (on a page: how near the planet is, from 0, high above and far, to 1, on foot; the head eases there)
+    acerca: function (k) { k = Math.min(1, Math.max(0, k)); var lejos = RADIO * 3, h = OJOS + (lejos - OJOS) * Math.pow(1 - k, 3); enVuelo = h > OJOS + 1; altura = quiereAltura = h; escena.classList.toggle('mundo--en-vuelo', enVuelo); pide(); },
     pon: function (o) { if (o.lugar) P = o.lugar.slice(); if (o.hacia) F = o.hacia.slice(); if (o.altura != null) { vuela(o.altura > OJOS); altura = quiereAltura = o.altura; piso0 = suelo(P[0], P[1], P[2]); radioDelOjo = piso0 + altura; } pide(); } };
   mide();
 })();
@@ -10936,7 +11269,7 @@ window.__TEMA_ANTES = document.documentElement.getAttribute('data-theme');
     if (A && window.ReactDOM) {
       // The one primary button, ALMA's own: it takes the reader to the contact.
       var el = document.getElementById('accion');
-      if (el) ReactDOM.createRoot(el).render(h(A.Button, { variant: 'filled', size: 'lg', onClick: function () { document.getElementById('contacto').scrollIntoView({ behavior: calma ? 'auto' : 'smooth' }); document.getElementById('cierre-t').focus({ preventScroll: true }); } }, 'Conversemos'));
+      if (el) ReactDOM.createRoot(el).render(h(A.Button, { variant: 'filled', onClick: function () { document.getElementById('contacto').scrollIntoView({ behavior: calma ? 'auto' : 'smooth' }); document.getElementById('cierre-t').focus({ preventScroll: true }); } }, 'Conversemos'));
       // The same proposal screen, drawn by ALMA's components, on a desktop, a phone and a watch.
       var COL = [{ key: 'p', label: 'Propuesta' }, { key: 'e', label: 'Estado' }, { key: 'f', label: 'Vence' }];
       var FILAS = [{ id: 'identidad', p: 'Identidad de marca', e: 'Espera tu decisión', f: '15 oct' }, { id: 'web', p: 'Sitio web', e: 'Espera tu decisión', f: '15 oct' }, { id: 'campana', p: 'Campaña de lanzamiento', e: 'Aprobada', f: '—' }, { id: 'senaletica', p: 'Señalética', e: 'En revisión', f: '30 oct' }];
@@ -10990,6 +11323,15 @@ window.__TEMA_ANTES = document.documentElement.getAttribute('data-theme');
         mapa.querySelectorAll('[data-traza]').forEach(function (l) { var t = Math.min(1, Math.max(0, (llega * 2 - +l.getAttribute('data-traza')) / 0.4)); l.style.strokeDasharray = 1; l.style.strokeDashoffset = 1 - t; });
         mapa.querySelectorAll('[data-sale]').forEach(function (x) { x.style.opacity = Math.min(1, Math.max(0, (llega * 2 - +x.getAttribute('data-sale')) / 0.25)); }); };
       alPasar.push(traza); }
+    // ALMA's effects, each where the page asks for it.
+    document.querySelectorAll('[data-efecto]').forEach(function (e) { try { window.AlmaEfectos.monta(e.getAttribute('data-efecto'), e, {}); } catch (x) {} });
+    // The planet closes the page: it starts high above and far; the page going down brings it near until one stands on
+    // it, and then the arrows walk. Still (motion asked down), it is there on foot.
+    var recorrido = document.querySelector('.recorrido'), mundo = document.querySelector('.mundo');
+    if (window.__mundo && window.__mundo.acerca && mundo) {
+      if (fija) { recorrido.classList.add('recorrido--fija'); var acercate = function () { var k = avance(recorrido); window.__mundo.acerca(Math.min(1, k / 0.92)); mundo.setAttribute('data-camina', k > 0.97 ? 'si' : 'no'); recorrido.classList.toggle('recorrido--a-pie', k > 0.97); }; acercate(); alPasar.push(acercate); }
+      else { window.__mundo.acerca(1); mundo.setAttribute('data-camina', 'no'); }
+    }
     // The pieces' line figures, ALMA's own.
     document.querySelectorAll('[data-figura]').forEach(function (f) { try { window.AlmaFigura.monta(f, f.getAttribute('data-figura'), { genes: G, intensidad: 0.5 }); } catch (x) {} });
     // The living word: ALMA's own piece, fitted to its width, heavier where the pointer touches it.
