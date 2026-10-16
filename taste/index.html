@@ -4237,17 +4237,24 @@ main { display: grid; }
 /* (the bust ends where the word ends: no dot falls under the sentence) */
 .palabra-banda .escaneo__fija { position: relative; height: calc(40svh + var(--space-96)); min-height: calc(var(--space-160) + var(--space-96)); }
 
-/* What the system is: one centered moment, the diagram on ALMA's dotted ground. */
-.sistema { display: grid; gap: var(--dentro); justify-items: center; text-align: center; padding: 0 var(--margen) var(--entre); }
-.sistema__frase { max-width: 36rem; text-wrap: balance; }
-.sistema__t { margin-top: var(--space-64); }
-.mapa-caja { position: relative; width: 100%; display: grid; justify-items: center; padding-block: var(--space-48); overflow: hidden; }
-.mapa { position: relative; display: block; width: 100%; max-width: 55rem; height: auto; }
+/* What the system is: the diagram as wide as the page, and under it one column of text. */
+.sistema { display: grid; gap: var(--space-48); padding: 0 var(--margen) var(--entre); }
+.mapa-caja { display: grid; justify-items: center; }
+.mapa { width: 100%; height: auto; }
 .mapa__txt { fill: var(--text-02); font-size: 13px; }
 .mapa__c { fill: var(--text-01); font-size: 14px; font-weight: var(--font-weight-emphasis); }
 .mapa__l { fill: none; stroke: var(--border-control); stroke-width: 1; }
 .mapa__caja { fill: var(--ui-01); stroke: var(--text-01); stroke-width: 1; }
-.sistema__texto { display: grid; gap: var(--dentro); max-width: 40rem; text-align: left; }
+/* (where the page is narrow the diagram's words would be too small to read: the same, one under the other) */
+.mapa-pila { display: grid; gap: var(--space-8); justify-items: center; text-align: center; color: var(--text-02); }
+.mapa-pila p { margin: 0; max-width: 22rem; }
+.mapa-pila__c { padding: var(--space-16) var(--space-24); border: 1px solid var(--text-01); border-radius: var(--radius-panel); background: var(--ui-01); color: var(--text-01); }
+.mapa-pila svg { color: var(--icon-02); }
+.mapa { display: none; }
+@media (min-width: 42rem) { .mapa { display: block; } .mapa-pila { display: none; } }
+.sistema__texto { display: grid; gap: var(--space-24); width: 100%; max-width: 40rem; justify-self: center; }
+.sistema__texto h2 { margin: 0 0 var(--space-8); }
+.sistema__texto p { text-wrap: pretty; }
 
 /* The pieces, side by side; where the scene stays in place, the page going down slides them along. */
 .desliza { position: relative; padding-bottom: var(--entre); }
@@ -4307,7 +4314,7 @@ main { display: grid; }
 .correo { overflow-wrap: anywhere; user-select: all; -webkit-user-select: all; }
 
 /* At the end of everything, the planet, edge to edge, to be walked. */
-.recorrido { position: relative; display: grid; background: var(--ui-01); }
+.recorrido { position: relative; display: grid; background: var(--ui-02); }
 /* (its line sits above it, never over the moving dots) */
 .recorrido__dice { max-width: 40rem; margin: 0; padding: var(--space-24) var(--margen); color: var(--text-02); }
 .recorrido .mundo { height: auto; }
@@ -4388,12 +4395,14 @@ main { display: grid; }
   </section>
 
   <section class="sistema" id="sistema" aria-labelledby="sistema-t">
-    <p class="web-h4 sistema__frase" data-entra>La marca se escribe para que cualquiera pueda decidir bien una pantalla que nadie dibujó todavía.</p>
-    <h2 class="tipo sistema__t" data-tipo="h4 h3 h3" id="sistema-t" data-entra>Qué es el sistema</h2>
-    <div class="mapa-caja" data-efecto="reticula" data-entra><svg class="mapa" viewBox="0 0 880 300" role="img" aria-label="De un lado, lo que entra al sistema de marca: principios, voz, color, letra, forma, movimiento, componentes, guías, pruebas. Del otro, lo que sale de él: producto, sitio, documento, anuncio, presentación, entorno."><g><text x="196" y="28" text-anchor="end" class="mapa__txt" data-sale="0.000">Principios</text><path d="M208 24 C287 24 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.000"/></g><g><text x="196" y="59.5" text-anchor="end" class="mapa__txt" data-sale="0.067">Voz</text><path d="M208 55.5 C287 55.5 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.067"/></g><g><text x="196" y="91" text-anchor="end" class="mapa__txt" data-sale="0.133">Color</text><path d="M208 87 C287 87 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.133"/></g><g><text x="196" y="122.5" text-anchor="end" class="mapa__txt" data-sale="0.200">Letra</text><path d="M208 118.5 C287 118.5 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.200"/></g><g><text x="196" y="154" text-anchor="end" class="mapa__txt" data-sale="0.267">Forma</text><path d="M208 150 C287 150 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.267"/></g><g><text x="196" y="185.5" text-anchor="end" class="mapa__txt" data-sale="0.333">Movimiento</text><path d="M208 181.5 C287 181.5 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.333"/></g><g><text x="196" y="217" text-anchor="end" class="mapa__txt" data-sale="0.400">Componentes</text><path d="M208 213 C287 213 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.400"/></g><g><text x="196" y="248.5" text-anchor="end" class="mapa__txt" data-sale="0.467">Guías</text><path d="M208 244.5 C287 244.5 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.467"/></g><g><text x="196" y="280" text-anchor="end" class="mapa__txt" data-sale="0.533">Pruebas</text><path d="M208 276 C287 276 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.533"/></g><g><text x="684" y="28" text-anchor="start" class="mapa__txt" data-sale="0.800">Producto</text><path d="M514 150 C593 150 593 24 672 24" pathLength="1" class="mapa__l" data-traza="0.800"/></g><g><text x="684" y="78.4" text-anchor="start" class="mapa__txt" data-sale="0.900">Sitio</text><path d="M514 150 C593 150 593 74.4 672 74.4" pathLength="1" class="mapa__l" data-traza="0.900"/></g><g><text x="684" y="128.8" text-anchor="start" class="mapa__txt" data-sale="1.000">Documento</text><path d="M514 150 C593 150 593 124.8 672 124.8" pathLength="1" class="mapa__l" data-traza="1.000"/></g><g><text x="684" y="179.2" text-anchor="start" class="mapa__txt" data-sale="1.100">Anuncio</text><path d="M514 150 C593 150 593 175.2 672 175.2" pathLength="1" class="mapa__l" data-traza="1.100"/></g><g><text x="684" y="229.6" text-anchor="start" class="mapa__txt" data-sale="1.200">Presentación</text><path d="M514 150 C593 150 593 225.6 672 225.6" pathLength="1" class="mapa__l" data-traza="1.200"/></g><g><text x="684" y="280" text-anchor="start" class="mapa__txt" data-sale="1.300">Entorno</text><path d="M514 150 C593 150 593 276 672 276" pathLength="1" class="mapa__l" data-traza="1.300"/></g><rect x="366" y="118" width="148" height="64" rx="16" class="mapa__caja"/><text x="440" y="146" text-anchor="middle" class="mapa__c">Sistema</text><text x="440" y="166" text-anchor="middle" class="mapa__c">de marca</text></svg></div>
+    <div class="mapa-caja" data-entra><svg class="mapa" viewBox="0 0 880 300" role="img" aria-label="De un lado, lo que entra al sistema de marca: principios, voz, color, letra, forma, movimiento, componentes, guías, pruebas. Del otro, lo que sale de él: producto, sitio, documento, anuncio, presentación, entorno."><g><text x="196" y="28" text-anchor="end" class="mapa__txt" data-sale="0.000">Principios</text><path d="M208 24 C287 24 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.000"/></g><g><text x="196" y="59.5" text-anchor="end" class="mapa__txt" data-sale="0.067">Voz</text><path d="M208 55.5 C287 55.5 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.067"/></g><g><text x="196" y="91" text-anchor="end" class="mapa__txt" data-sale="0.133">Color</text><path d="M208 87 C287 87 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.133"/></g><g><text x="196" y="122.5" text-anchor="end" class="mapa__txt" data-sale="0.200">Letra</text><path d="M208 118.5 C287 118.5 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.200"/></g><g><text x="196" y="154" text-anchor="end" class="mapa__txt" data-sale="0.267">Forma</text><path d="M208 150 C287 150 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.267"/></g><g><text x="196" y="185.5" text-anchor="end" class="mapa__txt" data-sale="0.333">Movimiento</text><path d="M208 181.5 C287 181.5 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.333"/></g><g><text x="196" y="217" text-anchor="end" class="mapa__txt" data-sale="0.400">Componentes</text><path d="M208 213 C287 213 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.400"/></g><g><text x="196" y="248.5" text-anchor="end" class="mapa__txt" data-sale="0.467">Guías</text><path d="M208 244.5 C287 244.5 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.467"/></g><g><text x="196" y="280" text-anchor="end" class="mapa__txt" data-sale="0.533">Pruebas</text><path d="M208 276 C287 276 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.533"/></g><g><text x="684" y="28" text-anchor="start" class="mapa__txt" data-sale="0.800">Producto</text><path d="M514 150 C593 150 593 24 672 24" pathLength="1" class="mapa__l" data-traza="0.800"/></g><g><text x="684" y="78.4" text-anchor="start" class="mapa__txt" data-sale="0.900">Sitio</text><path d="M514 150 C593 150 593 74.4 672 74.4" pathLength="1" class="mapa__l" data-traza="0.900"/></g><g><text x="684" y="128.8" text-anchor="start" class="mapa__txt" data-sale="1.000">Documento</text><path d="M514 150 C593 150 593 124.8 672 124.8" pathLength="1" class="mapa__l" data-traza="1.000"/></g><g><text x="684" y="179.2" text-anchor="start" class="mapa__txt" data-sale="1.100">Anuncio</text><path d="M514 150 C593 150 593 175.2 672 175.2" pathLength="1" class="mapa__l" data-traza="1.100"/></g><g><text x="684" y="229.6" text-anchor="start" class="mapa__txt" data-sale="1.200">Presentación</text><path d="M514 150 C593 150 593 225.6 672 225.6" pathLength="1" class="mapa__l" data-traza="1.200"/></g><g><text x="684" y="280" text-anchor="start" class="mapa__txt" data-sale="1.300">Entorno</text><path d="M514 150 C593 150 593 276 672 276" pathLength="1" class="mapa__l" data-traza="1.300"/></g><rect x="366" y="118" width="148" height="64" rx="16" class="mapa__caja"/><text x="440" y="146" text-anchor="middle" class="mapa__c">Sistema</text><text x="440" y="166" text-anchor="middle" class="mapa__c">de marca</text></svg>
+      <div class="mapa-pila" role="img" aria-label="Lo que entra al sistema de marca: principios, voz, color, letra, forma, movimiento, componentes, guías, pruebas. Lo que sale de él: producto, sitio, documento, anuncio, presentación, entorno."><p class="web-body-m">Principios · Voz · Color · Letra · Forma · Movimiento · Componentes · Guías · Pruebas</p><svg viewBox="0 0 32 32" width="24" height="24" fill="currentColor" aria-hidden="true" focusable="false"><polygon points="24.59 16.59 17 24.17 17 4 15 4 15 24.17 7.41 16.59 6 18 16 28 26 18 24.59 16.59"/></svg><p class="web-label-l mapa-pila__c">Sistema de marca</p><svg viewBox="0 0 32 32" width="24" height="24" fill="currentColor" aria-hidden="true" focusable="false"><polygon points="24.59 16.59 17 24.17 17 4 15 4 15 24.17 7.41 16.59 6 18 16 28 26 18 24.59 16.59"/></svg><p class="web-body-m">Producto · Sitio · Documento · Anuncio · Presentación · Entorno</p></div>
+    </div>
     <div class="sistema__texto">
-      <p class="web-body-l" data-entra>Guías, piezas y código que una persona puede recorrer y un agente puede leer: la voz y los principios de tu marca, sus reglas de color, letra, forma y movimiento, y los componentes con que se construye lo nuevo.</p>
-      <p class="web-body-l" data-entra>Cada regla dice dónde aplica y por qué. La del lima está escrita así: va solo en el botón principal; los enlaces son azules; los fondos y los textos, neutros. El código usa esa regla tal cual.</p>
+      <h2 id="sistema-t" class="web-h4" data-entra>El sistema</h2>
+      <p class="web-h5" data-entra>La marca se escribe para que cualquiera pueda decidir bien una pantalla que nadie dibujó todavía.</p>
+      <p class="web-body-m" data-entra>Guías, piezas y código que una persona puede recorrer y un agente puede leer: la voz y los principios de tu marca, sus reglas de color, letra, forma y movimiento, y los componentes con que se construye lo nuevo.</p>
+      <p class="web-body-m" data-entra>Cada regla dice dónde aplica y por qué. La del lima está escrita así: va solo en el botón principal; los enlaces son azules; los fondos y los textos, neutros. El código usa esa regla tal cual.</p>
     </div>
   </section>
 
@@ -4435,7 +4444,14 @@ main { display: grid; }
     <p class="tipo correo" data-tipo="h3 display-s display-m" data-entra>contacto@cordura.tech</p>
   </section>
 
-  <section class="recorrido" aria-labelledby="recorrido-t">
+</main>
+<footer class="pie">
+  <p class="web-h6 pie__marca">Cordura</p>
+  <p class="web-body-m">Santiago de Chile. En esta página no hay imágenes ni videos: todo lo que ves se dibuja con código, con el sistema de Cordura.</p>
+  <nav class="pie__nav" aria-label="Más de Cordura"><a class="web-label-l" href="/">El sitio</a><a class="web-label-l" href="/agentic/">Para agentes</a></nav>
+</footer>
+<aside class="cierre-mundo" aria-labelledby="recorrido-t">
+  <div class="recorrido">
     <h2 id="recorrido-t" class="web-label-l recorrido__dice">El planeta de Cordura se calcula alrededor de quien camina. Recórrelo con los botones o, después de hacerle clic, con las flechas o W A S D; con F despegas.</h2>
     <section class="escaneo mundo" aria-label="El planeta de Cordura, dibujado con puntos en sus colores. No está guardado en ningún archivo: se calcula alrededor de quien lo recorre y cada trozo llega como polvo que se asienta. Se camina con las flechas o los botones, y se puede despegar para verlo entero.">
       <div class="escaneo__fija">
@@ -4452,13 +4468,8 @@ main { display: grid; }
         </div>
       </div>
     </section>
-  </section>
-</main>
-<footer class="pie">
-  <p class="web-h6 pie__marca">Cordura</p>
-  <p class="web-body-m">Santiago de Chile. En esta página no hay imágenes ni videos: todo lo que ves se dibuja con código, con el sistema de Cordura.</p>
-  <nav class="pie__nav" aria-label="Más de Cordura"><a class="web-label-l" href="/">El sitio</a><a class="web-label-l" href="/agentic/">Para agentes</a></nav>
-</footer>
+  </div>
+</aside>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
@@ -9569,194 +9580,6 @@ window.__GENERADOR_VISTAS = function (G) {
   raiz.AlmaPalabra = { monta: monta };
 })(typeof window !== 'undefined' ? window : this);
 
-// ALMA's effects: the collection of what moves behind, between and under things. Four families: a background
-// (fondo), a change from one thing to another (transicion), an answer to whoever touches (reaccion) and a text that
-// moves as it arrives (texto).
-// Every effect is written here, ours, and keeps the same promises: its colours are tokens, read from where it is
-// mounted (so an entity's effect is the entity's); it asks ALMA's clock (site/reloj.js) for its frames; it draws only
-// while it is seen and the page is shown; with less motion asked for it is one still picture; and it is decoration,
-// hidden from whoever does not see the page.
-//   AlmaEfectos.pon({ id, familia, nombre, colores: { nombre: token }, ajustes: [{ id, nombre, min, max, paso, valor }], crea(lienzo, V) })
-//     crea → { medida(ancho, alto), cuadro(dt, t, puntero), color(nombre, [r, g, b]), quita() }
-//   A reaction lives on an element instead of on a canvas of its own: it gives pone(el, V) → { ajusta(id, valor), quita() }.
-//   A transition is a reaction with one more thing to give: pasa(), which plays it when whoever uses it says so.
-//   AlmaEfectos.monta(id, el, valores) → { ajusta(id, valor), valores, quieto(), quita() }
-(function () {
-  if (window.AlmaEfectos) return;
-  var LISTA = {}, sonda = null;
-  // A colour token as an element has it, as three numbers from 0 to 1, however CSS writes it.
-  function color(token, el) {
-    var v = getComputedStyle(el || document.documentElement).getPropertyValue('--' + token).trim();
-    if (!sonda) { var c = document.createElement('canvas'); c.width = c.height = 1; sonda = c.getContext('2d', { willReadFrequently: true }); }
-    sonda.clearRect(0, 0, 1, 1); if (v) { sonda.fillStyle = v; sonda.fillRect(0, 0, 1, 1); }
-    var d = sonda.getImageData(0, 0, 1, 1).data; return [d[0] / 255, d[1] / 255, d[2] / 255];
-  }
-  function quieto() { var R = window.AlmaReloj; return R ? R.quieto : !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches); }
-  // A motion token as an element has it: a duration in seconds, a curve as the function it is.
-  function segundos(token, el) { var P = window.AlmaPartitura; if (P) return P.segundos(token, el); var t = getComputedStyle(el || document.documentElement).getPropertyValue('--' + token).trim(), x = parseFloat(t); return isFinite(x) ? (/ms$/.test(t) ? x / 1000 : x) : 0.24; }
-  function curva(token, el) { var P = window.AlmaPartitura; return P ? P.curva(token, el) : function (k) { return 1 - (1 - k) * (1 - k); }; }
-  // A background that is one picture worked out point by point: a canvas, the program that colours each point, and
-  // its values by name. escala: how many of the screen's points it is drawn with (a soft picture needs fewer).
-  function sombra(lienzo, fs, escala) {
-    var gl = lienzo.getContext('webgl', { alpha: false, antialias: false, depth: false, stencil: false, preserveDrawingBuffer: true }); if (!gl) return null;
-    var p = gl.createProgram();
-    [[gl.VERTEX_SHADER, 'attribute vec2 p; varying vec2 vUv; void main() { vUv = p * 0.5 + 0.5; gl_Position = vec4(p, 0.0, 1.0); }'], [gl.FRAGMENT_SHADER, fs]].forEach(function (x) { var s = gl.createShader(x[0]); gl.shaderSource(s, x[1]); gl.compileShader(s); if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s)); gl.attachShader(p, s); });
-    gl.bindAttribLocation(p, 0, 'p'); gl.linkProgram(p); gl.useProgram(p);
-    var u = {}, n = gl.getProgramParameter(p, gl.ACTIVE_UNIFORMS); for (var i = 0; i < n; i++) { var nombre = gl.getActiveUniform(p, i).name; u[nombre] = gl.getUniformLocation(p, nombre); }
-    gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer()); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW); gl.enableVertexAttribArray(0); gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
-    return {
-      gl: gl, u: u,
-      medida: function (ancho, alto) { var d = Math.min(window.devicePixelRatio || 1, 2) * (escala || 1); lienzo.width = Math.max(2, Math.round(ancho * d)); lienzo.height = Math.max(2, Math.round(alto * d)); gl.viewport(0, 0, lienzo.width, lienzo.height); gl.uniform2f(u.uTam, lienzo.width, lienzo.height); },
-      dibuja: function () { gl.drawArrays(gl.TRIANGLES, 0, 3); },
-      quita: function () { var x = gl.getExtension('WEBGL_lose_context'); if (x) x.loseContext(); }
-    };
-  }
-  // (a noise of our own for those programs: a value at each corner of a grid, eased between them; from 0 to 1)
-  var RUIDO = 'float azar(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }\n' +
-    'float ruido(vec2 p) { vec2 i = floor(p), f = fract(p); f = f * f * (3.0 - 2.0 * f); return mix(mix(azar(i), azar(i + vec2(1.0, 0.0)), f.x), mix(azar(i + vec2(0.0, 1.0)), azar(i + vec2(1.0, 1.0)), f.x), f.y); }\n';
-  // Every frame while fn answers true, on ALMA's clock where there is one. → quita()
-  function cada(fn) { var R = window.AlmaReloj; if (R) return R.cada(function () { return fn(R.dt); }); var id = 0, paso = function () { if (fn(1 / 60) === true) id = requestAnimationFrame(paso); }; id = requestAnimationFrame(paso); return function () { cancelAnimationFrame(id); }; }
-  // Once, the first time a tenth of an element is seen. → deja()
-  function alVer(el, fn) { var ojo = new IntersectionObserver(function (v) { if (v[v.length - 1].isIntersecting) { ojo.disconnect(); fn(); } }, { threshold: 0.1 }); ojo.observe(el); return function () { ojo.disconnect(); }; }
-  // A text that moves has two faces: the true one, out of sight, for whoever has the page read to them, and the one
-  // that is seen and changes, which they are not told about.
-  function dosCaras(el) {
-    var texto = el.textContent, antes = el.innerHTML, real = document.createElement('span'), vista = document.createElement('span');
-    real.style.cssText = 'position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap'; real.textContent = texto;
-    vista.setAttribute('aria-hidden', 'true'); vista.textContent = texto; el.textContent = ''; el.appendChild(real); el.appendChild(vista);
-    return { texto: texto, vista: vista, suelta: function () { el.innerHTML = antes; } };
-  }
-  function monta(id, el, valores) {
-    var def = LISTA[id]; if (!def) throw new Error('No hay un efecto «' + id + '»');
-    if (def.pone) {
-      var W = {}; def.ajustes.forEach(function (a) { W[a.id] = valores && valores[a.id] != null ? valores[a.id] : a.valor; });
-      var o = def.pone(el, W);
-      return { valores: W, quieto: quieto, ajusta: function (k, v) { W[k] = v; if (o.ajusta) o.ajusta(k, v); }, pasa: o.pasa || function () {}, quita: o.quita };
-    }
-    var R = window.AlmaReloj, V = {}, lienzo = document.createElement('canvas'), vivo = true, aLaVista = false, quita = null, t = 0, cuenta = 0, puntero = { x: 0, y: 0, dentro: false };
-    def.ajustes.forEach(function (a) { V[a.id] = valores && valores[a.id] != null ? valores[a.id] : a.valor; });
-    lienzo.setAttribute('aria-hidden', 'true'); lienzo.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none';
-    if (getComputedStyle(el).position === 'static') el.style.position = 'relative';
-    el.insertBefore(lienzo, el.firstChild);
-    var obra = def.crea(lienzo, V);
-    if (!obra) { lienzo.remove(); return null; }
-    function colores() { for (var k in def.colores) obra.color(k, color(def.colores[k], el)); }
-    function mide() { var r = el.getBoundingClientRect(); if (r.width && r.height) { obra.medida(r.width, r.height); if (quieto()) fija(); } }
-    // One still picture: the effect as it is after a while, worked out at once.
-    function fija() { colores(); for (var i = 0; i < 200; i++) obra.cuadro(1 / 60, 20 + i / 60, puntero, i < 199); }
-    function cuadro() {
-      if (!vivo || !aLaVista || document.hidden || quieto()) { quita = null; return false; }
-      var dt = R ? R.dt : 1 / 60; t += dt;
-      // (a theme or an entity may change under it: its colours are read again twice a second)
-      if (cuenta++ % 30 === 0) colores();
-      obra.cuadro(dt, t, puntero, false); return true;
-    }
-    function anda() {
-      if (!vivo) return; if (quieto()) { fija(); return; }
-      if (quita || !aLaVista || document.hidden) return;
-      if (R) quita = R.cada(cuadro); else { var id = 0, paso = function () { if (cuadro()) id = requestAnimationFrame(paso); }; id = requestAnimationFrame(paso); quita = function () { cancelAnimationFrame(id); }; }
-    }
-    function mueve(e) { var r = el.getBoundingClientRect(); puntero.x = (e.clientX - r.left) / r.width - 0.5; puntero.y = 0.5 - (e.clientY - r.top) / r.height; puntero.dentro = Math.abs(puntero.x) <= 0.5 && Math.abs(puntero.y) <= 0.5; }
-    var ojo = new IntersectionObserver(function (v) { aLaVista = v[v.length - 1].isIntersecting; anda(); }), regla = new ResizeObserver(mide);
-    var dejaReloj = R ? R.alCambiar(anda) : null;
-    // (a still picture is not drawn again by itself: when the page changes theme, it is worked out anew)
-    var tema = window.MutationObserver ? new MutationObserver(function () { if (quieto()) fija(); }) : null; if (tema) tema.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    ojo.observe(el); regla.observe(el); window.addEventListener('pointermove', mueve, { passive: true }); document.addEventListener('visibilitychange', anda);
-    colores(); mide();
-    return {
-      valores: V,
-      ajusta: function (k, v) { V[k] = v; if (quieto()) fija(); },
-      quieto: quieto,
-      quita: function () { vivo = false; if (quita) quita(); if (dejaReloj) dejaReloj(); ojo.disconnect(); regla.disconnect(); if (tema) tema.disconnect(); window.removeEventListener('pointermove', mueve); document.removeEventListener('visibilitychange', anda); obra.quita(); lienzo.remove(); }
-    };
-  }
-  // The presence of an AI (guide «Interfaces de IA»): the Velo behind, the Halo in front, and the Halo saying the state.
-  // presencia(el, estado) → { estado(nombre), quita() }, or null where there is no WebGL: the state is always written too.
-  var PRESENCIA = {
-    velo: { alto: 0.45, amplitud: 1, suave: 0.35, fuerza: 0.7, velocidad: 1 },
-    reposo: { tamano: 1.2, pulso: 2, petalos: 3, estela: 0.8, giro: 1, velocidad: 1, latido: 0.6 },
-    escuchando: { tamano: 1.5, pulso: 0.6, petalos: 3, estela: 0.6, giro: 0.4, velocidad: 0.5, latido: 0 },
-    pensando: { tamano: 0.9, pulso: 3, petalos: 5, estela: 0.9, giro: 2.2, velocidad: 1.8, latido: 0 },
-    respondiendo: { tamano: 1.2, pulso: 1.2, petalos: 3, estela: 0.8, giro: 1, velocidad: 1.2, latido: 0.3 }
-  };
-  // «fondo»: the AI is there, in the background — the Velo alone, and no Halo is even made (it is the costly one).
-  // Any other state brings the Halo in front of it: the AI is what the screen is about.
-  function presencia(el, estado) {
-    if (!LISTA.halo || !LISTA.velo) return null;
-    var bajo = el.getBoundingClientRect().height < 240, velo = monta('velo', el, bajo ? Object.assign({}, PRESENCIA.velo, { alto: 0.35 }) : PRESENCIA.velo); if (!velo) return null;
-    var halo = null, para = null;
-    // lugar: where the Halo goes and how big, { x, y, escala } — to move it to the clear zone of a stage
-    function pon(nombre, lugar) {
-      var a = PRESENCIA[nombre]; if (nombre === 'velo') return;
-      if (a && lugar) { a = Object.assign({}, a, { x: lugar.x || 0, y: lugar.y || 0 }); a.tamano = a.tamano * (lugar.escala || 1); }
-      if (para) { para(); para = null; }
-      velo.ajusta('fuerza', nombre === 'apagada' ? 0.3 : PRESENCIA.velo.fuerza);
-      // in the background, or with no service, there is no Halo: it is taken away, not hidden
-      if (!a) { if (halo) { halo.quita(); halo = null; } return; }
-      // (an effect goes to the back of its zone when it is made: bring the Halo in front of the Velo)
-      if (!halo) { halo = monta('halo', el, a); if (!halo) return; var c = el.querySelectorAll('canvas'); if (c.length > 1) el.insertBefore(c[0], c[1].nextSibling); return; }
-      var de = Object.assign({}, halo.valores), t = 0, dura = segundos('duration-slow-02', el), sube = curva('easing-standard-expressive', el);
-      if (quieto()) { for (var q in a) halo.ajusta(q, a[q]); return; }
-      para = cada(function (dt) { t = Math.min(1, t + dt / dura); for (var k in a) halo.ajusta(k, k === 'petalos' ? a[k] : de[k] + (a[k] - de[k]) * sube(t)); return t < 1; });
-    }
-    pon(estado || 'fondo');
-    return { estado: pon, estados: ['fondo'].concat(Object.keys(PRESENCIA).filter(function (k) { return k !== 'velo'; }), ['apagada']), quita: function () { if (para) para(); if (halo) halo.quita(); velo.quita(); } };
-  }
-  window.AlmaEfectos = { presencia: presencia, lista: LISTA, color: color, quieto: quieto, segundos: segundos, curva: curva, sombra: sombra, RUIDO: RUIDO, cada: cada, alVer: alVer, dosCaras: dosCaras, monta: monta, pon: function (def) { LISTA[def.id] = def; return def; } };
-})();
-
-// Retícula: an even grid of small dots; those near the pointer grow and take the accent, and now and then a slow
-// wave of the same passes through by itself. A background.
-// How it works: each point of the picture finds the cell of the grid it is in and asks how far it is from that
-// cell's centre: nearer than the dot's radius, it is dot. The radius and the colour of each dot come from how near
-// its centre is to the pointer, and from a slow noise that drifts across the grid.
-(function () {
-  var E = window.AlmaEfectos;
-  var FS = [
-    'precision highp float;',
-    'varying vec2 vUv; uniform vec2 uTam, uPuntero; uniform float uT, uPaso, uTamano, uAlcance, uCrece, uOla, uCerca; uniform vec3 uFondo, uUno, uDos;',
-    E.RUIDO,
-    'void main() {',
-    '  vec2 px = gl_FragCoord.xy, celda = floor(px / uPaso), centro = (celda + 0.5) * uPaso;',
-    '  float d = length((centro / uTam - uPuntero) * vec2(uTam.x / uTam.y, 1.0));',
-    '  float cerca = uCerca * (1.0 - smoothstep(0.0, uAlcance, d));',
-    '  float ola = uOla * smoothstep(0.55, 0.92, ruido(celda * 0.11 + vec2(uT * 0.13, -uT * 0.09)));',
-    '  float viva = max(cerca, ola), radio = uTamano * (1.0 + uCrece * viva);',
-    '  float punto = 1.0 - smoothstep(radio - 0.75, radio + 0.75, length(px - centro));',
-    '  gl_FragColor = vec4(mix(uFondo, mix(mix(uFondo, uDos, 0.3), uUno, viva), punto), 1.0);',
-    '}'
-  ].join('\n');
-  E.pon({
-    id: 'reticula', familia: 'fondo', nombre: 'Retícula',
-    colores: { fondo: 'ui-02', uno: 'interactive-01', dos: 'text-01' },
-    ajustes: [
-      { id: 'paso', nombre: 'Separación', min: 12, max: 56, paso: 4, valor: 24 },
-      { id: 'tamano', nombre: 'Tamaño', min: 0.5, max: 6, paso: 0.5, valor: 1.5 },
-      { id: 'alcance', nombre: 'Alcance', min: 0.05, max: 0.6, paso: 0.05, valor: 0.3 },
-      { id: 'crece', nombre: 'Crece', min: 0, max: 4, paso: 0.25, valor: 2 },
-      { id: 'ola', nombre: 'Ola', min: 0, max: 1, paso: 0.05, valor: 0.5 },
-      { id: 'velocidad', nombre: 'Velocidad', min: 0, max: 3, paso: 0.1, valor: 1 }
-    ],
-    crea: function (lienzo, V) {
-      var S = E.sombra(lienzo, FS, 1); if (!S) return null; var gl = S.gl, u = S.u, t = 0, cerca = 0, px = 0.5, py = 0.5;
-      return {
-        medida: S.medida, quita: S.quita,
-        color: function (k, v) { gl.uniform3fv(u[{ fondo: 'uFondo', uno: 'uUno', dos: 'uDos' }[k]], v); },
-        cuadro: function (dt, ahora, puntero, calla) {
-          t += dt * V.velocidad * 4;
-          // the pointer's light comes up when it comes in and goes down when it leaves, and follows it without a jump
-          var k = 1 - Math.exp(-dt * 10); cerca += ((puntero.dentro ? 1 : 0) - cerca) * (1 - Math.exp(-dt * 5));
-          if (puntero.dentro) { px += (puntero.x + 0.5 - px) * k; py += (puntero.y + 0.5 - py) * k; }
-          if (calla) return;
-          var d = Math.min(window.devicePixelRatio || 1, 2);
-          gl.uniform1f(u.uT, t); gl.uniform1f(u.uPaso, V.paso * d); gl.uniform1f(u.uTamano, V.tamano * d); gl.uniform1f(u.uAlcance, V.alcance); gl.uniform1f(u.uCrece, V.crece); gl.uniform1f(u.uOla, V.ola); gl.uniform1f(u.uCerca, cerca); gl.uniform2f(u.uPuntero, px, py);
-          S.dibuja();
-        }
-      };
-    }
-  });
-})();
-
 // ALMA's line figures: the engine. A figure is one object drawn in thin line, seen from above and to one side, that
 // answers the pointer. Everything a figure needs is here: a camera, springs, one shared clock, the pointer (and the
 // keyboard in its place), and the five tones of line, which are ALMA tokens by name (`figura-*`).
@@ -11167,8 +10990,6 @@ window.__TEMA_ANTES = document.documentElement.getAttribute('data-theme');
         mapa.querySelectorAll('[data-traza]').forEach(function (l) { var t = Math.min(1, Math.max(0, (llega * 2 - +l.getAttribute('data-traza')) / 0.4)); l.style.strokeDasharray = 1; l.style.strokeDashoffset = 1 - t; });
         mapa.querySelectorAll('[data-sale]').forEach(function (x) { x.style.opacity = Math.min(1, Math.max(0, (llega * 2 - +x.getAttribute('data-sale')) / 0.25)); }); };
       alPasar.push(traza); }
-    // Its ground, ALMA's dotted grid.
-    document.querySelectorAll('[data-efecto]').forEach(function (e) { try { window.AlmaEfectos.monta(e.getAttribute('data-efecto'), e, {}); } catch (x) {} });
     // The pieces' line figures, ALMA's own.
     document.querySelectorAll('[data-figura]').forEach(function (f) { try { window.AlmaFigura.monta(f, f.getAttribute('data-figura'), { genes: G, intensidad: 0.5 }); } catch (x) {} });
     // The living word: ALMA's own piece, fitted to its width, heavier where the pointer touches it.
