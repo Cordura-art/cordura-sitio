@@ -4451,14 +4451,14 @@ main { display: grid; }
   </section>
 
   <section class="vistas" aria-labelledby="vistas-t">
-    <div class="vistas__fija" data-theme="dark">
+    <div class="vistas__fija" data-theme="light">
       <div class="vistas__texto">
         <h2 id="vistas-t" class="vistas__titulos">
           <span class="tipo vistas__uno" data-tipo="display-s display-m display-m" >Lo mismo,<br>en cada soporte.</span>
           <span class="tipo vistas__dos" data-tipo="display-s display-m display-m" >Cuatro temas,<br>una regla.</span>
         </h2>
         <p class="web-body-l vistas__dice">Un escritorio, un teléfono, un reloj: cambia cuánto se muestra; la voz, la letra y la forma no. No son capturas: son los componentes, funcionando.</p>
-        <div class="vistas__tema"><div id="elige-tema"></div><p class="web-label-m vistas__cual" aria-live="polite"></p></div>
+        <div class="vistas__tema"><p class="web-label-m vistas__cual" aria-live="polite"></p><div id="elige-tema"></div></div>
       </div>
       <div class="soportes__vivos">
         <div class="aparato aparato--escritorio" data-pantalla="escritorio" role="group" aria-label="La pantalla de propuestas en un escritorio"></div>
@@ -11304,8 +11304,8 @@ window.__TEMA_ANTES = document.documentElement.getAttribute('data-theme');
       document.querySelectorAll('[data-criatura]').forEach(function (c) { ReactDOM.createRoot(c).render(h(A.Pictogram, { name: c.getAttribute('data-criatura'), kind: 'creature', size: 32 })); });
     }
 
-    // Supports, then themes: one scene, and the whole of it takes the theme. First the same screen on three supports;
-    // then the title changes and the scene goes through the four themes as the page goes by. ALMA's theme controls
+    // Supports and themes: one scene, and the whole of it takes the theme. It goes from light to dark as the page goes
+    // by, through the four themes; the supports arrive under the first title, and halfway the title changes. ALMA's theme controls
     // beside the title choose one by hand, and the choice holds until the scene is left.
     var vistas = document.querySelector('.vistas'), escena = document.querySelector('.vistas__fija'), cual = document.querySelector('.vistas__cual');
     var elegido = null, oye = function () {}, enEscena = fija && matchMedia('(min-width: 66rem)').matches;
@@ -11316,16 +11316,17 @@ window.__TEMA_ANTES = document.documentElement.getAttribute('data-theme');
         return h('div', { className: 'vistas__mandos' }, h(A.SegmentedControl, { label: 'Tema', options: [{ value: 'dark', label: 'Oscuro' }, { value: 'light', label: 'Claro' }], value: claro ? 'light' : 'dark', onChange: function (v) { elige(v === 'light', alto); } }), h(A.Checkbox, { label: 'Alto contraste', checked: alto, onChange: function (v) { elige(claro, v); } })); };
       ReactDOM.createRoot(document.getElementById('elige-tema')).render(h(Mandos));
     }
-    ponTema('dark');
+    ponTema('light');
     var aparatos = [].slice.call(document.querySelectorAll('.aparato'));
     if (enEscena) {
       vistas.classList.add('vistas--fija');
       new IntersectionObserver(function (es) { if (!es[0].isIntersecting) elegido = null; }).observe(vistas);
       alPasar.push(function () {
-        var p = avance(vistas), temas = p >= 0.25, k = Math.min(RONDA.length - 1, Math.floor((p - 0.25) / 0.75 * RONDA.length));
+        // (the round of themes runs through the whole scene, both titles share it: two themes under each)
+        var p = avance(vistas), temas = p >= 0.5, k = Math.min(RONDA.length - 1, Math.floor(p * RONDA.length));
         // (the supports come one at a time: the desktop, then the phone, then the watch; only then the themes)
         aparatos.forEach(function (a, i) { var v = tramo(p, 0.02 + i * 0.07, 0.08 + i * 0.07); a.style.opacity = v.toFixed(3); a.style.transform = 'translateY(' + ((1 - v) * 24).toFixed(1) + 'px)'; });
-        vistas.classList.toggle('vistas--temas', temas); ponTema(elegido || (temas ? RONDA[k] : 'dark'));
+        vistas.classList.toggle('vistas--temas', temas); ponTema(elegido || RONDA[k]);
       });
     } else vistas.classList.add('vistas--quieta');
 
