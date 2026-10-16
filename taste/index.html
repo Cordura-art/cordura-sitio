@@ -4238,7 +4238,8 @@ main { display: grid; }
 .mapa-caja { display: grid; justify-items: center; }
 .mapa { width: 100%; height: auto; }
 .mapa__txt { fill: var(--text-02); font-size: 13px; }
-.mapa__c { fill: var(--text-01); font-size: 13px; }
+.mapa__nombre { box-sizing: border-box; height: 100%; display: grid; place-items: center; margin: 0; color: var(--text-01); font-size: 13px; line-height: 1; white-space: nowrap; opacity: 0; }
+.mapa__nombre--dicho { opacity: 1; }
 .mapa__l { fill: none; stroke: var(--border-control); stroke-width: 1; }
 .mapa__caja { fill: var(--ui-01); stroke: var(--text-01); stroke-width: 1; }
 /* (where the page is narrow the diagram's words would be too small to read: the same, one under the other) */
@@ -4367,8 +4368,7 @@ main { display: grid; }
 @media (min-width: 42rem) { .palabra-banda.palabra-banda--fija .palabra-banda__busto { left: 0; width: 100%; } }
 
 /* One protagonist at a time, everywhere the page holds a scene. */
-/* (the first screen is the title's: the veil starts below it) */
-.portada { min-height: calc(100svh - var(--space-32) - var(--size-touch-min)); box-sizing: border-box; align-content: start; }
+/* (the first screen is the title's: the veil under it comes in as the page goes down) */
 /* (the system: the drawing, alone, then what it means, in the same place) */
 .sistema.sistema--fija { height: 320svh; padding: 0 var(--margen); }
 .sistema--fija .sistema__fija { position: sticky; top: 0; height: 100svh; display: grid; align-items: center; }
@@ -4427,7 +4427,7 @@ main { display: grid; }
   </section>
 
   <section class="sistema" id="sistema" aria-labelledby="sistema-t"><div class="sistema__fija">
-    <div class="mapa-caja" data-entra><svg class="mapa" viewBox="0 0 880 300" role="img" aria-label="De un lado, lo que entra al sistema de marca: principios, voz, color, letra, forma, movimiento, componentes, guías, pruebas. Del otro, lo que sale de él: producto, sitio, documento, anuncio, presentación, entorno."><g><text x="196" y="28" text-anchor="end" class="mapa__txt" data-sale="0.000">Principios</text><path d="M208 24 C287 24 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.000"/></g><g><text x="196" y="59.5" text-anchor="end" class="mapa__txt" data-sale="0.067">Voz</text><path d="M208 55.5 C287 55.5 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.067"/></g><g><text x="196" y="91" text-anchor="end" class="mapa__txt" data-sale="0.133">Color</text><path d="M208 87 C287 87 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.133"/></g><g><text x="196" y="122.5" text-anchor="end" class="mapa__txt" data-sale="0.200">Letra</text><path d="M208 118.5 C287 118.5 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.200"/></g><g><text x="196" y="154" text-anchor="end" class="mapa__txt" data-sale="0.267">Forma</text><path d="M208 150 C287 150 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.267"/></g><g><text x="196" y="185.5" text-anchor="end" class="mapa__txt" data-sale="0.333">Movimiento</text><path d="M208 181.5 C287 181.5 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.333"/></g><g><text x="196" y="217" text-anchor="end" class="mapa__txt" data-sale="0.400">Componentes</text><path d="M208 213 C287 213 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.400"/></g><g><text x="196" y="248.5" text-anchor="end" class="mapa__txt" data-sale="0.467">Guías</text><path d="M208 244.5 C287 244.5 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.467"/></g><g><text x="196" y="280" text-anchor="end" class="mapa__txt" data-sale="0.533">Pruebas</text><path d="M208 276 C287 276 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.533"/></g><g><text x="684" y="28" text-anchor="start" class="mapa__txt" data-sale="0.800">Producto</text><path d="M514 150 C593 150 593 24 672 24" pathLength="1" class="mapa__l" data-traza="0.800"/></g><g><text x="684" y="78.4" text-anchor="start" class="mapa__txt" data-sale="0.900">Sitio</text><path d="M514 150 C593 150 593 74.4 672 74.4" pathLength="1" class="mapa__l" data-traza="0.900"/></g><g><text x="684" y="128.8" text-anchor="start" class="mapa__txt" data-sale="1.000">Documento</text><path d="M514 150 C593 150 593 124.8 672 124.8" pathLength="1" class="mapa__l" data-traza="1.000"/></g><g><text x="684" y="179.2" text-anchor="start" class="mapa__txt" data-sale="1.100">Anuncio</text><path d="M514 150 C593 150 593 175.2 672 175.2" pathLength="1" class="mapa__l" data-traza="1.100"/></g><g><text x="684" y="229.6" text-anchor="start" class="mapa__txt" data-sale="1.200">Presentación</text><path d="M514 150 C593 150 593 225.6 672 225.6" pathLength="1" class="mapa__l" data-traza="1.200"/></g><g><text x="684" y="280" text-anchor="start" class="mapa__txt" data-sale="1.300">Entorno</text><path d="M514 150 C593 150 593 276 672 276" pathLength="1" class="mapa__l" data-traza="1.300"/></g><rect x="366" y="130" width="148" height="40" rx="16" class="mapa__caja"/><text x="440" y="154" text-anchor="middle" class="mapa__c">Sistema de marca</text></svg>
+    <div class="mapa-caja" data-entra><svg class="mapa" viewBox="0 0 880 300" role="img" aria-label="De un lado, lo que entra al sistema de marca: principios, voz, color, letra, forma, movimiento, componentes, guías, pruebas. Del otro, lo que sale de él: producto, sitio, documento, anuncio, presentación, entorno."><g><text x="196" y="28" text-anchor="end" class="mapa__txt" data-sale="0.000">Principios</text><path d="M208 24 C287 24 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.000"/></g><g><text x="196" y="59.5" text-anchor="end" class="mapa__txt" data-sale="0.067">Voz</text><path d="M208 55.5 C287 55.5 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.067"/></g><g><text x="196" y="91" text-anchor="end" class="mapa__txt" data-sale="0.133">Color</text><path d="M208 87 C287 87 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.133"/></g><g><text x="196" y="122.5" text-anchor="end" class="mapa__txt" data-sale="0.200">Letra</text><path d="M208 118.5 C287 118.5 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.200"/></g><g><text x="196" y="154" text-anchor="end" class="mapa__txt" data-sale="0.267">Forma</text><path d="M208 150 C287 150 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.267"/></g><g><text x="196" y="185.5" text-anchor="end" class="mapa__txt" data-sale="0.333">Movimiento</text><path d="M208 181.5 C287 181.5 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.333"/></g><g><text x="196" y="217" text-anchor="end" class="mapa__txt" data-sale="0.400">Componentes</text><path d="M208 213 C287 213 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.400"/></g><g><text x="196" y="248.5" text-anchor="end" class="mapa__txt" data-sale="0.467">Guías</text><path d="M208 244.5 C287 244.5 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.467"/></g><g><text x="196" y="280" text-anchor="end" class="mapa__txt" data-sale="0.533">Pruebas</text><path d="M208 276 C287 276 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.533"/></g><g><text x="684" y="28" text-anchor="start" class="mapa__txt" data-sale="1.000">Producto</text><path d="M514 150 C593 150 593 24 672 24" pathLength="1" class="mapa__l" data-traza="1.000"/></g><g><text x="684" y="78.4" text-anchor="start" class="mapa__txt" data-sale="1.100">Sitio</text><path d="M514 150 C593 150 593 74.4 672 74.4" pathLength="1" class="mapa__l" data-traza="1.100"/></g><g><text x="684" y="128.8" text-anchor="start" class="mapa__txt" data-sale="1.200">Documento</text><path d="M514 150 C593 150 593 124.8 672 124.8" pathLength="1" class="mapa__l" data-traza="1.200"/></g><g><text x="684" y="179.2" text-anchor="start" class="mapa__txt" data-sale="1.300">Anuncio</text><path d="M514 150 C593 150 593 175.2 672 175.2" pathLength="1" class="mapa__l" data-traza="1.300"/></g><g><text x="684" y="229.6" text-anchor="start" class="mapa__txt" data-sale="1.400">Presentación</text><path d="M514 150 C593 150 593 225.6 672 225.6" pathLength="1" class="mapa__l" data-traza="1.400"/></g><g><text x="684" y="280" text-anchor="start" class="mapa__txt" data-sale="1.500">Entorno</text><path d="M514 150 C593 150 593 276 672 276" pathLength="1" class="mapa__l" data-traza="1.500"/></g><rect x="366" y="130" width="148" height="40" rx="20" class="mapa__caja"/><foreignObject x="366" y="130" width="148" height="40"><div xmlns="http://www.w3.org/1999/xhtml" class="mapa__nombre"><span class="mapa__letras">Sistema de marca</span></div></foreignObject></svg>
       <div class="mapa-pila" role="img" aria-label="Lo que entra al sistema de marca: principios, voz, color, letra, forma, movimiento, componentes, guías, pruebas. Lo que sale de él: producto, sitio, documento, anuncio, presentación, entorno."><p class="web-body-m">Principios · Voz · Color · Letra · Forma · Movimiento · Componentes · Guías · Pruebas</p><svg viewBox="0 0 32 32" width="24" height="24" fill="currentColor" aria-hidden="true" focusable="false"><polygon points="24.59 16.59 17 24.17 17 4 15 4 15 24.17 7.41 16.59 6 18 16 28 26 18 24.59 16.59"/></svg><p class="web-label-l mapa-pila__c">Sistema de marca</p><svg viewBox="0 0 32 32" width="24" height="24" fill="currentColor" aria-hidden="true" focusable="false"><polygon points="24.59 16.59 17 24.17 17 4 15 4 15 24.17 7.41 16.59 6 18 16 28 26 18 24.59 16.59"/></svg><p class="web-body-m">Producto · Sitio · Documento · Anuncio · Presentación · Entorno</p></div>
     </div>
     <div class="sistema__texto">
@@ -9751,14 +9751,16 @@ window.__GENERADOR_VISTAS = function (G) {
 
 // Escalonar: the words of a line come in one after another, each rising a little into its place. A text.
 // Each word is its own piece, so each can start a beat after the one before; the spaces between them stay spaces,
-// so the line still breaks where it would. It plays the first time it is seen; pasa() plays it again.
+// so the line still breaks where it would. By letter, each letter is a piece, and each word holds its letters
+// together so that a word never breaks. It plays the first time it is seen; pasa() plays it again.
 (function () {
   var E = window.AlmaEfectos;
   E.pon({
     id: 'escalonar', familia: 'texto', nombre: 'Escalonar', muestra: 'texto', ejemplo: 'Cada palabra a su tiempo',
     colores: {},
     ajustes: [
-      { id: 'pulsos', nombre: 'Pulsos entre palabras', min: 1, max: 8, paso: 1, valor: 3 },
+      { id: 'pulsos', nombre: 'Pulsos entre piezas', min: 1, max: 8, paso: 1, valor: 3 },
+      { id: 'letras', nombre: 'Por letra', min: 0, max: 1, paso: 1, valor: 0 },
       { id: 'subida', nombre: 'Subida', min: 0, max: 1, paso: 0.1, valor: 0.4 }
     ],
     pone: function (el, V) {
@@ -9766,7 +9768,9 @@ window.__GENERADOR_VISTAS = function (G) {
       C.vista.textContent = '';
       C.texto.split(/(\s+)/).forEach(function (t) {
         if (!t) return; if (/^\s+$/.test(t)) { C.vista.appendChild(document.createTextNode(t)); return; }
-        var s = document.createElement('span'); s.style.display = 'inline-block'; s.textContent = t; C.vista.appendChild(s); piezas.push(s);
+        if (!V.letras) { var s = document.createElement('span'); s.style.display = 'inline-block'; s.textContent = t; C.vista.appendChild(s); piezas.push(s); return; }
+        var junta = document.createElement('span'); junta.style.display = 'inline-block'; junta.style.whiteSpace = 'nowrap'; C.vista.appendChild(junta);
+        Array.from(t).forEach(function (l) { var s = document.createElement('span'); s.style.display = 'inline-block'; s.textContent = l; junta.appendChild(s); piezas.push(s); });
       });
       function para() { andan.forEach(function (a) { a.cancel(); }); andan = []; }
       function pasa() {
@@ -10548,7 +10552,7 @@ window.__TEMA_ANTES = document.documentElement.getAttribute('data-theme');
       // That is where it belongs. Where it is: drawn there by a spring, slack while it is stirred; carried by the currents
       // as much as it is stirred; and dragged and turned by the pointer as it passes near.
       // (what is turned away and at rest has no need of weight: it is simply where it belongs, unseen)
-      if (quieto || !puesto || (!seVe && e2 <= 0 && arma >= 1 && AG[i] < 0.02 && revuelo < 0.01)) { X[i] = puesto ? x : dx; Y[i] = puesto ? y : dy; VX[i] = VY[i] = 0; AG[i] = puesto ? 0 : 0.55; RA[i] = r; }
+      if (quieto || !puesto || (!seVe && e2 <= 0 && arma >= 1 && AG[i] < 0.02 && revuelo < 0.01)) { var ya = puesto || armaDada === 1; X[i] = ya ? x : dx; Y[i] = ya ? y : dy; VX[i] = VY[i] = 0; AG[i] = ya ? 0 : 0.55; RA[i] = r; }      // (told it is whole from the start, it is simply there: no coming together)
       else {
         var ag = Math.min(1, AG[i] + revuelo), qx = X[i], qy = Y[i], vx = VX[i], vy = VY[i];
         if (pasa) {
@@ -11341,7 +11345,15 @@ window.__TEMA_ANTES = document.documentElement.getAttribute('data-theme');
 
     // The diagram: what goes in, then what comes out, traced as it comes into view.
     var mapa = document.querySelector('.mapa'), sistema = document.querySelector('.sistema');
-    if (mapa) { var trazaHasta = function (llega) {
+    // (its middle is named once what goes in has reached it: the letters come one after another, then a light runs along them)
+    var nombre = mapa && mapa.querySelector('.mapa__nombre'), nombrado = false;
+    function nombra() {
+      if (nombrado || !nombre || !window.AlmaEfectos) return; nombrado = true; nombre.classList.add('mapa__nombre--dicho');
+      var letras = nombre.querySelector('.mapa__letras'), E = window.AlmaEfectos, uno = E.monta('escalonar', letras, { letras: 1, pulsos: 1 }), piezas = letras.textContent.replace(/ /g, '').length;
+      var dura = (E.segundos('duration-stagger', nombre) * uno.valores.pulsos * (piezas - 1) + E.segundos('duration-slow-01', nombre)) * 1000;
+      setTimeout(function () { uno.quita(); E.monta('brillo', nombre, {}); }, E.quieto() ? 0 : dura);
+    }
+    if (mapa) { var trazaHasta = function (llega) { if (llega >= 0.45) nombra();
         mapa.querySelectorAll('[data-traza]').forEach(function (l) { var t = Math.min(1, Math.max(0, (llega * 2 - +l.getAttribute('data-traza')) / 0.4)); l.style.strokeDasharray = 1; l.style.strokeDashoffset = 1 - t; });
         mapa.querySelectorAll('[data-sale]').forEach(function (x) { x.style.opacity = Math.min(1, Math.max(0, (llega * 2 - +x.getAttribute('data-sale')) / 0.25)); }); };
       // Held where there is room for the drawing: first it is traced, alone; then it goes and what it means is said,
@@ -11381,14 +11393,13 @@ window.__TEMA_ANTES = document.documentElement.getAttribute('data-theme');
     // The living word: ALMA's own piece, fitted to its width, heavier where the pointer touches it.
     var w = document.querySelector('.palabra-banda__palabra');
     if (w && window.AlmaPalabra) { var pw = window.AlmaPalabra.monta(w, { genes: window.__PALABRA, texto: 'Criterio' });
-      // One thing at a time, as the page goes by: first the bust comes together, alone; then it steps back and the
+      // One thing at a time, as the page goes by: first the bust, whole and alone; then it steps back and the
       // word is written over it; last, the sentence. Scrolled back, each goes as it came. Still, all three are there.
       var banda = document.querySelector('.palabra-banda'), busto = banda.querySelector('.palabra-banda__busto'), voz = banda.querySelector('.palabra-banda__voz'), frase = banda.querySelector('.palabra-banda__frase'), escrita = false;
       if (fija && window.__escaneo && window.__escaneo.arma) {
-        banda.classList.add('palabra-banda--fija'); window.__escaneo.arma(0);
+        banda.classList.add('palabra-banda--fija'); window.__escaneo.arma(1);
         var revela = function () {
-          var k = avance(banda), entra = tramo(k, 0.5, 0.6), dice = tramo(k, 0.7, 0.8);
-          window.__escaneo.arma(tramo(k, 0, 0.4));
+          var k = avance(banda), entra = tramo(k, 0.35, 0.5), dice = tramo(k, 0.6, 0.75);
           busto.style.opacity = (1 - 0.82 * entra).toFixed(3);
           voz.style.opacity = entra.toFixed(3); if (entra > 0 && !escrita) { escrita = true; pw.escribe(); }
           frase.style.opacity = dice.toFixed(3); frase.style.transform = 'translateY(' + ((1 - dice) * 16).toFixed(1) + 'px)';
