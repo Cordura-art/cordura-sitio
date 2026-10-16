@@ -4215,7 +4215,7 @@ main { display: grid; }
 
 /* The first screen: the answer in large type, the one action beside it; under it, the field, edge to edge and quiet. */
 /* (the one action lives up in the head, at the right; the title gets the air below it, about a third of the screen) */
-.cabecera { display: flex; justify-content: flex-end; padding: var(--space-32) var(--margen) 0; }
+.cabecera { display: flex; justify-content: flex-end; align-items: center; gap: var(--space-8); padding: var(--space-32) var(--margen) 0; }
 .portada { display: grid; gap: var(--dentro); padding: clamp(var(--space-96), 34svh, calc(var(--space-160) + var(--space-96) + var(--space-48))) var(--margen) var(--space-48); }
 .portada__dice { max-width: 34rem; }
 .campo { position: relative; height: 76svh; min-height: 22rem; overflow: hidden; margin-bottom: var(--entre); }
@@ -4402,6 +4402,7 @@ main { display: grid; }
 <body>
 <a class="salto" href="#contenido">Saltar al contenido</a>
 <header class="cabecera">
+  <div id="cambia-tema"></div>
   <div class="accion" data-efecto="iman"><div id="accion"><a class="web-label-l" href="#contacto">Conversemos</a></div></div>
 </header>
 <main id="contenido">
@@ -11268,7 +11269,8 @@ window.__TEMA_ANTES = document.documentElement.getAttribute('data-theme');
 })();
 
 </script>
-<script>document.documentElement.setAttribute('data-theme', window.__TEMA_ANTES || 'dark');</script>
+<script>(function () { var t = null; try { t = localStorage.getItem('cordura-taste-tema'); } catch (e) { /* not kept */ }
+  t = t === 'light' || t === 'dark' ? t : window.__TEMA_ANTES || 'dark'; document.documentElement.setAttribute('data-theme', t); document.documentElement.style.colorScheme = t; })();</script>
 <script>
   (function () {
     var calma = matchMedia('(prefers-reduced-motion: reduce)').matches, A = window.AlmaDS, h = window.React && React.createElement, raiz = document.documentElement;
@@ -11284,6 +11286,11 @@ window.__TEMA_ANTES = document.documentElement.getAttribute('data-theme');
     addEventListener('scroll', pide, { passive: true }); addEventListener('resize', pide);
 
     if (A && window.ReactDOM) {
+      // Beside it, the page's theme: dark or light, kept for the next visit (where the browser lets it be kept).
+      var CambiaTema = function () { var e = React.useState(raiz.getAttribute('data-theme')), claro = e[0] === 'light';
+        return h(A.Button, { variant: 'plain', icon: claro ? 'asleep' : 'light', 'aria-label': claro ? 'Usar tema oscuro' : 'Usar tema claro', onClick: function () {
+          var t = claro ? 'dark' : 'light'; raiz.setAttribute('data-theme', t); raiz.style.colorScheme = t; try { localStorage.setItem('cordura-taste-tema', t); } catch (x) { /* not kept */ } e[1](t); } }); };
+      ReactDOM.createRoot(document.getElementById('cambia-tema')).render(h(CambiaTema));
       // The one primary button, ALMA's own: it takes the reader to the contact.
       var el = document.getElementById('accion');
       if (el) ReactDOM.createRoot(el).render(h(A.Button, { variant: 'filled', onClick: function () { document.getElementById('contacto').scrollIntoView({ behavior: calma ? 'auto' : 'smooth' }); document.getElementById('cierre-t').focus({ preventScroll: true }); } }, 'Conversemos'));
