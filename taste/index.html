@@ -4274,7 +4274,7 @@ main { display: grid; }
 .desliza--fija .desliza__pista { will-change: transform; }
 
 /* Supports, then themes: one scene. The two titles take turns; the frames take the theme the page is at. */
-.vistas { position: relative; margin-bottom: var(--entre); }
+.vistas { position: relative; }
 .vistas__fija { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--dentro); align-content: center; padding: var(--space-48) var(--margen); background: var(--ui-02); color: var(--text-01); transition: background-color var(--duration-slow-01) var(--easing-standard-productive), color var(--duration-slow-01) var(--easing-standard-productive); }
 .vistas__texto { display: grid; gap: var(--space-16); }
 .vistas__titulos { margin: 0; display: grid; }
@@ -4286,7 +4286,7 @@ main { display: grid; }
 .vistas__tema { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-16) var(--space-24); min-height: var(--space-48); }
 .vistas__mandos { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-16) var(--space-24); }
 .vistas__cual { color: var(--text-02); }
-.vistas--fija { height: 400svh; margin-bottom: var(--entre); }
+.vistas--fija { height: 400svh; }
 /* (still, both titles are there, one after the other, and the switch changes the theme) */
 .vistas--quieta .vistas__titulos > * { grid-area: auto; opacity: 1; }
 @media (max-width: 41.99rem) { .aparato--escritorio { display: none; } }
@@ -4306,7 +4306,8 @@ main { display: grid; }
 
 /* From how we work to the planet, the page stays dark, whichever theme the reader chose: those parts carry their own theme. */
 .relacion, .cierre-mundo { background: var(--ui-02); color: var(--text-01); }
-.relacion { display: grid; gap: var(--dentro); padding: 0 var(--margen) var(--entre); }
+/* (no gap of page between the supports and how we work: the dark runs on from one to the other) */
+.relacion { display: grid; gap: var(--dentro); padding: var(--entre) var(--margen); }
 /* (the title and the steps, as one block in the middle of the screen) */
 .relacion__fija { display: grid; gap: var(--space-48); justify-content: center; }
 .pasos { max-width: 40rem; }
