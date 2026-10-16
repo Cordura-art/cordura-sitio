@@ -4186,6 +4186,7 @@ html, body { height: 100%; }
 
 .escaneo { --escaneo-1: #E1F564; --escaneo-2: #FAFAFA; --escaneo-3: #7EDCA0; }
 [data-theme="light"] .escaneo { --escaneo-1: #B5870E; --escaneo-2: #232425; --escaneo-3: #64C288; }
+[data-theme="dark"] .escaneo { --escaneo-1: #E1F564; --escaneo-2: #FAFAFA; --escaneo-3: #7EDCA0; }
 /* Cordura · a display landing drawn with code. Layout only: every color, space, radius and type value is an ALMA token
    with the Entidad Cordura's values; type sizes are ALMA's own styles. Sections are told apart by space and by a change
    of field, never by lines; running text is in full ink. No picture here is a file: each one is drawn by an engine. */
@@ -4303,12 +4304,14 @@ main { display: grid; }
 .en--uno > button { width: 100%; }
 .en--reloj { height: 100%; padding: var(--space-24) var(--space-16); gap: var(--space-8); justify-items: center; align-content: center; text-align: center; }
 
+/* From how we work to the planet, the page stays dark, whichever theme the reader chose: those parts carry their own theme. */
+.relacion, .cierre-mundo { background: var(--ui-02); color: var(--text-01); }
 .relacion { display: grid; gap: var(--dentro); padding: 0 var(--margen) var(--entre); }
 /* (the title and the steps, as one block in the middle of the screen) */
 .relacion__fija { display: grid; gap: var(--space-48); justify-content: center; }
 .pasos { max-width: 40rem; }
 
-.cierre { display: grid; gap: var(--dentro); padding: var(--entre) var(--margen); background: var(--ui-01); }
+.cierre { display: grid; gap: var(--dentro); padding: var(--entre) var(--margen); background: var(--ui-01); color: var(--text-01); }
 .correo { overflow-wrap: anywhere; user-select: all; -webkit-user-select: all; }
 
 /* At the end of everything, the planet, edge to edge, to be walked. */
@@ -4463,26 +4466,26 @@ main { display: grid; }
     </div>
   </section>
 
-  <section class="relacion" id="relacion" aria-labelledby="relacion-t">
+  <section class="relacion" id="relacion" aria-labelledby="relacion-t" data-theme="dark">
     <div class="relacion__fija">
       <h2 class="tipo " data-tipo="display-s display-m display-m" id="relacion-t">Cómo trabajamos.</h2>
       <div class="pasos" id="pasos"></div>
     </div>
   </section>
 
-  <section class="cierre" id="contacto" aria-labelledby="cierre-t">
+  <section class="cierre" id="contacto" aria-labelledby="cierre-t" data-theme="dark">
     <h2 class="tipo " data-tipo="display-s display-m display-l" id="cierre-t" tabindex="-1" data-efecto="escalonar">Conversemos.</h2>
     <p class="web-body-l" data-entra>Te mostramos el sistema con tu caso a la vista. Escríbenos a</p>
     <p class="tipo correo" data-tipo="h3 display-s display-m" data-efecto="descifrar">contacto@cordura.tech</p>
   </section>
 
 </main>
-<footer class="pie">
+<footer class="pie" data-theme="dark">
   <p class="web-h6 pie__marca">Cordura</p>
   <p class="web-body-m">Santiago de Chile.</p>
   <nav class="pie__nav" aria-label="Más de Cordura"><a class="web-label-l" href="/">El sitio</a><a class="web-label-l" href="/agentic/">Para agentes</a></nav>
 </footer>
-<aside class="cierre-mundo" aria-labelledby="recorrido-t">
+<aside class="cierre-mundo" aria-labelledby="recorrido-t" data-theme="dark">
   <div class="recorrido">
     <h2 id="recorrido-t" class="web-label-l recorrido__dice">El planeta de Cordura. Baja para acercarte; en el suelo, camina con las flechas o con los botones.</h2>
     <section class="escaneo mundo" aria-label="El planeta de Cordura, en sus colores. Se camina con las flechas o los botones, y se puede despegar para verlo entero.">
@@ -10905,9 +10908,11 @@ window.__TEMA_ANTES = document.documentElement.getAttribute('data-theme');
   var prueba = document.createElement('canvas'); prueba.width = prueba.height = 1; var gota = prueba.getContext('2d', { willReadFrequently: true });
   function color(css) { gota.clearRect(0, 0, 1, 1); gota.fillStyle = css; gota.fillRect(0, 0, 1, 1); return gota.getImageData(0, 0, 1, 1).data; }
   function viste() {
-    claro = /light/.test(document.documentElement.getAttribute('data-theme') || '');
+    // (its theme and ground are those of the part of the page it is in)
+    claro = /light/.test((escena.closest('[data-theme]') || escena).getAttribute('data-theme'));
     var lento = getComputedStyle(escena).getPropertyValue('--duration-slow-02').trim(), ls = parseFloat(lento); if (isFinite(ls) && ls > 0) ENTRADA = 2 * (/ms$/.test(lento) ? ls / 1000 : ls); if (window.AlmaPartitura) ENTRADA = window.AlmaPartitura.tiempos(escena).armarse.mundo;
-    var f = color(getComputedStyle(document.body).backgroundColor), e = getComputedStyle(escena); FONDO = [f[0] / 255, f[1] / 255, f[2] / 255];
+    for (var q = escena, pinta; (pinta = getComputedStyle(q).backgroundColor) === 'rgba(0, 0, 0, 0)' && q !== document.body;) q = q.parentElement;
+    var f = color(pinta), e = getComputedStyle(escena); FONDO = [f[0] / 255, f[1] / 255, f[2] / 255];
     for (var t = 0; t < 3; t++) { var k = color(e.getPropertyValue('--escaneo-' + (t + 1)).trim()); TINTAS[t * 3] = k[0] / 255; TINTAS[t * 3 + 1] = k[1] / 255; TINTAS[t * 3 + 2] = k[2] / 255; }
   }
   function mide() {
@@ -11242,7 +11247,7 @@ window.__TEMA_ANTES = document.documentElement.getAttribute('data-theme');
 
 </script>
 <script>(function () { var t = null; try { t = localStorage.getItem('cordura-taste-tema'); } catch (e) { /* not kept */ }
-  t = t === 'light' || t === 'dark' ? t : window.__TEMA_ANTES || 'dark'; document.documentElement.setAttribute('data-theme', t); document.documentElement.style.colorScheme = t; })();</script>
+  t = t === 'light' || t === 'dark' ? t : 'light';      /* (light unless the reader chose dark) */ document.documentElement.setAttribute('data-theme', t); document.documentElement.style.colorScheme = t; })();</script>
 <script>
   (function () {
     var calma = matchMedia('(prefers-reduced-motion: reduce)').matches, A = window.AlmaDS, h = window.React && React.createElement, raiz = document.documentElement;
