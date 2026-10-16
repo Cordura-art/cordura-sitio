@@ -4219,9 +4219,6 @@ main { display: grid; }
 .portada { display: grid; gap: var(--dentro); padding: clamp(var(--space-96), 34svh, calc(var(--space-160) + var(--space-96) + var(--space-48))) var(--margen) var(--space-48); }
 .portada__dice { max-width: 34rem; }
 .campo { position: relative; height: 76svh; min-height: 22rem; overflow: hidden; margin-bottom: var(--entre); }
-.campo > * { width: 100%; height: 100%; }
-/* (the field stays behind, as a ground: a tint of ALMA's over it) */
-.campo::after { content: ""; position: absolute; inset: 0; background: var(--tint-dark-64); pointer-events: none; }
 
 /* The living word, with the living bust behind it, crossing it. */
 .palabra-banda { position: relative; display: grid; gap: var(--dentro); padding: 0 var(--margen) var(--entre); align-items: end; }
@@ -4240,7 +4237,7 @@ main { display: grid; }
 .mapa-caja { display: grid; justify-items: center; }
 .mapa { width: 100%; height: auto; }
 .mapa__txt { fill: var(--text-02); font-size: 13px; }
-.mapa__c { fill: var(--text-01); font-size: 14px; font-weight: var(--font-weight-emphasis); }
+.mapa__c { fill: var(--text-01); font-size: 13px; }
 .mapa__l { fill: none; stroke: var(--border-control); stroke-width: 1; }
 .mapa__caja { fill: var(--ui-01); stroke: var(--text-01); stroke-width: 1; }
 /* (where the page is narrow the diagram's words would be too small to read: the same, one under the other) */
@@ -4262,7 +4259,8 @@ main { display: grid; }
 .desliza__pista { display: flex; gap: var(--space-48); margin: 0; width: max-content; }
 .pieza { display: grid; gap: var(--space-8); align-content: start; width: min(85vw, 40rem); }
 .pieza dt, .pieza dd { margin: 0; }
-.pieza__fig { aspect-ratio: 5 / 4; margin-bottom: var(--space-16); }
+/* (each figure on its own lighter layer, so its frame reads against the page) */
+.pieza__fig { --figura-fondo: var(--ui-01); aspect-ratio: 5 / 4; margin-bottom: var(--space-16); }
 .pieza__fig > * { width: 100%; height: 100%; }
 .desliza--fija { padding-bottom: 0; }
 .desliza--fija .desliza__fija { position: sticky; top: 0; height: 100svh; overflow: hidden; }
@@ -4385,7 +4383,7 @@ main { display: grid; }
     <h1 class="tipo " data-tipo="display-m display-l display-l" id="titulo" data-efecto="escalonar">Tu marca,<br>por escrito.</h1>
     <p class="web-body-l portada__dice" data-efecto="desvelar">Cordura escribe el sistema de diseño de tu marca para que tu equipo y sus agentes de IA decidan igual en cada pantalla.</p>
   </section>
-  <div class="campo" data-campo role="img" aria-label="El campo generativo de Cordura: emblemas de sus colores, dibujados por el sistema."></div>
+  <div class="campo" data-efecto="velo" aria-hidden="true"></div>
 
   <section class="palabra-banda" aria-labelledby="criterio">
     <h2 id="criterio" class="palabra-banda__voz"><span class="visualmente-oculto">Criterio</span><span class="palabra-banda__palabra" aria-hidden="true">Criterio</span></h2>
@@ -4398,7 +4396,7 @@ main { display: grid; }
   </section>
 
   <section class="sistema" id="sistema" aria-labelledby="sistema-t">
-    <div class="mapa-caja" data-entra><svg class="mapa" viewBox="0 0 880 300" role="img" aria-label="De un lado, lo que entra al sistema de marca: principios, voz, color, letra, forma, movimiento, componentes, guías, pruebas. Del otro, lo que sale de él: producto, sitio, documento, anuncio, presentación, entorno."><g><text x="196" y="28" text-anchor="end" class="mapa__txt" data-sale="0.000">Principios</text><path d="M208 24 C287 24 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.000"/></g><g><text x="196" y="59.5" text-anchor="end" class="mapa__txt" data-sale="0.067">Voz</text><path d="M208 55.5 C287 55.5 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.067"/></g><g><text x="196" y="91" text-anchor="end" class="mapa__txt" data-sale="0.133">Color</text><path d="M208 87 C287 87 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.133"/></g><g><text x="196" y="122.5" text-anchor="end" class="mapa__txt" data-sale="0.200">Letra</text><path d="M208 118.5 C287 118.5 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.200"/></g><g><text x="196" y="154" text-anchor="end" class="mapa__txt" data-sale="0.267">Forma</text><path d="M208 150 C287 150 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.267"/></g><g><text x="196" y="185.5" text-anchor="end" class="mapa__txt" data-sale="0.333">Movimiento</text><path d="M208 181.5 C287 181.5 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.333"/></g><g><text x="196" y="217" text-anchor="end" class="mapa__txt" data-sale="0.400">Componentes</text><path d="M208 213 C287 213 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.400"/></g><g><text x="196" y="248.5" text-anchor="end" class="mapa__txt" data-sale="0.467">Guías</text><path d="M208 244.5 C287 244.5 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.467"/></g><g><text x="196" y="280" text-anchor="end" class="mapa__txt" data-sale="0.533">Pruebas</text><path d="M208 276 C287 276 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.533"/></g><g><text x="684" y="28" text-anchor="start" class="mapa__txt" data-sale="0.800">Producto</text><path d="M514 150 C593 150 593 24 672 24" pathLength="1" class="mapa__l" data-traza="0.800"/></g><g><text x="684" y="78.4" text-anchor="start" class="mapa__txt" data-sale="0.900">Sitio</text><path d="M514 150 C593 150 593 74.4 672 74.4" pathLength="1" class="mapa__l" data-traza="0.900"/></g><g><text x="684" y="128.8" text-anchor="start" class="mapa__txt" data-sale="1.000">Documento</text><path d="M514 150 C593 150 593 124.8 672 124.8" pathLength="1" class="mapa__l" data-traza="1.000"/></g><g><text x="684" y="179.2" text-anchor="start" class="mapa__txt" data-sale="1.100">Anuncio</text><path d="M514 150 C593 150 593 175.2 672 175.2" pathLength="1" class="mapa__l" data-traza="1.100"/></g><g><text x="684" y="229.6" text-anchor="start" class="mapa__txt" data-sale="1.200">Presentación</text><path d="M514 150 C593 150 593 225.6 672 225.6" pathLength="1" class="mapa__l" data-traza="1.200"/></g><g><text x="684" y="280" text-anchor="start" class="mapa__txt" data-sale="1.300">Entorno</text><path d="M514 150 C593 150 593 276 672 276" pathLength="1" class="mapa__l" data-traza="1.300"/></g><rect x="366" y="118" width="148" height="64" rx="16" class="mapa__caja"/><text x="440" y="146" text-anchor="middle" class="mapa__c">Sistema</text><text x="440" y="166" text-anchor="middle" class="mapa__c">de marca</text></svg>
+    <div class="mapa-caja" data-entra><svg class="mapa" viewBox="0 0 880 300" role="img" aria-label="De un lado, lo que entra al sistema de marca: principios, voz, color, letra, forma, movimiento, componentes, guías, pruebas. Del otro, lo que sale de él: producto, sitio, documento, anuncio, presentación, entorno."><g><text x="196" y="28" text-anchor="end" class="mapa__txt" data-sale="0.000">Principios</text><path d="M208 24 C287 24 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.000"/></g><g><text x="196" y="59.5" text-anchor="end" class="mapa__txt" data-sale="0.067">Voz</text><path d="M208 55.5 C287 55.5 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.067"/></g><g><text x="196" y="91" text-anchor="end" class="mapa__txt" data-sale="0.133">Color</text><path d="M208 87 C287 87 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.133"/></g><g><text x="196" y="122.5" text-anchor="end" class="mapa__txt" data-sale="0.200">Letra</text><path d="M208 118.5 C287 118.5 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.200"/></g><g><text x="196" y="154" text-anchor="end" class="mapa__txt" data-sale="0.267">Forma</text><path d="M208 150 C287 150 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.267"/></g><g><text x="196" y="185.5" text-anchor="end" class="mapa__txt" data-sale="0.333">Movimiento</text><path d="M208 181.5 C287 181.5 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.333"/></g><g><text x="196" y="217" text-anchor="end" class="mapa__txt" data-sale="0.400">Componentes</text><path d="M208 213 C287 213 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.400"/></g><g><text x="196" y="248.5" text-anchor="end" class="mapa__txt" data-sale="0.467">Guías</text><path d="M208 244.5 C287 244.5 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.467"/></g><g><text x="196" y="280" text-anchor="end" class="mapa__txt" data-sale="0.533">Pruebas</text><path d="M208 276 C287 276 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.533"/></g><g><text x="684" y="28" text-anchor="start" class="mapa__txt" data-sale="0.800">Producto</text><path d="M514 150 C593 150 593 24 672 24" pathLength="1" class="mapa__l" data-traza="0.800"/></g><g><text x="684" y="78.4" text-anchor="start" class="mapa__txt" data-sale="0.900">Sitio</text><path d="M514 150 C593 150 593 74.4 672 74.4" pathLength="1" class="mapa__l" data-traza="0.900"/></g><g><text x="684" y="128.8" text-anchor="start" class="mapa__txt" data-sale="1.000">Documento</text><path d="M514 150 C593 150 593 124.8 672 124.8" pathLength="1" class="mapa__l" data-traza="1.000"/></g><g><text x="684" y="179.2" text-anchor="start" class="mapa__txt" data-sale="1.100">Anuncio</text><path d="M514 150 C593 150 593 175.2 672 175.2" pathLength="1" class="mapa__l" data-traza="1.100"/></g><g><text x="684" y="229.6" text-anchor="start" class="mapa__txt" data-sale="1.200">Presentación</text><path d="M514 150 C593 150 593 225.6 672 225.6" pathLength="1" class="mapa__l" data-traza="1.200"/></g><g><text x="684" y="280" text-anchor="start" class="mapa__txt" data-sale="1.300">Entorno</text><path d="M514 150 C593 150 593 276 672 276" pathLength="1" class="mapa__l" data-traza="1.300"/></g><rect x="366" y="130" width="148" height="40" rx="16" class="mapa__caja"/><text x="440" y="154" text-anchor="middle" class="mapa__c">Sistema de marca</text></svg>
       <div class="mapa-pila" role="img" aria-label="Lo que entra al sistema de marca: principios, voz, color, letra, forma, movimiento, componentes, guías, pruebas. Lo que sale de él: producto, sitio, documento, anuncio, presentación, entorno."><p class="web-body-m">Principios · Voz · Color · Letra · Forma · Movimiento · Componentes · Guías · Pruebas</p><svg viewBox="0 0 32 32" width="24" height="24" fill="currentColor" aria-hidden="true" focusable="false"><polygon points="24.59 16.59 17 24.17 17 4 15 4 15 24.17 7.41 16.59 6 18 16 28 26 18 24.59 16.59"/></svg><p class="web-label-l mapa-pila__c">Sistema de marca</p><svg viewBox="0 0 32 32" width="24" height="24" fill="currentColor" aria-hidden="true" focusable="false"><polygon points="24.59 16.59 17 24.17 17 4 15 4 15 24.17 7.41 16.59 6 18 16 28 26 18 24.59 16.59"/></svg><p class="web-body-m">Producto · Sitio · Documento · Anuncio · Presentación · Entorno</p></div>
     </div>
     <div class="sistema__texto">
@@ -4413,7 +4411,7 @@ main { display: grid; }
     <div class="desliza__fija">
       <h2 class="tipo desliza__t" data-tipo="display-s display-m display-m" id="piezas-t" data-efecto="escalonar">Lo que hacemos<br>contigo.</h2>
       <div class="desliza__ventana" tabindex="0" role="region" aria-label="Las seis piezas que hacemos contigo">
-        <dl class="desliza__pista"><div class="pieza"><div class="pieza__marco" data-efecto="inclinar"><div class="pieza__fig" data-figura="sello" aria-hidden="true"></div></div><dt><span class="tipo " data-tipo="h4 h3 h3" >Centro de marca</span></dt><dd class="web-body-l">Principios, voz, color, letra, forma y movimiento, con el porqué de cada regla.</dd></div><div class="pieza"><div class="pieza__marco" data-efecto="inclinar"><div class="pieza__fig" data-figura="matriz" aria-hidden="true"></div></div><dt><span class="tipo " data-tipo="h4 h3 h3" >Sistema de diseño</span></dt><dd class="web-body-l">75 componentes en React y tokens en CSS, JavaScript y Dart, en cuatro temas.</dd></div><div class="pieza"><div class="pieza__marco" data-efecto="inclinar"><div class="pieza__fig" data-figura="lupa" aria-hidden="true"></div></div><dt><span class="tipo " data-tipo="h4 h3 h3" >Guía de uso</span></dt><dd class="web-body-l">Cuándo usar cada pieza y cuándo no: patrones, accesibilidad y escritura.</dd></div><div class="pieza"><div class="pieza__marco" data-efecto="inclinar"><div class="pieza__fig" data-figura="portatil" aria-hidden="true"></div></div><dt><span class="tipo " data-tipo="h4 h3 h3" >Soluciones construidas</span></dt><dd class="web-body-l">Pantallas y flujos armados con el sistema, listos para adaptar.</dd></div><div class="pieza"><div class="pieza__marco" data-efecto="inclinar"><div class="pieza__fig" data-figura="cinta" aria-hidden="true"></div></div><dt><span class="tipo " data-tipo="h4 h3 h3" >Plantillas y movimiento</span></dt><dd class="web-body-l">Portadas, piezas de comunicación y transiciones del mismo lenguaje.</dd></div><div class="pieza"><div class="pieza__marco" data-efecto="inclinar"><div class="pieza__fig" data-figura="terminal" aria-hidden="true"></div></div><dt><span class="tipo " data-tipo="h4 h3 h3" >La puerta para tus agentes</span></dt><dd class="web-body-l">Las mismas reglas, escritas para que un agente de IA las lea antes de producir.</dd></div></dl>
+        <dl class="desliza__pista"><div class="pieza"><div class="pieza__marco"><div class="pieza__fig" data-figura="sello" aria-hidden="true"></div></div><dt><span class="tipo " data-tipo="h4 h3 h3" >Centro de marca</span></dt><dd class="web-body-l">Principios, voz, color, letra, forma y movimiento, con el porqué de cada regla.</dd></div><div class="pieza"><div class="pieza__marco"><div class="pieza__fig" data-figura="matriz" aria-hidden="true"></div></div><dt><span class="tipo " data-tipo="h4 h3 h3" >Sistema de diseño</span></dt><dd class="web-body-l">75 componentes en React y tokens en CSS, JavaScript y Dart, en cuatro temas.</dd></div><div class="pieza"><div class="pieza__marco"><div class="pieza__fig" data-figura="lupa" aria-hidden="true"></div></div><dt><span class="tipo " data-tipo="h4 h3 h3" >Guía de uso</span></dt><dd class="web-body-l">Cuándo usar cada pieza y cuándo no: patrones, accesibilidad y escritura.</dd></div><div class="pieza"><div class="pieza__marco"><div class="pieza__fig" data-figura="portatil" aria-hidden="true"></div></div><dt><span class="tipo " data-tipo="h4 h3 h3" >Soluciones construidas</span></dt><dd class="web-body-l">Pantallas y flujos armados con el sistema, listos para adaptar.</dd></div><div class="pieza"><div class="pieza__marco"><div class="pieza__fig" data-figura="cinta" aria-hidden="true"></div></div><dt><span class="tipo " data-tipo="h4 h3 h3" >Plantillas y movimiento</span></dt><dd class="web-body-l">Portadas, piezas de comunicación y transiciones del mismo lenguaje.</dd></div><div class="pieza"><div class="pieza__marco"><div class="pieza__fig" data-figura="terminal" aria-hidden="true"></div></div><dt><span class="tipo " data-tipo="h4 h3 h3" >La puerta para tus agentes</span></dt><dd class="web-body-l">Las mismas reglas, escritas para que un agente de IA las lea antes de producir.</dd></div></dl>
       </div>
     </div>
   </section>
@@ -9819,35 +9817,6 @@ window.__GENERADOR_VISTAS = function (G) {
   });
 })();
 
-// Inclinar: a surface tips toward the pointer as if it were held by its middle, and lies flat again when the
-// pointer leaves. A reaction.
-// It is put on a wrapper, which stays flat, and tips what the wrapper holds: so the place the pointer is measured
-// against does not tip with it. The side the pointer is on goes down, as a card pressed with a finger would.
-(function () {
-  var E = window.AlmaEfectos;
-  E.pon({
-    id: 'inclinar', familia: 'reaccion', nombre: 'Inclinar', muestra: 'envuelta',
-    colores: {},
-    ajustes: [
-      { id: 'grados', nombre: 'Grados', min: 2, max: 20, paso: 1, valor: 8 },
-      { id: 'crece', nombre: 'Crece', min: 1, max: 1.1, paso: 0.01, valor: 1.02 }
-    ],
-    pone: function (el, V) {
-      var pieza = el.firstElementChild; if (!pieza) return { quita: function () {} };
-      var antes = { transform: pieza.style.transform, transition: pieza.style.transition };
-      function mueve(ev) {
-        if (ev.pointerType === 'touch' || E.quieto()) return;
-        var r = el.getBoundingClientRect(), px = (ev.clientX - r.left) / r.width - 0.5, py = (ev.clientY - r.top) / r.height - 0.5;
-        pieza.style.transition = 'transform var(--duration-moderate-01) var(--easing-entrance-productive)';
-        pieza.style.transform = 'perspective(800px) rotateX(' + (-py * 2 * V.grados).toFixed(2) + 'deg) rotateY(' + (px * 2 * V.grados).toFixed(2) + 'deg) scale(' + V.crece + ')';
-      }
-      function sale() { pieza.style.transition = 'transform var(--duration-slow-01) var(--easing-standard-productive)'; pieza.style.transform = antes.transform; }
-      el.addEventListener('pointermove', mueve); el.addEventListener('pointerleave', sale);
-      return { quita: function () { el.removeEventListener('pointermove', mueve); el.removeEventListener('pointerleave', sale); pieza.style.transform = antes.transform; pieza.style.transition = antes.transition; } };
-    }
-  });
-})();
-
 // Imán: a thing leans toward the pointer when it comes near, and goes back when it leaves. A reaction.
 // It is put on a wrapper, which stays where it is, and moves what the wrapper holds: so where "near" is does not
 // move with the thing. Near is the wrapper's box and a margin round it; the lean is a part of the way to the pointer.
@@ -9905,6 +9874,55 @@ window.__GENERADOR_VISTAS = function (G) {
       }
       if (!E.quieto() && letras.length) { baraja(); pinta(0); deja = E.alVer(el, pasa); }
       return { pasa: pasa, quita: function () { if (quita) quita(); if (deja) deja(); C.suelta(); } };
+    }
+  });
+})();
+
+// Velo: curtains of light that hang from the top of a section and sway. A background.
+// How it works: along the top runs a wavering edge, a noise that drifts with time; above it there is light, and
+// below it the light thins out softly. A finer noise draws the folds of the cloth. The light goes from one colour
+// at the sides to another in the middle.
+(function () {
+  var E = window.AlmaEfectos;
+  var FS = [
+    'precision highp float;',
+    'varying vec2 vUv; uniform vec2 uTam; uniform float uT, uAlto, uAmplitud, uSuave, uFuerza, uCorre; uniform vec3 uFondo, uUno, uDos;',
+    E.RUIDO,
+    'void main() {',
+    '  float x = vUv.x * uTam.x / uTam.y + uCorre;',
+    // the edge: a slow wave and a quicker one on top of it
+    '  float borde = 1.0 - uAlto + (ruido(vec2(x * 1.3 + uT * 0.06, uT * 0.11)) - 0.5) * 0.7 * uAmplitud + (ruido(vec2(x * 3.7 - uT * 0.09, uT * 0.17 + 7.0)) - 0.5) * 0.22 * uAmplitud;',
+    '  float luz = smoothstep(borde - uSuave, borde + uSuave * 0.6, vUv.y);',
+    // the folds, stronger near the edge than at the top
+    '  float pliegue = 0.72 + 0.28 * ruido(vec2(x * 11.0 + uT * 0.05, vUv.y * 1.5 - uT * 0.08));',
+    '  luz *= mix(pliegue, 1.0, smoothstep(borde, 1.0, vUv.y) * 0.6);',
+    '  vec3 tono = mix(uUno, uDos, 0.45 * (1.0 - abs(vUv.x * 2.0 - 1.0)) * (0.6 + 0.4 * ruido(vec2(x * 0.8, uT * 0.07))));',
+    '  vec3 col = mix(uFondo, tono, luz * uFuerza);',
+    '  col += (azar(gl_FragCoord.xy) - 0.5) / 255.0;',
+    '  gl_FragColor = vec4(col, 1.0);',
+    '}'
+  ].join('\n');
+  E.pon({
+    id: 'velo', familia: 'fondo', nombre: 'Velo',
+    colores: { fondo: 'ui-02', uno: 'interactive-01', dos: 'text-01' },
+    ajustes: [
+      { id: 'alto', nombre: 'Caída', min: 0.1, max: 1, paso: 0.05, valor: 0.45 },
+      { id: 'amplitud', nombre: 'Amplitud', min: 0, max: 2, paso: 0.1, valor: 1 },
+      { id: 'suave', nombre: 'Suavidad', min: 0.05, max: 0.8, paso: 0.05, valor: 0.35 },
+      { id: 'fuerza', nombre: 'Fuerza', min: 0.1, max: 1, paso: 0.05, valor: 0.7 },
+      { id: 'velocidad', nombre: 'Velocidad', min: 0, max: 3, paso: 0.1, valor: 1 }
+    ],
+    crea: function (lienzo, V) {
+      var S = E.sombra(lienzo, FS, 0.5); if (!S) return null; var gl = S.gl, u = S.u, t = 0, corre = 0;
+      return {
+        medida: S.medida, quita: S.quita,
+        color: function (k, v) { gl.uniform3fv(u[{ fondo: 'uFondo', uno: 'uUno', dos: 'uDos' }[k]], v); },
+        cuadro: function (dt, ahora, puntero, calla) {
+          t += dt * V.velocidad * 4; corre += ((puntero.dentro ? puntero.x * 0.3 : 0) - corre) * (1 - Math.exp(-dt * 2)); if (calla) return;
+          gl.uniform1f(u.uT, t); gl.uniform1f(u.uAlto, V.alto); gl.uniform1f(u.uAmplitud, V.amplitud); gl.uniform1f(u.uSuave, V.suave); gl.uniform1f(u.uFuerza, V.fuerza); gl.uniform1f(u.uCorre, corre);
+          S.dibuja();
+        }
+      };
     }
   });
 })();
@@ -11279,10 +11297,8 @@ window.__TEMA_ANTES = document.documentElement.getAttribute('data-theme');
         reloj: function () { return h('div', { className: 'en en--reloj' }, h('p', { className: 'web-display-s' }, '2'), h('p', { className: 'web-body-s' }, 'propuestas esperan tu decisión'), h(A.Button, { variant: 'filled', size: 'sm' }, 'Revisar')); }
       };
       document.querySelectorAll('[data-pantalla]').forEach(function (c) { var v = VISTAS[c.getAttribute('data-pantalla')]; if (v) ReactDOM.createRoot(c).render(v()); });
-      // The creatures of the steps, and the field, drawn by Cordura's generator.
+      // The creatures of the steps.
       document.querySelectorAll('[data-criatura]').forEach(function (c) { ReactDOM.createRoot(c).render(h(A.Pictogram, { name: c.getAttribute('data-criatura'), kind: 'creature', size: 32 })); });
-      var campo = document.querySelector('[data-campo]'), V = window.__GENERADOR_VISTAS && window.__GENERADOR_VISTAS(G);
-      if (campo && V && V.Campo) ReactDOM.createRoot(campo).render(h(V.Campo, { clave: 'taste', anda: !calma, label: 'El campo generativo de Cordura.' }));
     }
 
     // Supports, then themes: one scene, and the whole of it takes the theme. First the same screen on three supports;
