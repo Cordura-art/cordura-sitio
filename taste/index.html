@@ -4241,7 +4241,7 @@ main { display: grid; }
 .mapa__txt { fill: var(--text-02); font-size: 13px; }
 /* (the middle's name is the page's own text over the drawing, so nothing cuts it as its words rise; it starts in the
    colour the light leaves it in, so the light only passes) */
-.mapa__nombre { position: absolute; box-sizing: border-box; display: grid; place-items: center; margin: 0; color: var(--text-02); line-height: 1.2; white-space: nowrap; opacity: 0; pointer-events: none; }
+.mapa__nombre { transition: opacity var(--duration-slow-01) var(--easing-entrance-expressive); position: absolute; box-sizing: border-box; display: grid; place-items: center; margin: 0; color: var(--text-02); line-height: 1.2; white-space: nowrap; opacity: 0; pointer-events: none; }
 .mapa__nombre--dicho { opacity: 1; }
 .mapa__l { fill: none; stroke: var(--border-control); stroke-width: 1; }
 .mapa__caja { fill: var(--ui-01); stroke: var(--text-01); stroke-width: 1; }
@@ -4361,7 +4361,7 @@ main { display: grid; }
 
 /* Criterio, scrolled: a screen held while the page goes by, and in it one protagonist at a time. The bust comes
    together alone, twice its size, cut by the screen's edges; then it steps back and the word comes; then the sentence. */
-.palabra-banda.palabra-banda--fija { height: 400svh; padding: 0; }
+.palabra-banda.palabra-banda--fija { height: 260svh; padding: 0; }
 .palabra-banda--fija .palabra-banda__fija { position: sticky; top: 0; height: 100svh; overflow: hidden; align-content: end; gap: var(--space-24); padding: 0 var(--margen) var(--space-96); box-sizing: border-box; }
 .palabra-banda.palabra-banda--fija .palabra-banda__voz { height: 28svh; min-height: 0; opacity: 0; }
 @media (min-width: 66rem) { .palabra-banda.palabra-banda--fija .palabra-banda__voz { height: 48svh; } }
@@ -11277,7 +11277,7 @@ window.__TEMA_ANTES = document.documentElement.getAttribute('data-theme');
   (function () {
     var calma = matchMedia('(prefers-reduced-motion: reduce)').matches, A = window.AlmaDS, h = window.React && React.createElement, raiz = document.documentElement;
     var G = {"id":"cordura","nombre":"Cordura","semilla":"nac|1987-03-31|10:45|America/Santiago","grupos":2,"redondez":0.6666666666666666,"puntas":5,"puertas":[{"n":21,"l":1},{"n":48,"l":1},{"n":38,"l":4},{"n":39,"l":4},{"n":27,"l":4},{"n":63,"l":2},{"n":55,"l":4},{"n":8,"l":3},{"n":17,"l":4},{"n":26,"l":5},{"n":11,"l":5},{"n":58,"l":5},{"n":44,"l":2},{"n":30,"l":2},{"n":51,"l":2},{"n":57,"l":2},{"n":14,"l":2},{"n":36,"l":4},{"n":22,"l":1},{"n":5,"l":5}],"numeros":[4,5,6],"complejidad":3,"trazo":0.875,"relleno":false,"tipo":"proyector","direccion":"foco","direccionPropia":false,"autoridad":"emocional","centros":["corazon","bazo","plexo","raiz"],"canales":[["corazon","bazo"],["raiz","plexo"]],"ritmo":1.25,"focos":4,"pieza":{"base":"#191919","barras":["#F1BB41","#B5870E","#7EDCA0","#64C288","#6E6F70"],"acento":"#E1F564","tinta":"#FAFAFA"},"fondo":{"dark":{"base":"#000000","barras":["#2A2F00","#392802","#00351A"],"acento":"#404803","tinta":"#FAFAFA"},"light":{"base":"#FAFAFA","barras":["#EBF6BC","#FFECC9","#D2FADE"],"acento":"#D5E856","tinta":"#232425"}}};
-    var TEMAS = [["dark","Oscuro"],["light","Claro"],["dark-hc","Oscuro, alto contraste"],["light-hc","Claro, alto contraste"]];
+    var TEMAS = [["dark","Oscuro"],["light","Claro"],["dark-hc","Oscuro, alto contraste"],["light-hc","Claro, alto contraste"]], RONDA = ['light', 'light-hc', 'dark-hc', 'dark'];      // (the round the scene goes through: from light to dark)
     // A scene stays in place while the page goes by, where there is room and motion is welcome; elsewhere it is still and has its own controls.
     var fija = !calma && innerHeight >= 480;
     function avance(el) { var r = el.getBoundingClientRect(), largo = r.height - innerHeight; return largo > 0 ? Math.min(1, Math.max(0, -r.top / largo)) : 0; }
@@ -11322,10 +11322,10 @@ window.__TEMA_ANTES = document.documentElement.getAttribute('data-theme');
       vistas.classList.add('vistas--fija');
       new IntersectionObserver(function (es) { if (!es[0].isIntersecting) elegido = null; }).observe(vistas);
       alPasar.push(function () {
-        var p = avance(vistas), temas = p >= 0.25, k = Math.min(TEMAS.length - 1, Math.floor((p - 0.25) / 0.75 * TEMAS.length));
+        var p = avance(vistas), temas = p >= 0.25, k = Math.min(RONDA.length - 1, Math.floor((p - 0.25) / 0.75 * RONDA.length));
         // (the supports come one at a time: the desktop, then the phone, then the watch; only then the themes)
         aparatos.forEach(function (a, i) { var v = tramo(p, 0.02 + i * 0.07, 0.08 + i * 0.07); a.style.opacity = v.toFixed(3); a.style.transform = 'translateY(' + ((1 - v) * 24).toFixed(1) + 'px)'; });
-        vistas.classList.toggle('vistas--temas', temas); ponTema(elegido || (temas ? TEMAS[k][0] : 'dark'));
+        vistas.classList.toggle('vistas--temas', temas); ponTema(elegido || (temas ? RONDA[k] : 'dark'));
       });
     } else vistas.classList.add('vistas--quieta');
 
@@ -11348,13 +11348,12 @@ window.__TEMA_ANTES = document.documentElement.getAttribute('data-theme');
 
     // The diagram: what goes in, then what comes out, traced as it comes into view.
     var mapa = document.querySelector('.mapa'), sistema = document.querySelector('.sistema');
-    // (its middle comes first: its words one after another, then a light runs along them once; only then are the lines traced)
+    // (its middle comes first, and a light runs along its name once; only then are the lines traced)
     var nombre = mapa && mapa.querySelector('.mapa__nombre'), nombrado = false;
     function nombra() {
       if (nombrado || !nombre || !window.AlmaEfectos) return; nombrado = true; nombre.classList.add('mapa__nombre--dicho');
-      // (the light comes a second and a half after the words begin, over the same words: nothing is rebuilt between the two)
-      var E = window.AlmaEfectos; E.monta('escalonar', nombre.querySelector('.mapa__letras'), {});
-      setTimeout(function () { E.monta('brillo', nombre, {}); }, E.quieto() ? 0 : 1500);
+      // (it simply appears; once it is there, a light runs along it once)
+      var E = window.AlmaEfectos; setTimeout(function () { E.monta('brillo', nombre, {}); }, E.quieto() ? 0 : E.segundos('duration-slow-02', nombre) * 1000);
     }
     if (mapa) { var trazaHasta = function (llega) { if (llega > 0) nombra();
         mapa.querySelectorAll('[data-traza]').forEach(function (l) { var t = Math.min(1, Math.max(0, (llega * 2 - +l.getAttribute('data-traza')) / 0.4)); l.style.strokeDasharray = 1; l.style.strokeDashoffset = 1 - t; });
@@ -11395,14 +11394,14 @@ window.__TEMA_ANTES = document.documentElement.getAttribute('data-theme');
     document.querySelectorAll('[data-figura]').forEach(function (f) { try { window.AlmaFigura.monta(f, f.getAttribute('data-figura'), { genes: G, intensidad: 0.5 }); } catch (x) {} });
     // The living word: ALMA's own piece, fitted to its width, heavier where the pointer touches it.
     var w = document.querySelector('.palabra-banda__palabra');
-    if (w && window.AlmaPalabra) { var pw = window.AlmaPalabra.monta(w, { genes: window.__PALABRA, texto: 'Criterio' });
+    if (w && window.AlmaPalabra) { var pw = window.AlmaPalabra.monta(w, { genes: window.__PALABRA, texto: 'Criterio', oye: document.querySelector('.palabra-banda__fija') });      // (as Cordura's word on its cover: the pointer anywhere on the scene gives it weight where it passes)
       // One thing at a time, as the page goes by: first the bust, whole and alone; then it steps back and the
       // word is written over it; last, the sentence. Scrolled back, each goes as it came. Still, all three are there.
       var banda = document.querySelector('.palabra-banda'), busto = banda.querySelector('.palabra-banda__busto'), voz = banda.querySelector('.palabra-banda__voz'), frase = banda.querySelector('.palabra-banda__frase'), escrita = false;
       if (fija && window.__escaneo && window.__escaneo.arma) {
         banda.classList.add('palabra-banda--fija'); window.__escaneo.arma(1);
         var revela = function () {
-          var k = avance(banda), entra = tramo(k, 0.35, 0.5), dice = tramo(k, 0.6, 0.75);
+          var k = avance(banda), entra = tramo(k, 0.2, 0.38), dice = tramo(k, 0.5, 0.68);
           busto.style.opacity = (1 - 0.82 * entra).toFixed(3);
           voz.style.opacity = entra.toFixed(3); if (entra > 0 && !escrita) { escrita = true; pw.escribe(); }
           frase.style.opacity = dice.toFixed(3); frase.style.transform = 'translateY(' + ((1 - dice) * 16).toFixed(1) + 'px)';
