@@ -4214,11 +4214,9 @@ p { margin: 0; }
 main { display: grid; }
 
 /* The first screen: the answer in large type, the one action beside it; under it, the field, edge to edge and quiet. */
-.portada { display: grid; gap: var(--dentro); padding: var(--entre) var(--margen) var(--space-48); }
-.portada__cabeza { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-16); }
-/* (on a phone the action has its own row, at the right, so the title keeps the whole width) */
-.portada__cabeza .accion { order: -1; justify-self: end; }
-@media (min-width: 42rem) { .portada__cabeza { grid-template-columns: minmax(0, 1fr) auto; align-items: start; } .portada__cabeza .accion { order: 0; } }
+/* (the one action lives up in the head, at the right; the title gets the air below it, about a third of the screen) */
+.cabecera { display: flex; justify-content: flex-end; padding: var(--space-32) var(--margen) 0; }
+.portada { display: grid; gap: var(--dentro); padding: clamp(var(--space-96), 34svh, calc(var(--space-160) + var(--space-96) + var(--space-48))) var(--margen) var(--space-48); }
 .portada__dice { max-width: 34rem; }
 .campo { position: relative; height: 76svh; min-height: 22rem; overflow: hidden; margin-bottom: var(--entre); }
 .campo > * { width: 100%; height: 100%; }
@@ -4378,13 +4376,13 @@ main { display: grid; }
 </head>
 <body>
 <a class="salto" href="#contenido">Saltar al contenido</a>
+<header class="cabecera">
+  <div class="accion" data-efecto="iman"><div id="accion"><a class="web-label-l" href="#contacto">Conversemos</a></div></div>
+</header>
 <main id="contenido">
 
   <section class="portada" aria-labelledby="titulo">
-    <div class="portada__cabeza">
-      <h1 class="tipo " data-tipo="display-m display-l display-l" id="titulo" data-efecto="escalonar">Tu marca,<br>por escrito.</h1>
-      <div class="accion" data-efecto="iman"><div id="accion"><a class="web-label-l" href="#contacto">Conversemos</a></div></div>
-    </div>
+    <h1 class="tipo " data-tipo="display-m display-l display-l" id="titulo" data-efecto="escalonar">Tu marca,<br>por escrito.</h1>
     <p class="web-body-l portada__dice" data-efecto="desvelar">Cordura escribe el sistema de diseño de tu marca para que tu equipo y sus agentes de IA decidan igual en cada pantalla.</p>
   </section>
   <div class="campo" data-campo role="img" aria-label="El campo generativo de Cordura: emblemas de sus colores, dibujados por el sistema."></div>
@@ -9637,9 +9635,10 @@ window.__GENERADOR_VISTAS = function (G) {
   // A text that moves has two faces: the true one, out of sight, for whoever has the page read to them, and the one
   // that is seen and changes, which they are not told about.
   function dosCaras(el) {
-    var texto = el.textContent, antes = el.innerHTML, real = document.createElement('span'), vista = document.createElement('span');
-    real.style.cssText = 'position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap'; real.textContent = texto;
-    vista.setAttribute('aria-hidden', 'true'); vista.textContent = texto; el.textContent = ''; el.appendChild(real); el.appendChild(vista);
+    // (a line break the text was written with stays one: it is kept as a new line, and the seen face keeps new lines)
+    var texto = (function lee(n) { var s = ''; n.childNodes.forEach(function (h) { s += h.nodeName === 'BR' ? '\n' : h.nodeType === 3 ? h.nodeValue.replace(/\s+/g, ' ') : lee(h); }); return s; })(el), antes = el.innerHTML, real = document.createElement('span'), vista = document.createElement('span');
+    real.style.cssText = 'position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap'; real.textContent = texto.replace(/\n/g, ' ');
+    vista.setAttribute('aria-hidden', 'true'); vista.style.whiteSpace = 'pre-line'; vista.textContent = texto; el.textContent = ''; el.appendChild(real); el.appendChild(vista);
     return { texto: texto, vista: vista, suelta: function () { el.innerHTML = antes; } };
   }
   function monta(id, el, valores) {
