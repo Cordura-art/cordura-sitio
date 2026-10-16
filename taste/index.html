@@ -4213,37 +4213,67 @@ p { margin: 0; }
 .marca { margin: 0; text-decoration: none; }
 main { display: grid; }
 
-/* The first screen: the answer in large type, one action, and the living bust beside it. */
-.portada { display: grid; gap: var(--dentro); padding: var(--space-32) var(--margen) var(--entre); align-items: end; }
-.portada__texto { display: grid; gap: var(--dentro); justify-items: start; align-content: end; }
+/* The first screen: the answer in large type and one action; under it, the field, drawn as it goes. */
+.portada { display: grid; gap: var(--ritmo, var(--space-48)); padding: var(--space-48) var(--margen) var(--entre); }
+.portada__texto { display: grid; gap: var(--dentro); justify-items: start; }
 .portada__texto p { max-width: 34rem; }
-/* (the bust's box is never taller than the screen, so it stays whole; it only turns and stirs) */
-.portada .escaneo { height: auto; }
-.portada .escaneo__fija { position: relative; height: min(64svh, 44rem); }
+.campo { aspect-ratio: 4 / 3; overflow: hidden; }
+.campo > * { width: 100%; height: 100%; }
 
-/* The living word, as wide as the screen, and one sentence under it. */
-.palabra-banda { display: grid; gap: var(--dentro); padding: 0 var(--margen) var(--entre); }
-.palabra-banda__voz { margin: 0; height: 40svh; min-height: var(--space-160); display: grid; align-items: end; }
+/* The living word, with the living bust beside it. */
+.palabra-banda { display: grid; gap: var(--dentro); padding: 0 var(--margen) var(--entre); align-items: end; }
+.palabra-banda__voz { margin: 0; height: 32svh; min-height: var(--space-160); display: grid; align-items: end; }
 .palabra-banda__palabra { display: block; line-height: 0.9; color: var(--text-01); }
 .palabra-banda__frase { max-width: 40rem; }
+/* (the bust's box is never taller than the screen, so it stays whole; it only turns and stirs) */
+.palabra-banda .escaneo { height: auto; }
+.palabra-banda .escaneo__fija { position: relative; height: 56svh; min-height: 22rem; }
 
-/* The planet, edge to edge, to be walked. */
-.recorrido { display: grid; gap: var(--dentro); padding-bottom: var(--entre); }
-.recorrido__texto { display: grid; gap: var(--dentro); padding-inline: var(--margen); max-width: 44rem; }
-.recorrido .mundo { height: auto; }
-.recorrido .mundo .escaneo__fija { position: relative; height: 80svh; min-height: 28rem; }
-.recorrido .mundo:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
+/* What the system is: one centered moment, the diagram on ALMA's dotted ground. */
+.sistema { display: grid; gap: var(--dentro); justify-items: center; text-align: center; padding: 0 var(--margen) var(--entre); }
+.sistema__frase { max-width: 36rem; text-wrap: balance; }
+.sistema__t { margin-top: var(--space-48); }
+.mapa-caja { position: relative; width: 100%; display: grid; justify-items: center; padding-block: var(--space-48); overflow: hidden; }
+.mapa { position: relative; display: block; width: 100%; max-width: 55rem; height: auto; }
+.mapa__txt { fill: var(--text-02); font-size: 13px; }
+.mapa__c { fill: var(--text-01); font-size: 14px; font-weight: var(--font-weight-emphasis); }
+.mapa__l { fill: none; stroke: var(--border-control); stroke-width: 1; }
+.mapa__caja { fill: var(--ui-01); stroke: var(--text-01); stroke-width: 1; }
+.sistema__texto { display: grid; gap: var(--dentro); max-width: 40rem; text-align: left; }
 
-.principios { display: grid; gap: var(--dentro); padding: 0 var(--margen) var(--entre); }
-.principios__lista { display: grid; gap: var(--space-48); margin: 0; }
-.principios__lista div { display: grid; gap: var(--space-8); }
-.principios__lista dt, .principios__lista dd { margin: 0; }
-.principios__lista dd { max-width: 30rem; }
+/* The pieces, side by side; where the scene stays in place, the page going down slides them along. */
+.desliza { position: relative; padding-bottom: var(--entre); }
+.desliza__fija { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--dentro); align-content: center; }
+.desliza__t { padding-inline: var(--margen); }
+.desliza__ventana { min-width: 0; overflow-x: auto; overscroll-behavior-x: contain; padding-inline: var(--margen); }
+.desliza__pista { display: flex; gap: var(--space-48); margin: 0; width: max-content; }
+.pieza { display: grid; gap: var(--space-8); align-content: start; width: min(80vw, 24rem); }
+.pieza dt, .pieza dd { margin: 0; }
+.pieza__fig { aspect-ratio: 5 / 4; margin-bottom: var(--space-16); }
+.pieza__fig > * { width: 100%; height: 100%; }
+.desliza--fija { padding-bottom: 0; }
+.desliza--fija .desliza__fija { position: sticky; top: 0; height: 100svh; overflow: hidden; }
+.desliza--fija .desliza__ventana { overflow: hidden; }
+.desliza--fija .desliza__pista { will-change: transform; }
 
-/* The same screen, alive, on three supports. A frame is the support's edge; inside, ALMA's components. */
-.soportes { display: grid; gap: var(--dentro); padding: 0 var(--margen) var(--entre); }
-.soportes__texto { display: grid; gap: var(--dentro); max-width: 44rem; }
-.soportes__vivos { display: grid; gap: var(--space-24); align-items: end; }
+/* Supports, then themes: one scene. The two titles take turns; the frames take the theme the page is at. */
+.vistas { position: relative; padding: 0 var(--margen) var(--entre); }
+.vistas__fija { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--dentro); align-content: center; }
+.vistas__texto { display: grid; gap: var(--space-16); }
+.vistas__titulos { margin: 0; display: grid; }
+.vistas__titulos > * { grid-area: 1 / 1; }
+.vistas__dos { opacity: 0; }
+.vistas--temas .vistas__uno { opacity: 0; }
+.vistas--temas .vistas__dos { opacity: 1; }
+.vistas__dice { max-width: 40rem; }
+.vistas__tema { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-16); min-height: var(--space-48); }
+.vistas--fija { height: 400svh; padding-bottom: 0; }
+/* (still, both titles are there, one after the other, and the switch changes the theme) */
+.vistas--quieta .vistas__titulos > * { grid-area: auto; opacity: 1; }
+@media (max-width: 41.99rem) { .aparato--escritorio { display: none; } }
+.vistas--fija .vistas__fija { position: sticky; top: 0; height: 100svh; box-sizing: border-box; padding-block: var(--space-48); }
+.vistas--fija #elige-tema { display: none; }
+.soportes__vivos { display: grid; gap: var(--space-16); align-items: end; background: var(--ui-02); color: var(--text-01); }
 .aparato { box-sizing: border-box; overflow: hidden; border: 2px solid var(--border-control); background: var(--ui-02); min-width: 0; }
 .aparato--escritorio { border-radius: var(--space-16); }
 .aparato--telefono { border-radius: var(--space-48); width: 100%; max-width: 22rem; justify-self: start; }
@@ -4255,29 +4285,9 @@ main { display: grid; }
 .en--uno { padding: var(--space-48) var(--space-24) var(--space-32); }
 .en--uno > button { width: 100%; }
 .en--reloj { height: 100%; padding: var(--space-24) var(--space-16); gap: var(--space-8); justify-items: center; align-content: center; text-align: center; }
-.en--reloj p { margin: 0; }
-.en--ancho .alma-table, .en--ancho table { min-width: 0; }
-
-/* The four themes at once: each frame is the same screen under another theme. */
-.temas { display: grid; gap: var(--dentro); padding: var(--entre) var(--margen); background: var(--ui-01); }
-.temas__vivos { display: grid; gap: var(--space-16); }
-.tema { display: grid; gap: var(--space-8); align-content: start; background: var(--ui-02); color: var(--text-01); }
-.tema__n { padding: var(--space-16) var(--space-24) 0; color: var(--text-01); }
-.en--tema { padding: var(--space-16) var(--space-24) var(--space-24); gap: var(--space-16); }
-.temas__nota { max-width: 40rem; }
-
-.piezas { display: grid; gap: var(--dentro); padding: var(--entre) var(--margen); }
-.piezas__lista { display: grid; gap: var(--space-48); margin: 0; }
-.piezas__lista > div { display: grid; gap: var(--space-8); align-content: start; }
-.piezas__lista dt, .piezas__lista dd { margin: 0; }
-.piezas__lista dd { max-width: 36rem; }
-.pieza__fig { aspect-ratio: 5 / 4; margin-bottom: var(--space-16); }
-.pieza__fig > * { width: 100%; height: 100%; }
 
 .relacion { display: grid; gap: var(--dentro); padding: var(--entre) var(--margen); }
 .relacion > p.web-body-l { max-width: 40rem; }
-.campo { aspect-ratio: 7 / 4; overflow: hidden; }
-.campo > * { width: 100%; height: 100%; }
 .pasos { display: grid; gap: var(--space-48); margin: 0; padding: 0; list-style: none; }
 .pasos li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-24); align-items: start; }
 .pasos li > div { display: grid; gap: var(--space-8); }
@@ -4287,34 +4297,46 @@ main { display: grid; }
 .cierre { display: grid; gap: var(--dentro); padding: var(--entre) var(--margen); background: var(--ui-01); }
 .correo { overflow-wrap: anywhere; user-select: all; -webkit-user-select: all; }
 
+/* At the end of everything, the planet, edge to edge, to be walked. */
+.recorrido { display: grid; gap: var(--dentro); padding-top: var(--space-48); background: var(--ui-01); }
+.recorrido__texto { display: grid; gap: var(--space-8); padding-inline: var(--margen); max-width: 44rem; }
+.recorrido .mundo { height: auto; }
+.recorrido .mundo .escaneo__fija { position: relative; height: 88svh; min-height: 28rem; }
+.recorrido .mundo:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
+
 .pie { display: grid; gap: var(--space-16); padding: var(--space-48) var(--margen) var(--space-64); background: var(--ui-01); color: var(--text-01); }
 .pie__marca { margin: 0; }
 .pie__nav { display: flex; flex-wrap: wrap; gap: var(--space-24); }
 
 @media (min-width: 42rem) {
+  .campo { aspect-ratio: 2 / 1; }
   .soportes__vivos { grid-template-columns: minmax(0, 1fr) auto; }
   .aparato--escritorio { grid-column: 1 / -1; }
   .aparato--telefono { width: 22rem; }
-  .temas__vivos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .piezas__lista { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-64) var(--space-48); }
   .pasos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .pie { grid-template-columns: auto minmax(0, 1fr) auto; align-items: baseline; gap: var(--space-32); }
 }
 @media (min-width: 66rem) { /* bp-lg */
-  .portada { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); min-height: calc(100svh - var(--space-96)); box-sizing: border-box; padding-bottom: var(--space-64); }
-  .portada .escaneo__fija { height: min(80svh, 56rem); }
-  .palabra-banda__voz { height: 72svh; }
-  .principios__lista div { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); align-items: baseline; gap: var(--space-32); }
+  .palabra-banda { grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); }
+  .palabra-banda__voz { height: 48svh; }
+  .palabra-banda__frase { grid-column: 1 / -1; }
   .soportes__vivos { grid-template-columns: minmax(0, 1fr) 22rem 12rem; }
   .aparato--escritorio { grid-column: auto; }
-  .piezas__lista { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .vistas--fija .vistas__texto { grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); align-items: end; gap: var(--space-16) var(--space-48); }
+  .vistas--fija .vistas__titulos { grid-row: span 2; }
+  .vistas--fija .soportes__vivos { grid-template-columns: minmax(0, 1fr) 18rem 12rem; padding: var(--space-16); }
+  .vistas--fija .aparato--escritorio { grid-column: auto; }
+  .vistas--fija .aparato--telefono { width: 18rem; }
+  .vistas--fija .en { padding: var(--space-24); gap: var(--space-16); }
+  .vistas--fija .en--uno { padding-top: var(--space-32); }
   .relacion { grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); align-items: end; }
-  .relacion .campo, .relacion .pasos { grid-column: 1 / -1; }
+  .relacion .pasos { grid-column: 1 / -1; }
 }
 
-/* Motion: each part rises once, a beat after the one before. Transform and opacity only. */
+/* Motion: each part rises once, a beat after the one before; the scene's titles cross. Transform and opacity only. */
 .anima [data-entra] { opacity: 0; transform: translateY(var(--space-24)); }
 .anima [data-entra].dentro { opacity: 1; transform: none; transition: opacity var(--duration-slow-02) var(--easing-entrance-expressive), transform var(--duration-slow-02) var(--easing-entrance-expressive); transition-delay: calc(var(--orden, 0) * 4 * var(--duration-stagger)); }
+.anima .vistas__uno, .anima .vistas__dos { transition: opacity var(--duration-slow-01) var(--easing-entrance-expressive); }
 
 </style>
 <script>
@@ -4348,22 +4370,72 @@ main { display: grid; }
       <p class="web-body-l" data-entra>Cordura escribe el sistema de diseño de tu marca para que tu equipo y sus agentes de IA decidan igual en cada pantalla.</p>
       <div id="accion" class="accion" data-entra><a class="web-label-l" href="#contacto">Conversemos</a></div>
     </div>
-    <div class="portada__busto" data-entra>
-      <section class="escaneo" aria-label="El busto de Cordura">
-        <div class="escaneo__fija"><figure class="escaneo__figura" role="img" aria-label="Un busto romano dibujado con miles de puntos lima, blancos y verdes. Gira con el puntero."><canvas class="escaneo__lienzo" aria-hidden="true"></canvas></figure></div>
-      </section>
-    </div>
+    <div class="campo" data-entra data-campo role="img" aria-label="El campo generativo de Cordura: emblemas de sus colores, dibujados por el sistema."></div>
   </section>
 
   <section class="palabra-banda" aria-labelledby="criterio">
     <h2 id="criterio" class="palabra-banda__voz"><span class="visualmente-oculto">Criterio</span><span class="palabra-banda__palabra" aria-hidden="true">Criterio</span></h2>
+    <div class="palabra-banda__busto">
+      <section class="escaneo" aria-label="El busto de Cordura">
+        <div class="escaneo__fija"><figure class="escaneo__figura" role="img" aria-label="Un busto romano dibujado con miles de puntos lima, blancos y verdes. Gira con el puntero."><canvas class="escaneo__lienzo" aria-hidden="true"></canvas></figure></div>
+      </section>
+    </div>
     <p class="web-body-l palabra-banda__frase" data-entra>Las guías de una plataforma dicen con qué piezas construir. Nosotros escribimos cómo decide tu marca cuando las piezas se juntan.</p>
+  </section>
+
+  <section class="sistema" id="sistema" aria-labelledby="sistema-t">
+    <p class="web-h4 sistema__frase" data-entra>La marca se escribe para que cualquiera pueda decidir bien una pantalla que nadie dibujó todavía.</p>
+    <h2 class="tipo sistema__t" data-tipo="display-s display-s display-m" id="sistema-t" data-entra>Qué es el sistema</h2>
+    <div class="mapa-caja" data-efecto="reticula" data-entra><svg class="mapa" viewBox="0 0 880 300" role="img" aria-label="De un lado, lo que entra al sistema de marca: principios, voz, color, letra, forma, movimiento, componentes, guías, pruebas. Del otro, lo que sale de él: producto, sitio, documento, anuncio, presentación, entorno."><g><text x="196" y="28" text-anchor="end" class="mapa__txt" data-sale="0.000">Principios</text><path d="M208 24 C287 24 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.000"/></g><g><text x="196" y="59.5" text-anchor="end" class="mapa__txt" data-sale="0.067">Voz</text><path d="M208 55.5 C287 55.5 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.067"/></g><g><text x="196" y="91" text-anchor="end" class="mapa__txt" data-sale="0.133">Color</text><path d="M208 87 C287 87 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.133"/></g><g><text x="196" y="122.5" text-anchor="end" class="mapa__txt" data-sale="0.200">Letra</text><path d="M208 118.5 C287 118.5 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.200"/></g><g><text x="196" y="154" text-anchor="end" class="mapa__txt" data-sale="0.267">Forma</text><path d="M208 150 C287 150 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.267"/></g><g><text x="196" y="185.5" text-anchor="end" class="mapa__txt" data-sale="0.333">Movimiento</text><path d="M208 181.5 C287 181.5 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.333"/></g><g><text x="196" y="217" text-anchor="end" class="mapa__txt" data-sale="0.400">Componentes</text><path d="M208 213 C287 213 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.400"/></g><g><text x="196" y="248.5" text-anchor="end" class="mapa__txt" data-sale="0.467">Guías</text><path d="M208 244.5 C287 244.5 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.467"/></g><g><text x="196" y="280" text-anchor="end" class="mapa__txt" data-sale="0.533">Pruebas</text><path d="M208 276 C287 276 287 150 366 150" pathLength="1" class="mapa__l" data-traza="0.533"/></g><g><text x="684" y="28" text-anchor="start" class="mapa__txt" data-sale="0.800">Producto</text><path d="M514 150 C593 150 593 24 672 24" pathLength="1" class="mapa__l" data-traza="0.800"/></g><g><text x="684" y="78.4" text-anchor="start" class="mapa__txt" data-sale="0.900">Sitio</text><path d="M514 150 C593 150 593 74.4 672 74.4" pathLength="1" class="mapa__l" data-traza="0.900"/></g><g><text x="684" y="128.8" text-anchor="start" class="mapa__txt" data-sale="1.000">Documento</text><path d="M514 150 C593 150 593 124.8 672 124.8" pathLength="1" class="mapa__l" data-traza="1.000"/></g><g><text x="684" y="179.2" text-anchor="start" class="mapa__txt" data-sale="1.100">Anuncio</text><path d="M514 150 C593 150 593 175.2 672 175.2" pathLength="1" class="mapa__l" data-traza="1.100"/></g><g><text x="684" y="229.6" text-anchor="start" class="mapa__txt" data-sale="1.200">Presentación</text><path d="M514 150 C593 150 593 225.6 672 225.6" pathLength="1" class="mapa__l" data-traza="1.200"/></g><g><text x="684" y="280" text-anchor="start" class="mapa__txt" data-sale="1.300">Entorno</text><path d="M514 150 C593 150 593 276 672 276" pathLength="1" class="mapa__l" data-traza="1.300"/></g><rect x="366" y="118" width="148" height="64" rx="16" class="mapa__caja"/><text x="440" y="146" text-anchor="middle" class="mapa__c">Sistema</text><text x="440" y="166" text-anchor="middle" class="mapa__c">de marca</text></svg></div>
+    <div class="sistema__texto">
+      <p class="web-body-l" data-entra>Guías, piezas y código que una persona puede recorrer y un agente puede leer: la voz y los principios de tu marca, sus reglas de color, letra, forma y movimiento, y los componentes con que se construye lo nuevo.</p>
+      <p class="web-body-l" data-entra>Cada regla dice dónde aplica y por qué. La del lima está escrita así: va solo en el botón principal; los enlaces son azules; los fondos y los textos, neutros. El código usa esa regla tal cual.</p>
+    </div>
+  </section>
+
+  <section class="desliza" aria-labelledby="piezas-t">
+    <div class="desliza__fija">
+      <h2 class="tipo desliza__t" data-tipo="display-s display-m display-m" id="piezas-t">Lo que hacemos<br>contigo.</h2>
+      <div class="desliza__ventana" tabindex="0" role="region" aria-label="Las seis piezas que hacemos contigo">
+        <dl class="desliza__pista"><div class="pieza"><div class="pieza__fig" data-figura="sello" aria-hidden="true"></div><dt><span class="tipo " data-tipo="h4 h3 h3" >Centro de marca</span></dt><dd class="web-body-l">Principios, voz, color, letra, forma y movimiento, con el porqué de cada regla.</dd></div><div class="pieza"><div class="pieza__fig" data-figura="matriz" aria-hidden="true"></div><dt><span class="tipo " data-tipo="h4 h3 h3" >Sistema de diseño</span></dt><dd class="web-body-l">75 componentes en React y tokens en CSS, JavaScript y Dart, en cuatro temas.</dd></div><div class="pieza"><div class="pieza__fig" data-figura="lupa" aria-hidden="true"></div><dt><span class="tipo " data-tipo="h4 h3 h3" >Guía de uso</span></dt><dd class="web-body-l">Cuándo usar cada pieza y cuándo no: patrones, accesibilidad y escritura.</dd></div><div class="pieza"><div class="pieza__fig" data-figura="portatil" aria-hidden="true"></div><dt><span class="tipo " data-tipo="h4 h3 h3" >Soluciones construidas</span></dt><dd class="web-body-l">Pantallas y flujos armados con el sistema, listos para adaptar.</dd></div><div class="pieza"><div class="pieza__fig" data-figura="cinta" aria-hidden="true"></div><dt><span class="tipo " data-tipo="h4 h3 h3" >Plantillas y movimiento</span></dt><dd class="web-body-l">Portadas, piezas de comunicación y transiciones del mismo lenguaje.</dd></div><div class="pieza"><div class="pieza__fig" data-figura="terminal" aria-hidden="true"></div><dt><span class="tipo " data-tipo="h4 h3 h3" >La puerta para tus agentes</span></dt><dd class="web-body-l">Las mismas reglas, escritas para que un agente de IA las lea antes de producir.</dd></div></dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="vistas" aria-labelledby="vistas-t">
+    <div class="vistas__fija">
+      <div class="vistas__texto">
+        <h2 id="vistas-t" class="vistas__titulos">
+          <span class="tipo vistas__uno" data-tipo="display-s display-m display-m" >Lo mismo,<br>en cada soporte.</span>
+          <span class="tipo vistas__dos" data-tipo="display-s display-m display-m" >Cuatro temas,<br>una regla.</span>
+        </h2>
+        <p class="web-body-l vistas__dice">Un escritorio, un teléfono, un reloj: cambia cuánto se muestra; la voz, la letra y la forma no. No son capturas: son los componentes, funcionando.</p>
+        <div class="vistas__tema"><p class="web-label-l vistas__cual" aria-live="polite"></p><div id="elige-tema"></div></div>
+      </div>
+      <div class="soportes__vivos" data-theme="dark">
+        <div class="aparato aparato--escritorio" data-pantalla="escritorio" role="group" aria-label="La pantalla de propuestas en un escritorio"></div>
+        <div class="aparato aparato--telefono" data-pantalla="telefono" role="group" aria-label="La misma pantalla en un teléfono"></div>
+        <div class="aparato aparato--reloj" data-pantalla="reloj" role="group" aria-label="La misma propuesta en un reloj"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="relacion" id="relacion" aria-labelledby="relacion-t">
+    <h2 class="tipo " data-tipo="display-s display-m display-m" id="relacion-t" data-entra>Una relación,<br>no una entrega.</h2>
+    <p class="web-body-l" data-entra>Un sistema así no se entrega y se deja: se sostiene. Entramos como tu socio de diseño, al modo de una aceleradora, con el pago acordado por escrito y atado al resultado.</p>
+    <ol class="pasos"><li data-entra><span class="criatura" data-criatura="Conocernos" aria-hidden="true"></span><div><h3 class="tipo " data-tipo="h3 h2 h2" >Conocernos</h3><p class="web-body-l">Miramos cómo trabaja tu equipo y hacia dónde va tu producto. Ahí decidimos los dos si tiene sentido seguir.</p></div></li><li data-entra><span class="criatura" data-criatura="Construir la base" aria-hidden="true"></span><div><h3 class="tipo " data-tipo="h3 h2 h2" >Construir la base</h3><p class="web-body-l">Armamos contigo el sistema y escribimos su criterio. Lo que ya funciona se queda.</p></div></li><li data-entra><span class="criatura" data-criatura="Acompañar" aria-hidden="true"></span><div><h3 class="tipo " data-tipo="h3 h2 h2" >Acompañar</h3><p class="web-body-l">Seguimos dentro: cada corrección se vuelve una regla, para no repetirla.</p></div></li><li data-entra><span class="criatura" data-criatura="Medir juntos" aria-hidden="true"></span><div><h3 class="tipo " data-tipo="h3 h2 h2" >Medir juntos</h3><p class="web-body-l">Acordamos qué medir antes de empezar, y lo revisamos con fecha y con fuente.</p></div></li></ol>
+  </section>
+
+  <section class="cierre" id="contacto" aria-labelledby="cierre-t">
+    <h2 class="tipo " data-tipo="display-s display-m display-l" id="cierre-t" tabindex="-1" data-entra>Conversemos.</h2>
+    <p class="web-body-l" data-entra>Te mostramos el sistema con tu caso a la vista. Escríbenos a</p>
+    <p class="tipo correo" data-tipo="h3 display-s display-m" data-entra>contacto@cordura.tech</p>
   </section>
 
   <section class="recorrido" aria-labelledby="recorrido-t">
     <div class="recorrido__texto">
-      <h2 class="tipo " data-tipo="display-s display-m display-m" id="recorrido-t" data-entra>No se mira.<br>Se recorre.</h2>
-      <p class="web-body-l" data-entra>El planeta de Cordura no está guardado en ningún archivo: se calcula alrededor de quien camina. Recórrelo con los botones o, después de hacerle clic, con las flechas o W A S D. Con F despegas.</p>
+      <h2 class="tipo " data-tipo="h3 h2 h2" id="recorrido-t">No se mira. Se recorre.</h2>
+      <p class="web-body-l">El planeta de Cordura no está guardado en ningún archivo: se calcula alrededor de quien camina. Recórrelo con los botones o, después de hacerle clic, con las flechas o W A S D. Con F despegas.</p>
     </div>
     <section class="escaneo mundo" aria-label="El planeta de Cordura, dibujado con puntos en sus colores. No está guardado en ningún archivo: se calcula alrededor de quien lo recorre y cada trozo llega como polvo que se asienta. Se camina con las flechas o los botones, y se puede despegar para verlo entero.">
       <div class="escaneo__fija">
@@ -4380,47 +4452,6 @@ main { display: grid; }
         </div>
       </div>
     </section>
-  </section>
-
-  <section class="principios" aria-labelledby="principios-t">
-    <h2 class="tipo " data-tipo="display-s display-m display-m" id="principios-t" data-entra>Cómo decide<br>Cordura.</h2>
-    <dl class="principios__lista"><div data-entra><dt><span class="tipo " data-tipo="h3 display-s display-s" >El control es tuyo</span></dt><dd class="web-h5">Nuestros productos ofrecen; las personas deciden.</dd></div><div data-entra><dt><span class="tipo " data-tipo="h3 display-s display-s" >Emoción con sentido</span></dt><dd class="web-h5">No le tememos a la emoción: es nuestro motor.</dd></div><div data-entra><dt><span class="tipo " data-tipo="h3 display-s display-s" >Memoria que convence</span></dt><dd class="web-h5">Convencemos con lo que ya pasó, no con promesas.</dd></div><div data-entra><dt><span class="tipo " data-tipo="h3 display-s display-s" >Hasta la raíz</span></dt><dd class="web-h5">No nos quedamos en la superficie.</dd></div></dl>
-  </section>
-
-  <section class="soportes" id="sistema" aria-labelledby="soportes-t">
-    <div class="soportes__texto">
-      <h2 class="tipo " data-tipo="display-s display-m display-m" id="soportes-t" data-entra>Lo mismo,<br>en cada soporte.</h2>
-      <p class="web-body-l" data-entra>Un escritorio, un teléfono, un reloj. Cambia cuánto se muestra; la voz, la letra y la forma no. No son capturas: son los componentes, funcionando.</p>
-    </div>
-    <div class="soportes__vivos">
-      <div class="aparato aparato--escritorio" data-entra data-pantalla="escritorio" role="group" aria-label="La pantalla de propuestas en un escritorio"></div>
-      <div class="aparato aparato--telefono" data-entra data-pantalla="telefono" role="group" aria-label="La misma pantalla en un teléfono"></div>
-      <div class="aparato aparato--reloj" data-entra data-pantalla="reloj" role="group" aria-label="La misma propuesta en un reloj"></div>
-    </div>
-  </section>
-
-  <section class="temas" aria-labelledby="temas-t">
-    <h2 class="tipo " data-tipo="display-s display-m display-m" id="temas-t" data-entra>Cuatro temas,<br>una regla.</h2>
-    <div class="temas__vivos"><div class="tema" data-theme="dark" data-entra><p class="web-label-l tema__n">Oscuro</p><div data-pantalla="tema"></div></div><div class="tema" data-theme="light" data-entra><p class="web-label-l tema__n">Claro</p><div data-pantalla="tema"></div></div><div class="tema" data-theme="dark-hc" data-entra><p class="web-label-l tema__n">Oscuro, alto contraste</p><div data-pantalla="tema"></div></div><div class="tema" data-theme="light-hc" data-entra><p class="web-label-l tema__n">Claro, alto contraste</p><div data-pantalla="tema"></div></div></div>
-    <p class="web-body-l temas__nota" data-entra>Las cuatro son la misma pantalla. Cada color sale de una tabla, no de un valor suelto, y 540 pruebas revisan que cada texto se lea en todos los temas.</p>
-  </section>
-
-  <section class="piezas" aria-labelledby="piezas-t">
-    <h2 class="tipo " data-tipo="display-s display-m display-m" id="piezas-t" data-entra>Lo que hacemos<br>contigo.</h2>
-    <dl class="piezas__lista"><div data-entra><div class="pieza__fig" data-figura="sello" aria-hidden="true"></div><dt><span class="tipo " data-tipo="h4 h3 h3" >Centro de marca</span></dt><dd class="web-body-l">Principios, voz, color, letra, forma y movimiento, con el porqué de cada regla.</dd></div><div data-entra><div class="pieza__fig" data-figura="matriz" aria-hidden="true"></div><dt><span class="tipo " data-tipo="h4 h3 h3" >Sistema de diseño</span></dt><dd class="web-body-l">75 componentes en React y tokens en CSS, JavaScript y Dart, en cuatro temas.</dd></div><div data-entra><div class="pieza__fig" data-figura="lupa" aria-hidden="true"></div><dt><span class="tipo " data-tipo="h4 h3 h3" >Guía de uso</span></dt><dd class="web-body-l">Cuándo usar cada pieza y cuándo no: patrones, accesibilidad y escritura.</dd></div><div data-entra><div class="pieza__fig" data-figura="portatil" aria-hidden="true"></div><dt><span class="tipo " data-tipo="h4 h3 h3" >Soluciones construidas</span></dt><dd class="web-body-l">Pantallas y flujos armados con el sistema, listos para adaptar.</dd></div><div data-entra><div class="pieza__fig" data-figura="cinta" aria-hidden="true"></div><dt><span class="tipo " data-tipo="h4 h3 h3" >Plantillas y movimiento</span></dt><dd class="web-body-l">Portadas, piezas de comunicación y transiciones del mismo lenguaje.</dd></div><div data-entra><div class="pieza__fig" data-figura="terminal" aria-hidden="true"></div><dt><span class="tipo " data-tipo="h4 h3 h3" >La puerta para tus agentes</span></dt><dd class="web-body-l">Las mismas reglas, escritas para que un agente de IA las lea antes de producir.</dd></div></dl>
-  </section>
-
-  <section class="relacion" id="relacion" aria-labelledby="relacion-t">
-    <h2 class="tipo " data-tipo="display-s display-m display-m" id="relacion-t" data-entra>Una relación,<br>no una entrega.</h2>
-    <p class="web-body-l" data-entra>Un sistema así no se entrega y se deja: se sostiene. Entramos como tu socio de diseño, al modo de una aceleradora, con el pago acordado por escrito y atado al resultado.</p>
-    <div class="campo" data-entra data-campo role="img" aria-label="El campo generativo de Cordura: emblemas de sus colores, dibujados por el sistema."></div>
-    <ol class="pasos"><li data-entra><span class="criatura" data-criatura="Conocernos" aria-hidden="true"></span><div><h3 class="tipo " data-tipo="h3 h2 h2" >Conocernos</h3><p class="web-body-l">Miramos cómo trabaja tu equipo y hacia dónde va tu producto. Ahí decidimos los dos si tiene sentido seguir.</p></div></li><li data-entra><span class="criatura" data-criatura="Construir la base" aria-hidden="true"></span><div><h3 class="tipo " data-tipo="h3 h2 h2" >Construir la base</h3><p class="web-body-l">Armamos contigo el sistema y escribimos su criterio. Lo que ya funciona se queda.</p></div></li><li data-entra><span class="criatura" data-criatura="Acompañar" aria-hidden="true"></span><div><h3 class="tipo " data-tipo="h3 h2 h2" >Acompañar</h3><p class="web-body-l">Seguimos dentro: cada corrección se vuelve una regla, para no repetirla.</p></div></li><li data-entra><span class="criatura" data-criatura="Medir juntos" aria-hidden="true"></span><div><h3 class="tipo " data-tipo="h3 h2 h2" >Medir juntos</h3><p class="web-body-l">Acordamos qué medir antes de empezar, y lo revisamos con fecha y con fuente.</p></div></li></ol>
-  </section>
-
-  <section class="cierre" id="contacto" aria-labelledby="cierre-t">
-    <h2 class="tipo " data-tipo="display-s display-m display-l" id="cierre-t" tabindex="-1" data-entra>Conversemos.</h2>
-    <p class="web-body-l" data-entra>Te mostramos el sistema con tu caso a la vista. Escríbenos a</p>
-    <p class="tipo correo" data-tipo="h3 display-s display-m" data-entra>contacto@cordura.tech</p>
   </section>
 </main>
 <footer class="pie">
@@ -9538,6 +9569,194 @@ window.__GENERADOR_VISTAS = function (G) {
   raiz.AlmaPalabra = { monta: monta };
 })(typeof window !== 'undefined' ? window : this);
 
+// ALMA's effects: the collection of what moves behind, between and under things. Four families: a background
+// (fondo), a change from one thing to another (transicion), an answer to whoever touches (reaccion) and a text that
+// moves as it arrives (texto).
+// Every effect is written here, ours, and keeps the same promises: its colours are tokens, read from where it is
+// mounted (so an entity's effect is the entity's); it asks ALMA's clock (site/reloj.js) for its frames; it draws only
+// while it is seen and the page is shown; with less motion asked for it is one still picture; and it is decoration,
+// hidden from whoever does not see the page.
+//   AlmaEfectos.pon({ id, familia, nombre, colores: { nombre: token }, ajustes: [{ id, nombre, min, max, paso, valor }], crea(lienzo, V) })
+//     crea → { medida(ancho, alto), cuadro(dt, t, puntero), color(nombre, [r, g, b]), quita() }
+//   A reaction lives on an element instead of on a canvas of its own: it gives pone(el, V) → { ajusta(id, valor), quita() }.
+//   A transition is a reaction with one more thing to give: pasa(), which plays it when whoever uses it says so.
+//   AlmaEfectos.monta(id, el, valores) → { ajusta(id, valor), valores, quieto(), quita() }
+(function () {
+  if (window.AlmaEfectos) return;
+  var LISTA = {}, sonda = null;
+  // A colour token as an element has it, as three numbers from 0 to 1, however CSS writes it.
+  function color(token, el) {
+    var v = getComputedStyle(el || document.documentElement).getPropertyValue('--' + token).trim();
+    if (!sonda) { var c = document.createElement('canvas'); c.width = c.height = 1; sonda = c.getContext('2d', { willReadFrequently: true }); }
+    sonda.clearRect(0, 0, 1, 1); if (v) { sonda.fillStyle = v; sonda.fillRect(0, 0, 1, 1); }
+    var d = sonda.getImageData(0, 0, 1, 1).data; return [d[0] / 255, d[1] / 255, d[2] / 255];
+  }
+  function quieto() { var R = window.AlmaReloj; return R ? R.quieto : !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches); }
+  // A motion token as an element has it: a duration in seconds, a curve as the function it is.
+  function segundos(token, el) { var P = window.AlmaPartitura; if (P) return P.segundos(token, el); var t = getComputedStyle(el || document.documentElement).getPropertyValue('--' + token).trim(), x = parseFloat(t); return isFinite(x) ? (/ms$/.test(t) ? x / 1000 : x) : 0.24; }
+  function curva(token, el) { var P = window.AlmaPartitura; return P ? P.curva(token, el) : function (k) { return 1 - (1 - k) * (1 - k); }; }
+  // A background that is one picture worked out point by point: a canvas, the program that colours each point, and
+  // its values by name. escala: how many of the screen's points it is drawn with (a soft picture needs fewer).
+  function sombra(lienzo, fs, escala) {
+    var gl = lienzo.getContext('webgl', { alpha: false, antialias: false, depth: false, stencil: false, preserveDrawingBuffer: true }); if (!gl) return null;
+    var p = gl.createProgram();
+    [[gl.VERTEX_SHADER, 'attribute vec2 p; varying vec2 vUv; void main() { vUv = p * 0.5 + 0.5; gl_Position = vec4(p, 0.0, 1.0); }'], [gl.FRAGMENT_SHADER, fs]].forEach(function (x) { var s = gl.createShader(x[0]); gl.shaderSource(s, x[1]); gl.compileShader(s); if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s)); gl.attachShader(p, s); });
+    gl.bindAttribLocation(p, 0, 'p'); gl.linkProgram(p); gl.useProgram(p);
+    var u = {}, n = gl.getProgramParameter(p, gl.ACTIVE_UNIFORMS); for (var i = 0; i < n; i++) { var nombre = gl.getActiveUniform(p, i).name; u[nombre] = gl.getUniformLocation(p, nombre); }
+    gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer()); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW); gl.enableVertexAttribArray(0); gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+    return {
+      gl: gl, u: u,
+      medida: function (ancho, alto) { var d = Math.min(window.devicePixelRatio || 1, 2) * (escala || 1); lienzo.width = Math.max(2, Math.round(ancho * d)); lienzo.height = Math.max(2, Math.round(alto * d)); gl.viewport(0, 0, lienzo.width, lienzo.height); gl.uniform2f(u.uTam, lienzo.width, lienzo.height); },
+      dibuja: function () { gl.drawArrays(gl.TRIANGLES, 0, 3); },
+      quita: function () { var x = gl.getExtension('WEBGL_lose_context'); if (x) x.loseContext(); }
+    };
+  }
+  // (a noise of our own for those programs: a value at each corner of a grid, eased between them; from 0 to 1)
+  var RUIDO = 'float azar(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }\n' +
+    'float ruido(vec2 p) { vec2 i = floor(p), f = fract(p); f = f * f * (3.0 - 2.0 * f); return mix(mix(azar(i), azar(i + vec2(1.0, 0.0)), f.x), mix(azar(i + vec2(0.0, 1.0)), azar(i + vec2(1.0, 1.0)), f.x), f.y); }\n';
+  // Every frame while fn answers true, on ALMA's clock where there is one. → quita()
+  function cada(fn) { var R = window.AlmaReloj; if (R) return R.cada(function () { return fn(R.dt); }); var id = 0, paso = function () { if (fn(1 / 60) === true) id = requestAnimationFrame(paso); }; id = requestAnimationFrame(paso); return function () { cancelAnimationFrame(id); }; }
+  // Once, the first time a tenth of an element is seen. → deja()
+  function alVer(el, fn) { var ojo = new IntersectionObserver(function (v) { if (v[v.length - 1].isIntersecting) { ojo.disconnect(); fn(); } }, { threshold: 0.1 }); ojo.observe(el); return function () { ojo.disconnect(); }; }
+  // A text that moves has two faces: the true one, out of sight, for whoever has the page read to them, and the one
+  // that is seen and changes, which they are not told about.
+  function dosCaras(el) {
+    var texto = el.textContent, antes = el.innerHTML, real = document.createElement('span'), vista = document.createElement('span');
+    real.style.cssText = 'position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap'; real.textContent = texto;
+    vista.setAttribute('aria-hidden', 'true'); vista.textContent = texto; el.textContent = ''; el.appendChild(real); el.appendChild(vista);
+    return { texto: texto, vista: vista, suelta: function () { el.innerHTML = antes; } };
+  }
+  function monta(id, el, valores) {
+    var def = LISTA[id]; if (!def) throw new Error('No hay un efecto «' + id + '»');
+    if (def.pone) {
+      var W = {}; def.ajustes.forEach(function (a) { W[a.id] = valores && valores[a.id] != null ? valores[a.id] : a.valor; });
+      var o = def.pone(el, W);
+      return { valores: W, quieto: quieto, ajusta: function (k, v) { W[k] = v; if (o.ajusta) o.ajusta(k, v); }, pasa: o.pasa || function () {}, quita: o.quita };
+    }
+    var R = window.AlmaReloj, V = {}, lienzo = document.createElement('canvas'), vivo = true, aLaVista = false, quita = null, t = 0, cuenta = 0, puntero = { x: 0, y: 0, dentro: false };
+    def.ajustes.forEach(function (a) { V[a.id] = valores && valores[a.id] != null ? valores[a.id] : a.valor; });
+    lienzo.setAttribute('aria-hidden', 'true'); lienzo.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none';
+    if (getComputedStyle(el).position === 'static') el.style.position = 'relative';
+    el.insertBefore(lienzo, el.firstChild);
+    var obra = def.crea(lienzo, V);
+    if (!obra) { lienzo.remove(); return null; }
+    function colores() { for (var k in def.colores) obra.color(k, color(def.colores[k], el)); }
+    function mide() { var r = el.getBoundingClientRect(); if (r.width && r.height) { obra.medida(r.width, r.height); if (quieto()) fija(); } }
+    // One still picture: the effect as it is after a while, worked out at once.
+    function fija() { colores(); for (var i = 0; i < 200; i++) obra.cuadro(1 / 60, 20 + i / 60, puntero, i < 199); }
+    function cuadro() {
+      if (!vivo || !aLaVista || document.hidden || quieto()) { quita = null; return false; }
+      var dt = R ? R.dt : 1 / 60; t += dt;
+      // (a theme or an entity may change under it: its colours are read again twice a second)
+      if (cuenta++ % 30 === 0) colores();
+      obra.cuadro(dt, t, puntero, false); return true;
+    }
+    function anda() {
+      if (!vivo) return; if (quieto()) { fija(); return; }
+      if (quita || !aLaVista || document.hidden) return;
+      if (R) quita = R.cada(cuadro); else { var id = 0, paso = function () { if (cuadro()) id = requestAnimationFrame(paso); }; id = requestAnimationFrame(paso); quita = function () { cancelAnimationFrame(id); }; }
+    }
+    function mueve(e) { var r = el.getBoundingClientRect(); puntero.x = (e.clientX - r.left) / r.width - 0.5; puntero.y = 0.5 - (e.clientY - r.top) / r.height; puntero.dentro = Math.abs(puntero.x) <= 0.5 && Math.abs(puntero.y) <= 0.5; }
+    var ojo = new IntersectionObserver(function (v) { aLaVista = v[v.length - 1].isIntersecting; anda(); }), regla = new ResizeObserver(mide);
+    var dejaReloj = R ? R.alCambiar(anda) : null;
+    // (a still picture is not drawn again by itself: when the page changes theme, it is worked out anew)
+    var tema = window.MutationObserver ? new MutationObserver(function () { if (quieto()) fija(); }) : null; if (tema) tema.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    ojo.observe(el); regla.observe(el); window.addEventListener('pointermove', mueve, { passive: true }); document.addEventListener('visibilitychange', anda);
+    colores(); mide();
+    return {
+      valores: V,
+      ajusta: function (k, v) { V[k] = v; if (quieto()) fija(); },
+      quieto: quieto,
+      quita: function () { vivo = false; if (quita) quita(); if (dejaReloj) dejaReloj(); ojo.disconnect(); regla.disconnect(); if (tema) tema.disconnect(); window.removeEventListener('pointermove', mueve); document.removeEventListener('visibilitychange', anda); obra.quita(); lienzo.remove(); }
+    };
+  }
+  // The presence of an AI (guide «Interfaces de IA»): the Velo behind, the Halo in front, and the Halo saying the state.
+  // presencia(el, estado) → { estado(nombre), quita() }, or null where there is no WebGL: the state is always written too.
+  var PRESENCIA = {
+    velo: { alto: 0.45, amplitud: 1, suave: 0.35, fuerza: 0.7, velocidad: 1 },
+    reposo: { tamano: 1.2, pulso: 2, petalos: 3, estela: 0.8, giro: 1, velocidad: 1, latido: 0.6 },
+    escuchando: { tamano: 1.5, pulso: 0.6, petalos: 3, estela: 0.6, giro: 0.4, velocidad: 0.5, latido: 0 },
+    pensando: { tamano: 0.9, pulso: 3, petalos: 5, estela: 0.9, giro: 2.2, velocidad: 1.8, latido: 0 },
+    respondiendo: { tamano: 1.2, pulso: 1.2, petalos: 3, estela: 0.8, giro: 1, velocidad: 1.2, latido: 0.3 }
+  };
+  // «fondo»: the AI is there, in the background — the Velo alone, and no Halo is even made (it is the costly one).
+  // Any other state brings the Halo in front of it: the AI is what the screen is about.
+  function presencia(el, estado) {
+    if (!LISTA.halo || !LISTA.velo) return null;
+    var bajo = el.getBoundingClientRect().height < 240, velo = monta('velo', el, bajo ? Object.assign({}, PRESENCIA.velo, { alto: 0.35 }) : PRESENCIA.velo); if (!velo) return null;
+    var halo = null, para = null;
+    // lugar: where the Halo goes and how big, { x, y, escala } — to move it to the clear zone of a stage
+    function pon(nombre, lugar) {
+      var a = PRESENCIA[nombre]; if (nombre === 'velo') return;
+      if (a && lugar) { a = Object.assign({}, a, { x: lugar.x || 0, y: lugar.y || 0 }); a.tamano = a.tamano * (lugar.escala || 1); }
+      if (para) { para(); para = null; }
+      velo.ajusta('fuerza', nombre === 'apagada' ? 0.3 : PRESENCIA.velo.fuerza);
+      // in the background, or with no service, there is no Halo: it is taken away, not hidden
+      if (!a) { if (halo) { halo.quita(); halo = null; } return; }
+      // (an effect goes to the back of its zone when it is made: bring the Halo in front of the Velo)
+      if (!halo) { halo = monta('halo', el, a); if (!halo) return; var c = el.querySelectorAll('canvas'); if (c.length > 1) el.insertBefore(c[0], c[1].nextSibling); return; }
+      var de = Object.assign({}, halo.valores), t = 0, dura = segundos('duration-slow-02', el), sube = curva('easing-standard-expressive', el);
+      if (quieto()) { for (var q in a) halo.ajusta(q, a[q]); return; }
+      para = cada(function (dt) { t = Math.min(1, t + dt / dura); for (var k in a) halo.ajusta(k, k === 'petalos' ? a[k] : de[k] + (a[k] - de[k]) * sube(t)); return t < 1; });
+    }
+    pon(estado || 'fondo');
+    return { estado: pon, estados: ['fondo'].concat(Object.keys(PRESENCIA).filter(function (k) { return k !== 'velo'; }), ['apagada']), quita: function () { if (para) para(); if (halo) halo.quita(); velo.quita(); } };
+  }
+  window.AlmaEfectos = { presencia: presencia, lista: LISTA, color: color, quieto: quieto, segundos: segundos, curva: curva, sombra: sombra, RUIDO: RUIDO, cada: cada, alVer: alVer, dosCaras: dosCaras, monta: monta, pon: function (def) { LISTA[def.id] = def; return def; } };
+})();
+
+// Retícula: an even grid of small dots; those near the pointer grow and take the accent, and now and then a slow
+// wave of the same passes through by itself. A background.
+// How it works: each point of the picture finds the cell of the grid it is in and asks how far it is from that
+// cell's centre: nearer than the dot's radius, it is dot. The radius and the colour of each dot come from how near
+// its centre is to the pointer, and from a slow noise that drifts across the grid.
+(function () {
+  var E = window.AlmaEfectos;
+  var FS = [
+    'precision highp float;',
+    'varying vec2 vUv; uniform vec2 uTam, uPuntero; uniform float uT, uPaso, uTamano, uAlcance, uCrece, uOla, uCerca; uniform vec3 uFondo, uUno, uDos;',
+    E.RUIDO,
+    'void main() {',
+    '  vec2 px = gl_FragCoord.xy, celda = floor(px / uPaso), centro = (celda + 0.5) * uPaso;',
+    '  float d = length((centro / uTam - uPuntero) * vec2(uTam.x / uTam.y, 1.0));',
+    '  float cerca = uCerca * (1.0 - smoothstep(0.0, uAlcance, d));',
+    '  float ola = uOla * smoothstep(0.55, 0.92, ruido(celda * 0.11 + vec2(uT * 0.13, -uT * 0.09)));',
+    '  float viva = max(cerca, ola), radio = uTamano * (1.0 + uCrece * viva);',
+    '  float punto = 1.0 - smoothstep(radio - 0.75, radio + 0.75, length(px - centro));',
+    '  gl_FragColor = vec4(mix(uFondo, mix(mix(uFondo, uDos, 0.3), uUno, viva), punto), 1.0);',
+    '}'
+  ].join('\n');
+  E.pon({
+    id: 'reticula', familia: 'fondo', nombre: 'Retícula',
+    colores: { fondo: 'ui-02', uno: 'interactive-01', dos: 'text-01' },
+    ajustes: [
+      { id: 'paso', nombre: 'Separación', min: 12, max: 56, paso: 4, valor: 24 },
+      { id: 'tamano', nombre: 'Tamaño', min: 0.5, max: 6, paso: 0.5, valor: 1.5 },
+      { id: 'alcance', nombre: 'Alcance', min: 0.05, max: 0.6, paso: 0.05, valor: 0.3 },
+      { id: 'crece', nombre: 'Crece', min: 0, max: 4, paso: 0.25, valor: 2 },
+      { id: 'ola', nombre: 'Ola', min: 0, max: 1, paso: 0.05, valor: 0.5 },
+      { id: 'velocidad', nombre: 'Velocidad', min: 0, max: 3, paso: 0.1, valor: 1 }
+    ],
+    crea: function (lienzo, V) {
+      var S = E.sombra(lienzo, FS, 1); if (!S) return null; var gl = S.gl, u = S.u, t = 0, cerca = 0, px = 0.5, py = 0.5;
+      return {
+        medida: S.medida, quita: S.quita,
+        color: function (k, v) { gl.uniform3fv(u[{ fondo: 'uFondo', uno: 'uUno', dos: 'uDos' }[k]], v); },
+        cuadro: function (dt, ahora, puntero, calla) {
+          t += dt * V.velocidad * 4;
+          // the pointer's light comes up when it comes in and goes down when it leaves, and follows it without a jump
+          var k = 1 - Math.exp(-dt * 10); cerca += ((puntero.dentro ? 1 : 0) - cerca) * (1 - Math.exp(-dt * 5));
+          if (puntero.dentro) { px += (puntero.x + 0.5 - px) * k; py += (puntero.y + 0.5 - py) * k; }
+          if (calla) return;
+          var d = Math.min(window.devicePixelRatio || 1, 2);
+          gl.uniform1f(u.uT, t); gl.uniform1f(u.uPaso, V.paso * d); gl.uniform1f(u.uTamano, V.tamano * d); gl.uniform1f(u.uAlcance, V.alcance); gl.uniform1f(u.uCrece, V.crece); gl.uniform1f(u.uOla, V.ola); gl.uniform1f(u.uCerca, cerca); gl.uniform2f(u.uPuntero, px, py);
+          S.dibuja();
+        }
+      };
+    }
+  });
+})();
+
 // ALMA's line figures: the engine. A figure is one object drawn in thin line, seen from above and to one side, that
 // answers the pointer. Everything a figure needs is here: a camera, springs, one shared clock, the pointer (and the
 // keyboard in its place), and the five tones of line, which are ALMA tokens by name (`figura-*`).
@@ -10882,22 +11101,27 @@ window.__TEMA_ANTES = document.documentElement.getAttribute('data-theme');
 <script>document.documentElement.setAttribute('data-theme', window.__TEMA_ANTES || 'dark');</script>
 <script>
   (function () {
-    var calma = matchMedia('(prefers-reduced-motion: reduce)').matches, A = window.AlmaDS, h = window.React && React.createElement;
+    var calma = matchMedia('(prefers-reduced-motion: reduce)').matches, A = window.AlmaDS, h = window.React && React.createElement, raiz = document.documentElement;
     var G = {"id":"cordura","nombre":"Cordura","semilla":"nac|1987-03-31|10:45|America/Santiago","grupos":2,"redondez":0.6666666666666666,"puntas":5,"puertas":[{"n":21,"l":1},{"n":48,"l":1},{"n":38,"l":4},{"n":39,"l":4},{"n":27,"l":4},{"n":63,"l":2},{"n":55,"l":4},{"n":8,"l":3},{"n":17,"l":4},{"n":26,"l":5},{"n":11,"l":5},{"n":58,"l":5},{"n":44,"l":2},{"n":30,"l":2},{"n":51,"l":2},{"n":57,"l":2},{"n":14,"l":2},{"n":36,"l":4},{"n":22,"l":1},{"n":5,"l":5}],"numeros":[4,5,6],"complejidad":3,"trazo":0.875,"relleno":false,"tipo":"proyector","direccion":"foco","direccionPropia":false,"autoridad":"emocional","centros":["corazon","bazo","plexo","raiz"],"canales":[["corazon","bazo"],["raiz","plexo"]],"ritmo":1.25,"focos":4,"pieza":{"base":"#191919","barras":["#F1BB41","#B5870E","#7EDCA0","#64C288","#6E6F70"],"acento":"#E1F564","tinta":"#FAFAFA"},"fondo":{"dark":{"base":"#000000","barras":["#2A2F00","#392802","#00351A"],"acento":"#404803","tinta":"#FAFAFA"},"light":{"base":"#FAFAFA","barras":["#EBF6BC","#FFECC9","#D2FADE"],"acento":"#D5E856","tinta":"#232425"}}};
+    var TEMAS = [["dark","Oscuro"],["light","Claro"],["dark-hc","Oscuro, alto contraste"],["light-hc","Claro, alto contraste"]];
+    // A scene stays in place while the page goes by, where there is room and motion is welcome; elsewhere it is still and has its own controls.
+    var fija = !calma && innerHeight >= 480;
+    function avance(el) { var r = el.getBoundingClientRect(), largo = r.height - innerHeight; return largo > 0 ? Math.min(1, Math.max(0, -r.top / largo)) : 0; }
+    var alPasar = []; function pide() { if (!pide.raf) pide.raf = requestAnimationFrame(function () { pide.raf = 0; alPasar.forEach(function (f) { f(); }); }); }
+    addEventListener('scroll', pide, { passive: true }); addEventListener('resize', pide);
+
     if (A && window.ReactDOM) {
       // The one primary button, ALMA's own: it takes the reader to the contact.
       var el = document.getElementById('accion');
       if (el) ReactDOM.createRoot(el).render(h(A.Button, { variant: 'filled', size: 'lg', onClick: function () { document.getElementById('contacto').scrollIntoView({ behavior: calma ? 'auto' : 'smooth' }); document.getElementById('cierre-t').focus({ preventScroll: true }); } }, 'Conversemos'));
-      // The same proposal screen, drawn by ALMA's components: on a desktop, a phone, a watch, and in the four themes.
+      // The same proposal screen, drawn by ALMA's components, on a desktop, a phone and a watch.
       var COL = [{ key: 'p', label: 'Propuesta' }, { key: 'e', label: 'Estado' }, { key: 'f', label: 'Vence' }];
       var FILAS = [{ id: 'identidad', p: 'Identidad de marca', e: 'Espera tu decisión', f: '15 oct' }, { id: 'web', p: 'Sitio web', e: 'Espera tu decisión', f: '15 oct' }, { id: 'campana', p: 'Campaña de lanzamiento', e: 'Aprobada', f: '—' }, { id: 'senaletica', p: 'Señalética', e: 'En revisión', f: '30 oct' }];
       var AVISO = { status: 'info', title: '2 propuestas esperan tu decisión', message: 'Vencen el 15 de octubre. No hay apuro: puedes revisarlas cuando quieras.' };
-      var lista = function (n, k) { return h(A.List, { 'aria-label': 'Propuestas', items: FILAS.slice(0, n).map(function (r) { return { id: k + r.id, title: r.p, subtitle: r.e, trailing: r.f }; }) }); };
       var VISTAS = {
         escritorio: function () { return h('div', { className: 'en en--ancho' }, h('div', { className: 'en__cabeza' }, h('h3', { className: 'web-h3' }, 'Propuestas'), h('div', { className: 'en__acciones' }, h(A.Button, { variant: 'tinted' }, 'Ahora no'), h(A.Button, { variant: 'filled' }, 'Revisar 2 propuestas'))), h(A.InlineNotification, AVISO), h(A.Table, { caption: 'Propuestas', columns: COL, rows: FILAS })); },
-        telefono: function () { return h('div', { className: 'en en--uno' }, h('h3', { className: 'web-h3' }, 'Propuestas'), h(A.InlineNotification, AVISO), lista(3, 't'), h(A.Button, { variant: 'filled' }, 'Revisar 2 propuestas')); },
-        reloj: function () { return h('div', { className: 'en en--reloj' }, h('p', { className: 'web-display-s' }, '2'), h('p', { className: 'web-body-s' }, 'propuestas esperan tu decisión'), h(A.Button, { variant: 'filled', size: 'sm' }, 'Revisar')); },
-        tema: function () { return h('div', { className: 'en en--tema' }, h('h3', { className: 'web-h4' }, 'Propuestas'), h(A.InlineNotification, AVISO), lista(2, 'm' + Math.random()), h('div', { className: 'en__acciones' }, h(A.Button, { variant: 'filled' }, 'Revisar'), h(A.Button, { variant: 'tinted' }, 'Ahora no'))); }
+        telefono: function () { return h('div', { className: 'en en--uno' }, h('h3', { className: 'web-h3' }, 'Propuestas'), h(A.InlineNotification, AVISO), h(A.List, { 'aria-label': 'Propuestas', items: FILAS.slice(0, 2).map(function (r) { return { id: 't' + r.id, title: r.p, subtitle: r.e, trailing: r.f }; }) }), h(A.Button, { variant: 'filled' }, 'Revisar 2 propuestas')); },
+        reloj: function () { return h('div', { className: 'en en--reloj' }, h('p', { className: 'web-display-s' }, '2'), h('p', { className: 'web-body-s' }, 'propuestas esperan tu decisión'), h(A.Button, { variant: 'filled', size: 'sm' }, 'Revisar')); }
       };
       document.querySelectorAll('[data-pantalla]').forEach(function (c) { var v = VISTAS[c.getAttribute('data-pantalla')]; if (v) ReactDOM.createRoot(c).render(v()); });
       // The creatures of the steps, and the field, drawn by Cordura's generator.
@@ -10905,14 +11129,51 @@ window.__TEMA_ANTES = document.documentElement.getAttribute('data-theme');
       var campo = document.querySelector('[data-campo]'), V = window.__GENERADOR_VISTAS && window.__GENERADOR_VISTAS(G);
       if (campo && V && V.Campo) ReactDOM.createRoot(campo).render(h(V.Campo, { clave: 'taste', anda: !calma, label: 'El campo generativo de Cordura.' }));
     }
-    // The pieces' line figures, ALMA's own, beside their words.
+
+    // Supports, then themes: one scene. First the same screen on three supports; then the title changes and the
+    // screens go through the four themes as the page goes by. Still, a theme switch of ALMA's does it by hand.
+    var vistas = document.querySelector('.vistas'), marcos = document.querySelector('.soportes__vivos'), cual = document.querySelector('.vistas__cual');
+    function ponTema(id, nombre) { if (marcos.getAttribute('data-theme') !== id) marcos.setAttribute('data-theme', id); cual.textContent = nombre ? 'Tema ' + nombre.toLowerCase() : ''; }
+    // (three screens fit a scene only where the screen is wide: on a phone the scene is still, and the theme switch does it)
+    if (fija && matchMedia('(min-width: 66rem)').matches) {
+      vistas.classList.add('vistas--fija');
+      alPasar.push(function () {
+        var p = avance(vistas), temas = p >= 0.25, k = Math.min(TEMAS.length - 1, Math.floor((p - 0.25) / 0.75 * TEMAS.length));
+        vistas.classList.toggle('vistas--temas', temas); ponTema(temas ? TEMAS[k][0] : 'dark', temas ? TEMAS[k][1] : '');
+      });
+    } else if (A && window.ReactDOM) {
+      vistas.classList.add('vistas--quieta');
+      var Elige = function () { var e = React.useState('dark'); React.useEffect(function () { var t = TEMAS.filter(function (x) { return x[0] === e[0]; })[0]; ponTema(e[0], t[1]); }, [e[0]]);
+        return h(A.SegmentedControl, { label: 'Tema', options: TEMAS.map(function (x) { return { value: x[0], label: x[1].replace(', alto contraste', ' AC') }; }), value: e[0], onChange: e[1] }); };
+      ReactDOM.createRoot(document.getElementById('elige-tema')).render(h(Elige));
+    }
+
+    // The pieces, side by side: the page going down slides them along.
+    var desliza = document.querySelector('.desliza'), pista = document.querySelector('.desliza__pista'), ventana = document.querySelector('.desliza__ventana');
+    if (fija) {
+      desliza.classList.add('desliza--fija');
+      var mide = function () { var cs = getComputedStyle(ventana), util = ventana.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight), sobra = Math.max(0, pista.scrollWidth - util); desliza.style.height = 'calc(100svh + ' + sobra + 'px)'; desliza.sobra = sobra; };
+      mide(); addEventListener('resize', mide); setTimeout(mide, 1500);
+      alPasar.push(function () { pista.style.transform = 'translateX(' + (-avance(desliza) * (desliza.sobra || 0)).toFixed(1) + 'px)'; });
+    }
+
+    // The diagram: what goes in, then what comes out, traced as it comes into view.
+    var mapa = document.querySelector('.mapa');
+    if (mapa) { var traza = function () { var r = mapa.getBoundingClientRect(), llega = calma ? 1 : Math.min(1, Math.max(0, (innerHeight * 0.92 - r.top) / (innerHeight * 0.5)));
+        mapa.querySelectorAll('[data-traza]').forEach(function (l) { var t = Math.min(1, Math.max(0, (llega * 2 - +l.getAttribute('data-traza')) / 0.4)); l.style.strokeDasharray = 1; l.style.strokeDashoffset = 1 - t; });
+        mapa.querySelectorAll('[data-sale]').forEach(function (x) { x.style.opacity = Math.min(1, Math.max(0, (llega * 2 - +x.getAttribute('data-sale')) / 0.25)); }); };
+      alPasar.push(traza); }
+    // Its ground, ALMA's dotted grid.
+    document.querySelectorAll('[data-efecto]').forEach(function (e) { try { window.AlmaEfectos.monta(e.getAttribute('data-efecto'), e, {}); } catch (x) {} });
+    // The pieces' line figures, ALMA's own.
     document.querySelectorAll('[data-figura]').forEach(function (f) { try { window.AlmaFigura.monta(f, f.getAttribute('data-figura'), { genes: G, intensidad: 0.5 }); } catch (x) {} });
     // The living word: ALMA's own piece, fitted to its width, heavier where the pointer touches it.
     var w = document.querySelector('.palabra-banda__palabra');
-    if (w && window.AlmaPalabra) { var p = window.AlmaPalabra.monta(w, { genes: window.__PALABRA, texto: 'Criterio' });
-      if (calma) p.escribe(); else new IntersectionObserver(function (es, o) { if (es[0].isIntersecting) { p.escribe(); o.disconnect(); } }, { threshold: 0.4 }).observe(w); }
+    if (w && window.AlmaPalabra) { var pw = window.AlmaPalabra.monta(w, { genes: window.__PALABRA, texto: 'Criterio' });
+      if (calma) pw.escribe(); else new IntersectionObserver(function (es, o) { if (es[0].isIntersecting) { pw.escribe(); o.disconnect(); } }, { threshold: 0.4 }).observe(w); }
+    pide();
     // Each part enters once, in its order (heading, text, picture), a beat apart.
-    if (!document.documentElement.classList.contains('anima')) return;
+    if (!raiz.classList.contains('anima')) return;
     var mira = new IntersectionObserver(function (es) { es.forEach(function (e) { if (!e.isIntersecting) return; var hermanos = Array.prototype.filter.call(e.target.parentNode.querySelectorAll(':scope > [data-entra], :scope > * > [data-entra]'), function (x) { return !x.classList.contains('dentro'); });
       e.target.style.setProperty('--orden', Math.max(0, hermanos.indexOf(e.target))); e.target.classList.add('dentro'); mira.unobserve(e.target); }); }, { rootMargin: '0px 0px -8% 0px' });
     document.querySelectorAll('[data-entra]').forEach(function (x) { mira.observe(x); });
