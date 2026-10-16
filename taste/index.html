@@ -4220,7 +4220,7 @@ main { display: grid; }
 .portada__cabeza .accion { order: -1; justify-self: end; }
 @media (min-width: 42rem) { .portada__cabeza { grid-template-columns: minmax(0, 1fr) auto; align-items: start; } .portada__cabeza .accion { order: 0; } }
 .portada__dice { max-width: 34rem; }
-.campo { position: relative; height: 56svh; min-height: 18rem; overflow: hidden; margin-bottom: var(--entre); }
+.campo { position: relative; height: 76svh; min-height: 22rem; overflow: hidden; margin-bottom: var(--entre); }
 .campo > * { width: 100%; height: 100%; }
 /* (the field stays behind, as a ground: a tint of ALMA's over it) */
 .campo::after { content: ""; position: absolute; inset: 0; background: var(--tint-dark-64); pointer-events: none; }
@@ -4228,13 +4228,14 @@ main { display: grid; }
 /* The living word, with the living bust behind it, crossing it. */
 .palabra-banda { position: relative; display: grid; gap: var(--dentro); padding: 0 var(--margen) var(--entre); align-items: end; }
 .palabra-banda__voz { position: relative; z-index: 1; margin: 0; height: 40svh; min-height: var(--space-160); display: grid; align-items: end; pointer-events: none; }
-.palabra-banda__busto { position: absolute; z-index: 0; top: calc(-1 * var(--space-48)); right: var(--margen); width: 60%; }
+.palabra-banda__busto { position: absolute; z-index: 0; top: calc(-1 * var(--space-96)); right: 0; width: 100%; }
 .palabra-banda__frase { position: relative; z-index: 1; }
 .palabra-banda__palabra { display: block; line-height: 0.9; color: var(--text-01); }
 .palabra-banda__frase { max-width: 40rem; }
 /* (the bust's box is never taller than the screen, so it stays whole; it only turns and stirs) */
 .palabra-banda .escaneo { height: auto; }
-.palabra-banda .escaneo__fija { position: relative; height: 64svh; min-height: 22rem; }
+/* (the bust ends where the word ends: no dot falls under the sentence) */
+.palabra-banda .escaneo__fija { position: relative; height: calc(40svh + var(--space-96)); min-height: calc(var(--space-160) + var(--space-96)); }
 
 /* What the system is: one centered moment, the diagram on ALMA's dotted ground. */
 .sistema { display: grid; gap: var(--dentro); justify-items: center; text-align: center; padding: 0 var(--margen) var(--entre); }
@@ -4254,7 +4255,7 @@ main { display: grid; }
 .desliza__t { padding-inline: var(--margen); }
 .desliza__ventana { min-width: 0; overflow-x: auto; overscroll-behavior-x: contain; padding-inline: var(--margen); }
 .desliza__pista { display: flex; gap: var(--space-48); margin: 0; width: max-content; }
-.pieza { display: grid; gap: var(--space-8); align-content: start; width: min(80vw, 24rem); }
+.pieza { display: grid; gap: var(--space-8); align-content: start; width: min(85vw, 40rem); }
 .pieza dt, .pieza dd { margin: 0; }
 .pieza__fig { aspect-ratio: 5 / 4; margin-bottom: var(--space-16); }
 .pieza__fig > * { width: 100%; height: 100%; }
@@ -4325,8 +4326,9 @@ main { display: grid; }
   .pie { grid-template-columns: auto minmax(0, 1fr) auto; align-items: baseline; gap: var(--space-32); }
 }
 @media (min-width: 66rem) { /* bp-lg */
-  .palabra-banda__voz { height: 56svh; }
-  .palabra-banda__busto { width: 46%; right: 8%; }
+  .palabra-banda__voz { height: 72svh; }
+  .palabra-banda__busto { width: 72%; }
+  .palabra-banda .escaneo__fija { height: calc(72svh + var(--space-96)); }
   .soportes__vivos { grid-template-columns: minmax(0, 1fr) 22rem 12rem; }
   .aparato--escritorio { grid-column: auto; }
   .vistas__texto { grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); align-items: end; gap: var(--space-16) var(--space-48); }
