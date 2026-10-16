@@ -4304,12 +4304,8 @@ main { display: grid; }
 .en--reloj { height: 100%; padding: var(--space-24) var(--space-16); gap: var(--space-8); justify-items: center; align-content: center; text-align: center; }
 
 .relacion { display: grid; gap: var(--dentro); padding: 0 var(--margen) var(--entre); }
-.relacion > p.web-body-l { max-width: 40rem; }
-.pasos { display: grid; gap: var(--space-48); margin: 0; padding: 0; list-style: none; }
-.pasos li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-24); align-items: start; }
-.pasos li > div { display: grid; gap: var(--space-8); }
-.pasos p { max-width: 34rem; }
-.criatura { padding-top: var(--space-8); color: var(--text-01); }
+.relacion__fija { display: grid; gap: var(--space-48); }
+.pasos { max-width: 40rem; }
 
 .cierre { display: grid; gap: var(--dentro); padding: var(--entre) var(--margen); background: var(--ui-01); }
 .correo { overflow-wrap: anywhere; user-select: all; -webkit-user-select: all; }
@@ -4317,7 +4313,6 @@ main { display: grid; }
 /* At the end of everything, the planet, edge to edge, to be walked. */
 .recorrido { position: relative; display: grid; background: var(--ui-02); }
 /* (high above at first: the page going down brings it near; it stays in place the while) */
-.criatura-marco { display: inline-block; }
 /* (its line sits above it, never over the moving dots) */
 .recorrido__dice { max-width: 40rem; margin: 0; padding: var(--space-24) var(--margen); color: var(--text-02); }
 .recorrido .mundo { height: auto; }
@@ -4335,7 +4330,6 @@ main { display: grid; }
   .soportes__vivos { grid-template-columns: minmax(0, 1fr) auto; }
   .aparato--escritorio { grid-column: 1 / -1; }
   .aparato--telefono { width: 22rem; }
-  .pasos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .pie { grid-template-columns: auto minmax(0, 1fr) auto; align-items: baseline; gap: var(--space-32); }
 }
 @media (min-width: 66rem) { /* bp-lg */
@@ -4385,7 +4379,6 @@ main { display: grid; }
 /* (the steps: one at a time) */
 .relacion.relacion--fija { height: 300svh; padding: 0 var(--margen); }
 .relacion--fija .relacion__fija { position: sticky; top: 0; height: 100svh; display: grid; align-content: center; }
-.relacion--fija .pasos > li { opacity: 0; }
 
 </style>
 <script>
@@ -4469,8 +4462,10 @@ main { display: grid; }
   </section>
 
   <section class="relacion" id="relacion" aria-labelledby="relacion-t">
-    <h2 id="relacion-t" class="visualmente-oculto">Cómo trabajamos</h2>
-    <div class="relacion__fija"><ol class="pasos"><li data-entra><span class="criatura-marco" data-efecto="iman" aria-hidden="true"><span class="criatura" data-criatura="Conocernos"></span></span><div><h3 class="tipo " data-tipo="h3 h2 h2" >Conocernos</h3><p class="web-body-l">Miramos cómo trabaja tu equipo y hacia dónde va tu producto. Ahí decidimos los dos si tiene sentido seguir.</p></div></li><li data-entra><span class="criatura-marco" data-efecto="iman" aria-hidden="true"><span class="criatura" data-criatura="Construir la base"></span></span><div><h3 class="tipo " data-tipo="h3 h2 h2" >Construir la base</h3><p class="web-body-l">Armamos contigo el sistema y escribimos su criterio. Lo que ya funciona se queda.</p></div></li><li data-entra><span class="criatura-marco" data-efecto="iman" aria-hidden="true"><span class="criatura" data-criatura="Acompañar"></span></span><div><h3 class="tipo " data-tipo="h3 h2 h2" >Acompañar</h3><p class="web-body-l">Seguimos dentro: cada corrección se vuelve una regla, para no repetirla.</p></div></li><li data-entra><span class="criatura-marco" data-efecto="iman" aria-hidden="true"><span class="criatura" data-criatura="Medir juntos"></span></span><div><h3 class="tipo " data-tipo="h3 h2 h2" >Medir juntos</h3><p class="web-body-l">Acordamos qué medir antes de empezar, y lo revisamos con fecha y con fuente.</p></div></li></ol></div>
+    <div class="relacion__fija">
+      <h2 class="tipo " data-tipo="display-s display-m display-m" id="relacion-t">Cómo trabajamos.</h2>
+      <div class="pasos" id="pasos"></div>
+    </div>
   </section>
 
   <section class="cierre" id="contacto" aria-labelledby="cierre-t">
@@ -11283,6 +11278,7 @@ window.__TEMA_ANTES = document.documentElement.getAttribute('data-theme');
     function avance(el) { var r = el.getBoundingClientRect(), largo = r.height - innerHeight; return largo > 0 ? Math.min(1, Math.max(0, -r.top / largo)) : 0; }
     // (a stretch of a scene's way: 0 before a, 1 after b, eased between)
     function tramo(k, a, b) { k = Math.min(1, Math.max(0, (k - a) / (b - a))); return k * k * (3 - 2 * k); }
+    var ponPaso = function () {};
     var alPasar = []; function pide() { if (!pide.raf) pide.raf = requestAnimationFrame(function () { pide.raf = 0; alPasar.forEach(function (f) { f(); }); }); }
     addEventListener('scroll', pide, { passive: true }); addEventListener('resize', pide);
 
@@ -11300,8 +11296,11 @@ window.__TEMA_ANTES = document.documentElement.getAttribute('data-theme');
         reloj: function () { return h('div', { className: 'en en--reloj' }, h('p', { className: 'web-display-s' }, '2'), h('p', { className: 'web-body-s' }, 'propuestas esperan tu decisión'), h(A.Button, { variant: 'filled', size: 'sm' }, 'Revisar')); }
       };
       document.querySelectorAll('[data-pantalla]').forEach(function (c) { var v = VISTAS[c.getAttribute('data-pantalla')]; if (v) ReactDOM.createRoot(c).render(v()); });
-      // The creatures of the steps.
-      document.querySelectorAll('[data-criatura]').forEach(function (c) { ReactDOM.createRoot(c).render(h(A.Pictogram, { name: c.getAttribute('data-criatura'), kind: 'creature', size: 32 })); });
+      // How we work: ALMA's progress indicator, upright; the page going down moves it from step to step.
+      var PASOS = [{"label":"Conocernos","description":"Miramos cómo trabaja tu equipo y hacia dónde va tu producto. Ahí decidimos los dos si tiene sentido seguir."},{"label":"Construir la base","description":"Armamos contigo el sistema y escribimos su criterio. Lo que ya funciona se queda."},{"label":"Acompañar","description":"Seguimos dentro: cada corrección se vuelve una regla, para no repetirla."},{"label":"Medir juntos","description":"Acordamos qué medir antes de empezar, y lo revisamos con fecha y con fuente."}];
+      var Pasos = function () { var e = React.useState(fija ? 0 : PASOS.length); React.useEffect(function () { ponPaso = e[1]; return function () { ponPaso = function () {}; }; }, []);
+        return h(A.ProgressIndicator, { label: 'Cómo trabajamos', vertical: true, current: e[0], steps: PASOS }); };
+      ReactDOM.createRoot(document.getElementById('pasos')).render(h(Pasos));
     }
 
     // Supports and themes: one scene, and the whole of it takes the theme. It goes from light to dark as the page goes
@@ -11373,13 +11372,11 @@ window.__TEMA_ANTES = document.documentElement.getAttribute('data-theme');
     // The first screen is the title's alone: the veil under it comes in only as the page goes down.
     var campo = document.querySelector('.campo');
     if (campo && fija) { var asoma = function () { campo.style.opacity = tramo((innerHeight - campo.getBoundingClientRect().top) / innerHeight, 0.05, 0.55).toFixed(3); }; asoma(); alPasar.push(asoma); }
-    // How we work: held, its steps come one at a time; the one just come is the one, those before it stay, quieter
-    // (never so quiet that they cannot be read: at 0.6 their text still clears AA on the page)
-    var relacion = document.querySelector('.relacion'), pasos = [].slice.call(document.querySelectorAll('.pasos > li'));
+    // How we work, held: a stretch of the way for each step; at the end, all four done.
+    var relacion = document.querySelector('.relacion');
     if (fija && relacion) {
-      relacion.classList.add('relacion--fija'); pasos.forEach(function (l) { l.removeAttribute('data-entra'); });
-      var cuentaPasos = function () { var k = avance(relacion), ahora = Math.min(pasos.length - 1, Math.floor(k / 0.2));
-        pasos.forEach(function (l, i) { var v = tramo(k, i * 0.2, i * 0.2 + 0.1); l.style.opacity = (i < ahora ? 0.6 : v).toFixed(3); l.style.transform = 'translateY(' + ((1 - v) * 16).toFixed(1) + 'px)'; l.classList.toggle('paso--activo', i === ahora && v > 0.5); }); };
+      relacion.classList.add('relacion--fija');
+      var cuentaPasos = function () { ponPaso(Math.min(4, Math.floor(avance(relacion) / 0.2))); };
       cuentaPasos(); alPasar.push(cuentaPasos);
     }
     // ALMA's effects, each where the page asks for it.
