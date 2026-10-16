@@ -4384,6 +4384,10 @@ main { display: grid; }
 /* (the steps: one at a time) */
 .relacion.relacion--fija { height: 300svh; padding: 0 var(--margen); }
 .relacion--fija .relacion__fija { position: sticky; top: 0; height: 100svh; display: grid; align-content: center; }
+/* (in it, the title first, then the steps one by one) */
+.relacion--fija #relacion-t { opacity: 0; transition: opacity var(--duration-slow-01) var(--easing-entrance-expressive); }
+.relacion--fija #relacion-t.relacion__t--dicho { opacity: 1; }
+.relacion--fija #pasos li { opacity: 0; }
 
 </style>
 <script>
@@ -11358,12 +11362,18 @@ window.__TEMA_ANTES = document.documentElement.getAttribute('data-theme');
     // The first screen is the title's alone: the veil under it comes in only as the page goes down.
     var campo = document.querySelector('.campo');
     if (campo && fija) { var asoma = function () { campo.style.opacity = tramo((innerHeight - campo.getBoundingClientRect().top) / innerHeight, 0.05, 0.55).toFixed(3); }; asoma(); alPasar.push(asoma); }
-    // How we work, held: a stretch of the way for each step; at the end, all four done.
-    var relacion = document.querySelector('.relacion');
+    // How we work, held, built a little at a time as the system's drawing is: first its title, alone, and a light runs along
+    // it once; then each step arrives with its stretch of line and is the one under way; at the end, all four are done.
+    var relacion = document.querySelector('.relacion'), tituloPasos = document.getElementById('relacion-t'), dichoPasos = false;
     if (fija && relacion) {
       relacion.classList.add('relacion--fija');
-      var cuentaPasos = function () { ponPaso(Math.min(4, Math.floor(avance(relacion) / 0.2))); };
-      cuentaPasos(); alPasar.push(cuentaPasos);
+      var cuentaPasos = function () {
+        var k = avance(relacion), llegan = document.querySelectorAll('#pasos li'), hasta = -1;
+        if (!dichoPasos && relacion.getBoundingClientRect().top < innerHeight * 0.5) { dichoPasos = true; tituloPasos.classList.add('relacion__t--dicho'); if (window.AlmaEfectos) setTimeout(function () { window.AlmaEfectos.monta('brillo', tituloPasos, {}); }, window.AlmaEfectos.segundos('duration-slow-02', tituloPasos) * 1000); }
+        for (var i = 0; i < llegan.length; i++) { var a = 0.1 + i * 0.18, v = tramo(k, a, a + 0.08); llegan[i].style.opacity = v.toFixed(3); llegan[i].style.transform = 'translateY(' + ((1 - v) * 16).toFixed(1) + 'px)'; if (v > 0.5) hasta = i; }
+        ponPaso(k >= 0.85 ? 4 : Math.max(0, hasta));
+      };
+      cuentaPasos(); alPasar.push(cuentaPasos); setTimeout(cuentaPasos, 300);
     }
     // ALMA's effects, each where the page asks for it.
     document.querySelectorAll('[data-efecto]').forEach(function (e) { try { window.AlmaEfectos.monta(e.getAttribute('data-efecto'), e, {}); } catch (x) {} });
