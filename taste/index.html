@@ -4281,7 +4281,7 @@ main { display: grid; }
 .vistas__dos { opacity: 0; }
 .vistas--temas .vistas__uno { opacity: 0; }
 .vistas--temas .vistas__dos { opacity: 1; }
-.vistas__dice { max-width: 40rem; }
+.vistas__dice { max-width: 40rem; text-wrap: pretty; }
 .vistas__tema { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-16) var(--space-24); min-height: var(--space-48); }
 .vistas__mandos { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-16) var(--space-24); }
 .vistas__cual { color: var(--text-02); }
@@ -4422,7 +4422,7 @@ main { display: grid; }
     <h2 id="criterio" class="palabra-banda__voz"><span class="visualmente-oculto">Criterio</span><span class="palabra-banda__palabra" aria-hidden="true">Criterio</span></h2>
     <div class="palabra-banda__busto">
       <section class="escaneo" aria-label="El busto de Cordura">
-        <div class="escaneo__fija"><figure class="escaneo__figura" role="img" aria-label="Un busto romano dibujado con miles de puntos lima, blancos y verdes. Gira con el puntero."><canvas class="escaneo__lienzo" aria-hidden="true"></canvas></figure></div>
+        <div class="escaneo__fija"><figure class="escaneo__figura" role="img" aria-label="Un busto romano en puntos lima, blancos y verdes. Gira con el puntero."><canvas class="escaneo__lienzo" aria-hidden="true"></canvas></figure></div>
       </section>
     </div>
     <p class="web-body-l palabra-banda__frase">Las guías de una plataforma dicen con qué piezas construir. Nosotros escribimos cómo decide tu marca cuando las piezas se juntan.</p>
@@ -4457,7 +4457,7 @@ main { display: grid; }
           <span class="tipo vistas__uno" data-tipo="display-s display-m display-m" >Lo mismo,<br>en cada soporte.</span>
           <span class="tipo vistas__dos" data-tipo="display-s display-m display-m" >Cuatro temas,<br>una regla.</span>
         </h2>
-        <p class="web-body-l vistas__dice">Un escritorio, un teléfono, un reloj: cambia cuánto se muestra; la voz, la letra y la forma no. No son capturas: son los componentes, funcionando.</p>
+        <p class="web-body-l vistas__dice">Un escritorio, un teléfono, un reloj: cambia cuánto se muestra; la voz, la letra y la forma no.</p>
         <div class="vistas__tema"><p class="web-label-m vistas__cual" aria-live="polite"></p><div id="elige-tema"></div></div>
       </div>
       <div class="soportes__vivos">
@@ -4482,15 +4482,15 @@ main { display: grid; }
 </main>
 <footer class="pie">
   <p class="web-h6 pie__marca">Cordura</p>
-  <p class="web-body-m">Santiago de Chile. En esta página no hay imágenes ni videos: todo lo que ves se dibuja con código, con el sistema de Cordura.</p>
+  <p class="web-body-m">Santiago de Chile.</p>
   <nav class="pie__nav" aria-label="Más de Cordura"><a class="web-label-l" href="/">El sitio</a><a class="web-label-l" href="/agentic/">Para agentes</a></nav>
 </footer>
 <aside class="cierre-mundo" aria-labelledby="recorrido-t">
   <div class="recorrido">
-    <h2 id="recorrido-t" class="web-label-l recorrido__dice">El planeta de Cordura se calcula alrededor de quien llega. Baja para acercarte; en el suelo, camina con las flechas o con los botones.</h2>
-    <section class="escaneo mundo" aria-label="El planeta de Cordura, dibujado con puntos en sus colores. No está guardado en ningún archivo: se calcula alrededor de quien lo recorre y cada trozo llega como polvo que se asienta. Se camina con las flechas o los botones, y se puede despegar para verlo entero.">
+    <h2 id="recorrido-t" class="web-label-l recorrido__dice">El planeta de Cordura. Baja para acercarte; en el suelo, camina con las flechas o con los botones.</h2>
+    <section class="escaneo mundo" aria-label="El planeta de Cordura, en sus colores. Se camina con las flechas o los botones, y se puede despegar para verlo entero.">
       <div class="escaneo__fija">
-        <figure class="escaneo__figura" role="img" aria-label="El planeta de Cordura, dibujado con puntos en sus colores. No está guardado en ningún archivo: se calcula alrededor de quien lo recorre y cada trozo llega como polvo que se asienta. Se camina con las flechas o los botones, y se puede despegar para verlo entero."><canvas class="escaneo__lienzo" aria-hidden="true"></canvas></figure>
+        <figure class="escaneo__figura" role="img" aria-label="El planeta de Cordura, en sus colores. Se camina con las flechas o los botones, y se puede despegar para verlo entero."><canvas class="escaneo__lienzo" aria-hidden="true"></canvas></figure>
         <div class="mundo__mandos" role="group" aria-label="Recorrer el planeta">
           <button class="mundo__mando" type="button" data-mando="izquierda" aria-label="Girar a la izquierda" title="Girar a la izquierda"><svg viewBox="0 0 32 32" width="24" height="24" fill="currentColor" aria-hidden="true" focusable="false"><polygon points="14 26 15.41 24.59 7.83 17 28 17 28 15 7.83 15 15.41 7.41 14 6 4 16 14 26"/></svg></button>
           <button class="mundo__mando" type="button" data-mando="adelante" aria-label="Avanzar" title="Avanzar"><svg viewBox="0 0 32 32" width="24" height="24" fill="currentColor" aria-hidden="true" focusable="false"><polygon points="16 4 6 14 7.41 15.41 15 7.83 15 28 17 28 17 7.83 24.59 15.41 26 14 16 4"/></svg></button>
@@ -11292,8 +11292,8 @@ window.__TEMA_ANTES = document.documentElement.getAttribute('data-theme');
       if (el) ReactDOM.createRoot(el).render(h(A.Button, { variant: 'filled', onClick: function () { document.getElementById('contacto').scrollIntoView({ behavior: calma ? 'auto' : 'smooth' }); document.getElementById('cierre-t').focus({ preventScroll: true }); } }, 'Conversemos'));
       // The same proposal screen, drawn by ALMA's components, on a desktop, a phone and a watch.
       var COL = [{ key: 'p', label: 'Propuesta' }, { key: 'e', label: 'Estado' }, { key: 'f', label: 'Vence' }];
-      var FILAS = [{ id: 'identidad', p: 'Identidad de marca', e: 'Espera tu decisión', f: '15 oct' }, { id: 'web', p: 'Sitio web', e: 'Espera tu decisión', f: '15 oct' }, { id: 'campana', p: 'Campaña de lanzamiento', e: 'Aprobada', f: '—' }, { id: 'senaletica', p: 'Señalética', e: 'En revisión', f: '30 oct' }];
-      var AVISO = { status: 'info', title: '2 propuestas esperan tu decisión', message: 'Vencen el 15 de octubre. No hay apuro: puedes revisarlas cuando quieras.' };
+      var FILAS = [{ id: 'identidad', p: 'Identidad de marca', e: 'Espera tu decisión', f: 'Viernes' }, { id: 'web', p: 'Sitio web', e: 'Espera tu decisión', f: 'Viernes' }, { id: 'campana', p: 'Campaña de lanzamiento', e: 'Aprobada', f: '—' }, { id: 'senaletica', p: 'Señalética', e: 'En revisión', f: 'En dos semanas' }];
+      var AVISO = { status: 'info', title: '2 propuestas esperan tu decisión', message: 'Vencen el viernes. No hay apuro: puedes revisarlas cuando quieras.' };
       var VISTAS = {
         escritorio: function () { return h('div', { className: 'en en--ancho' }, h('div', { className: 'en__cabeza' }, h('h3', { className: 'web-h3' }, 'Propuestas'), h('div', { className: 'en__acciones' }, h(A.Button, { variant: 'tinted' }, 'Ahora no'), h(A.Button, { variant: 'filled' }, 'Revisar 2 propuestas'))), h(A.InlineNotification, AVISO), h(A.Table, { caption: 'Propuestas', columns: COL, rows: FILAS })); },
         telefono: function () { return h('div', { className: 'en en--uno' }, h('h3', { className: 'web-h3' }, 'Propuestas'), h(A.InlineNotification, AVISO), h(A.List, { 'aria-label': 'Propuestas', items: FILAS.slice(0, 2).map(function (r) { return { id: 't' + r.id, title: r.p, subtitle: r.e, trailing: r.f }; }) }), h(A.Button, { variant: 'filled' }, 'Revisar 2 propuestas')); },
